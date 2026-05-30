@@ -1,0 +1,426 @@
+<!-- profile.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Profile</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:linear-gradient(
+135deg,
+#000,
+#0f172a,
+#111827
+);
+color:white;
+min-height:100vh;
+padding:25px;
+padding-bottom:120px;
+}
+
+.header{
+display:flex;
+align-items:center;
+gap:15px;
+margin-bottom:30px;
+}
+
+.header a{
+color:#00ff99;
+font-size:26px;
+text-decoration:none;
+}
+
+.header h1{
+font-size:32px;
+color:#00ff99;
+}
+
+.profile-card{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+border-radius:30px;
+padding:25px;
+backdrop-filter:blur(10px);
+box-shadow:0 0 30px rgba(0,255,153,0.1);
+}
+
+.section-title{
+margin-top:10px;
+margin-bottom:15px;
+font-size:24px;
+color:#00ff99;
+}
+
+.option-box{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
+padding:18px 20px;
+border-radius:20px;
+margin-bottom:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+transition:0.2s;
+cursor:pointer;
+}
+
+.option-box:hover{
+transform:translateY(-3px);
+box-shadow:0 0 18px rgba(0,255,153,0.2);
+}
+
+.option-left{
+display:flex;
+align-items:center;
+gap:15px;
+font-size:18px;
+}
+
+.option-left i{
+font-size:22px;
+color:#00ff99;
+}
+
+.option-right{
+color:#888;
+font-size:18px;
+}
+
+#languageSelect{
+background:#0f172a;
+color:white;
+padding:8px 12px;
+border:none;
+border-radius:10px;
+font-size:15px;
+outline:none;
+cursor:pointer;
+}
+
+.logout-btn{
+width:100%;
+padding:16px;
+border:none;
+border-radius:18px;
+margin-top:30px;
+background:#ff3b3b;
+color:white;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.footer{
+text-align:center;
+margin-top:30px;
+color:#777;
+font-size:15px;
+}
+
+.link{
+text-decoration:none;
+color:white;
+}
+
+@media screen and (min-width:768px){
+
+body{
+max-width:700px;
+margin:auto;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<a href="index.html">
+<i class="fa-solid fa-arrow-left"></i>
+</a>
+
+<h1>Profile</h1>
+
+</div>
+
+<div class="profile-card">
+
+<h2 class="section-title">Settings</h2>
+
+<div class="option-box">
+
+<div class="option-left">
+<i class="fa-solid fa-user"></i>
+<span>Profile Details</span>
+</div>
+
+<div class="option-right">
+<i class="fa-solid fa-angle-right"></i>
+</div>
+
+</div>
+
+<!-- WISHLIST -->
+
+<a href="wishlist.html"
+class="link">
+
+<div class="option-box">
+
+<div class="option-left">
+<i class="fa-solid fa-heart"></i>
+<span>Wishlist</span>
+</div>
+
+<div class="option-right">
+<i class="fa-solid fa-angle-right"></i>
+</div>
+
+</div>
+
+</a>
+
+<!-- ORDERS -->
+
+<a href="orders.html"
+class="link">
+
+<div class="option-box">
+
+<div class="option-left">
+<i class="fa-solid fa-box"></i>
+<span>Orders</span>
+</div>
+
+<div class="option-right">
+<i class="fa-solid fa-angle-right"></i>
+</div>
+
+</div>
+
+</a>
+
+<!-- LANGUAGE -->
+
+<div class="option-box">
+
+<div class="option-left">
+<i class="fa-solid fa-language"></i>
+<span>Language Settings</span>
+</div>
+
+<select id="languageSelect">
+<option>English</option>
+<option>Hindi</option>
+</select>
+
+</div>
+
+<!-- ABOUT -->
+
+<a href="about.html"
+class="link">
+
+<div class="option-box">
+
+<div class="option-left">
+<i class="fa-solid fa-circle-info"></i>
+<span>About Sadbhavna Files</span>
+</div>
+
+<div class="option-right">
+<i class="fa-solid fa-angle-right"></i>
+</div>
+
+</div>
+
+</a>
+
+<!-- TERMS -->
+
+<a href="terms.html"
+class="link">
+
+<div class="option-box">
+
+<div class="option-left">
+<i class="fa-solid fa-file-contract"></i>
+<span>Terms & Conditions</span>
+</div>
+
+<div class="option-right">
+<i class="fa-solid fa-angle-right"></i>
+</div>
+
+</div>
+
+</a>
+
+<!-- POLICY -->
+
+<a href="policy.html"
+class="link">
+
+<div class="option-box">
+
+<div class="option-left">
+<i class="fa-solid fa-shield-halved"></i>
+<span>Privacy Policy</span>
+</div>
+
+<div class="option-right">
+<i class="fa-solid fa-angle-right"></i>
+</div>
+
+</div>
+
+</a>
+
+<!-- SUPPORT -->
+
+<div class="option-box">
+
+<div class="option-left">
+<i class="fa-brands fa-whatsapp"></i>
+<span>WhatsApp Support</span>
+</div>
+
+<div class="option-right">
+Online
+</div>
+
+</div>
+
+<button class="logout-btn" onclick="logout()">
+Logout
+</button>
+
+</div>
+
+<div class="footer">
+© 2026 Sadbhavna Files
+</div>
+
+<script>
+
+const languageSelect =
+document.getElementById(
+"languageSelect"
+);
+
+languageSelect.addEventListener(
+"change",
+function(){
+
+if(this.value === "Hindi"){
+
+document.querySelector(".header h1")
+.innerText = "प्रोफाइल";
+
+document.querySelector(".section-title")
+.innerText = "सेटिंग्स";
+
+document.querySelectorAll(".option-left span")[0]
+.innerText = "प्रोफाइल विवरण";
+
+document.querySelectorAll(".option-left span")[1]
+.innerText = "विशलिस्ट";
+
+document.querySelectorAll(".option-left span")[2]
+.innerText = "भाषा सेटिंग्स";
+
+document.querySelectorAll(".option-left span")[3]
+.innerText = "सद्भावना फाइल्स के बारे में";
+
+document.querySelectorAll(".option-left span")[4]
+.innerText = "नियम और शर्तें";
+
+document.querySelectorAll(".option-left span")[5]
+.innerText = "प्राइवेसी पॉलिसी";
+
+document.querySelectorAll(".option-left span")[6]
+.innerText = "व्हाट्सएप सहायता";
+
+document.querySelector(".logout-btn")
+.innerText = "लॉगआउट";
+
+document.querySelector(".footer")
+.innerText =
+"© 2026 सद्भावना फाइल्स";
+
+}else{
+
+document.querySelector(".header h1")
+.innerText = "Profile";
+
+document.querySelector(".section-title")
+.innerText = "Settings";
+
+document.querySelectorAll(".option-left span")[0]
+.innerText = "Profile Details";
+
+document.querySelectorAll(".option-left span")[1]
+.innerText = "Wishlist";
+
+document.querySelectorAll(".option-left span")[2]
+.innerText = "Language Settings";
+
+document.querySelectorAll(".option-left span")[3]
+.innerText = "About Sadbhavna Files";
+
+document.querySelectorAll(".option-left span")[4]
+.innerText = "Terms & Conditions";
+
+document.querySelectorAll(".option-left span")[5]
+.innerText = "Privacy Policy";
+
+document.querySelectorAll(".option-left span")[6]
+.innerText = "WhatsApp Support";
+
+document.querySelector(".logout-btn")
+.innerText = "Logout";
+
+document.querySelector(".footer")
+.innerText =
+"© 2026 Sadbhavna Files";
+
+}
+
+});
+
+</script>
+
+<script>
+function logout() {
+    localStorage.removeItem("user_id");
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
+
+</html>

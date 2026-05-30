@@ -1,0 +1,1841 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Sadbhavna Files</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+-webkit-tap-highlight-color:transparent;
+}
+
+body{
+background:linear-gradient(135deg,#000,#0f172a,#111827);
+color:white;
+min-height:100vh;
+padding-bottom:100px;
+overflow-x:hidden;
+}
+
+button,
+.card,
+.nav-item,
+i,
+a{
+touch-action:manipulation;
+}
+
+.card,
+button,
+.nav-item,
+.food-img,
+.cart-icon,
+.top-icons i{
+transition:0.15s;
+}
+
+/* HEADER */
+
+.top-header{
+padding:18px;
+position:sticky;
+top:0;
+z-index:100;
+background:rgba(0,0,0,0.7);
+backdrop-filter:blur(10px);
+}
+
+.top-bar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:15px;
+}
+
+.top-bar h1{
+color:#00ff99;
+font-size:28px;
+}
+
+.top-icons{
+display:flex;
+align-items:center;
+gap:20px;
+font-size:24px;
+}
+
+.top-icons i{
+cursor:pointer;
+}
+
+.cart-icon{
+position:relative;
+cursor:pointer;
+}
+
+.notification-icon{
+position:relative;
+cursor:pointer;
+}
+
+#notification-badge{
+position:absolute;
+top:-10px;
+right:-10px;
+background:red;
+color:white;
+font-size:12px;
+padding:3px 7px;
+border-radius:50%;
+display:none;
+}
+
+#cart-badge{
+position:absolute;
+top:-10px;
+right:-10px;
+background:red;
+color:white;
+font-size:12px;
+padding:3px 7px;
+border-radius:50%;
+}
+
+.search-box input{
+width:100%;
+padding:15px;
+border:none;
+border-radius:14px;
+background:rgba(255,255,255,0.08);
+color:white;
+font-size:16px;
+outline:none;
+}
+
+/* HERO */
+
+.hero{
+text-align:center;
+padding:20px;
+}
+
+.hero h2{
+color:#00ff99;
+font-size:28px;
+}
+
+.hero p{
+color:#aaa;
+margin-top:10px;
+}
+
+/* MENU */
+
+.menu{
+padding:20px;
+display:grid;
+gap:22px;
+grid-template-columns:repeat(2,1fr);
+max-width:1600px;
+margin:auto;
+}
+
+/* TABLET */
+
+@media screen and (min-width:768px){
+
+.menu{
+grid-template-columns:repeat(3,1fr);
+max-width:1100px;
+}
+
+}
+
+/* LAPTOP + PC */
+
+@media screen and (min-width:1100px){
+
+.menu{
+grid-template-columns:repeat(5,1fr);
+max-width:1700px;
+}
+
+.food-img{
+height:170px;
+}
+
+.card{
+padding:14px;
+}
+
+.card h2{
+font-size:18px;
+}
+
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+border-radius:22px;
+padding:18px;
+}
+
+.card{
+position:relative;
+overflow:hidden;
+}
+
+.card-icons{
+position:absolute;
+top:15px;
+left:15px;
+right:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:5;
+}
+
+.fav-btn{ 
+font-size:26px; 
+color:#fff; 
+cursor:pointer; 
+}
+
+.add-btn{
+width:45px;
+height:45px;
+border:none;
+border-radius:50%;
+background:#00ff99;
+color:#000;
+font-size:28px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 25px #00ff99;
+}
+
+.food-img{
+width:100%;
+height:220px;
+object-fit:contain;
+background:white;
+border-radius:18px;
+padding:10px;
+}
+
+.food-img:hover{
+transform:scale(1.03);
+}
+
+.card h2{
+color:#00ff99;
+margin-top:15px;
+}
+
+.fav-icon{
+font-size:24px;
+cursor:pointer;
+margin-top:12px;
+display:block;
+text-align:right;
+color:white;
+}
+
+/* BUTTONS */
+
+.controls{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:15px;
+margin-top:15px;
+}
+
+.controls button{
+border:none;
+border-radius:12px;
+padding:10px 18px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.minus{
+background:#ff3b3b;
+color:white;
+}
+
+.plus{
+background:#00ff99;
+color:black;
+}
+
+.count{
+font-size:22px;
+font-weight:bold;
+}
+
+/* CART */
+
+.cart-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:none;
+z-index:999;
+}
+
+.cart-overlay.active{
+display:block;
+}
+
+.cart-popup{
+position:fixed;
+top:0;
+right:-100%;
+width:100%;
+max-width:450px;
+height:100%;
+background:#111827;
+transition:0.3s;
+z-index:1000;
+padding:20px;
+overflow:auto;
+}
+
+.cart-popup.active{
+right:0;
+}
+
+.cart-content h2{
+color:#00ff99;
+margin-bottom:20px;
+text-align:center;
+}
+
+.cart-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px;
+background:rgba(255,255,255,0.05);
+border-radius:14px;
+margin-bottom:15px;
+}
+
+.cart-controls{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.cart-controls button{
+border:none;
+padding:8px 14px;
+border-radius:10px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.order-btn{
+width:100%;
+margin-top:15px;
+padding:15px;
+border:none;
+border-radius:14px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+background:#00ff99;
+color:black;
+}
+
+.close-btn{
+width:100%;
+padding:15px;
+margin-top:12px;
+border:none;
+border-radius:14px;
+background:red;
+color:white;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.order-input{
+width:100%;
+padding:15px;
+margin-bottom:15px;
+border:none;
+border-radius:14px;
+background:rgba(255,255,255,0.08);
+color:white;
+font-size:16px;
+outline:none;
+}
+
+.order-input::placeholder{
+color:#aaa;
+}
+
+select.order-input{
+background:#1e293b;
+color:white;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+height:75px;
+background:#111827;
+display:flex;
+justify-content:space-around;
+align-items:center;
+border-top:1px solid rgba(255,255,255,0.1);
+z-index:1000;
+}
+
+.bottom-nav a{
+text-decoration:none;
+width:100%;
+height:100%;
+}
+
+.nav-item{
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:5px;
+font-size:13px;
+color:#aaa;
+height:100%;
+}
+
+.nav-item i{
+font-size:22px;
+}
+
+.nav-item.active{
+color:#00ff99;
+background:rgba(0,255,153,0.08);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<script>
+const user = localStorage.getItem("user_id");
+
+if (!user) {
+    window.location.href = "login.html";
+}
+</script>
+
+<header class="top-header">
+
+<div class="top-bar">
+
+<h1>🍟 Sadbhavna Files</h1>
+
+<div class="top-icons">
+
+<div class="notification-icon"
+onclick="openNotification()">
+
+<i class="fa-regular fa-bell"></i>
+
+<span id="notification-badge">
+0
+</span>
+
+</div>
+
+<i class="fa-regular fa-heart"
+onclick="openFav()">
+</i>
+
+<div class="cart-icon"
+onclick="openCart()">
+
+<i class="fa-solid fa-cart-shopping"></i>
+
+<span id="cart-badge">0</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="search-box">
+
+<input type="text"
+id="searchInput"
+placeholder="Search snacks..."
+onkeyup="searchItems()">
+
+</div>
+
+</header>
+
+<section class="hero">
+
+<h2>Hostel Snacks Corner 😎</h2>
+
+<p>Order snacks instantly on WhatsApp</p>
+
+</section>
+
+<div class="menu">
+
+<!-- ITEMS -->
+
+<div class="card">
+
+<img class="food-img" src="ParleG.jpg">
+
+<div class="card-icons">
+
+<i class="fa-regular fa-heart fav-btn"
+onclick="toggleFav('Parle G',this)">
+</i>
+
+<button class="add-btn"
+onclick="openItemPopup('Parle G')">
++
+</button>
+
+</div>
+
+<h2>Parle G</h2>
+
+</div>
+
+<div class="card">
+
+<img class="food-img" src="Tedhe Medhe.webp">
+
+<div class="card-icons">
+
+<i class="fa-regular fa-heart fav-btn"
+onclick="toggleFav('Tedhe Medhe',this)">
+</i>
+
+<button class="add-btn"
+onclick="openItemPopup('Tedhe Medhe')">
++
+</button>
+
+</div>
+
+<h2>Tedhe Medhe</h2>
+
+</div>
+
+<div class="card">
+
+<img class="food-img" src="Kurkure.jpg">
+
+<div class="card-icons">
+
+<i class="fa-regular fa-heart fav-btn"
+onclick="toggleFav('Kurkure',this)">
+</i>
+
+<button class="add-btn"
+onclick="openItemPopup('Kurkure')">
++
+</button>
+
+</div>
+
+<h2>Kurkure</h2>
+
+</div>
+
+<div class="card">
+
+<img class="food-img" src="Cup Maggie.jpg">
+
+<div class="card-icons">
+
+<i class="fa-regular fa-heart fav-btn"
+onclick="toggleFav('Cup Maggi',this)">
+</i>
+
+<button class="add-btn"
+onclick="openItemPopup('Cup Maggi')">
++
+</button>
+
+</div>
+
+<h2>Cup Maggi</h2>
+
+</div>
+
+<div class="card">
+
+<img class="food-img" src="Bourbon.jpg">
+
+<div class="card-icons">
+
+<i class="fa-regular fa-heart fav-btn"
+onclick="toggleFav('Bourbon',this)">
+</i>
+
+<button class="add-btn"
+onclick="openItemPopup('Bourbon')">
++
+</button>
+
+</div>
+
+<h2>Bourbon</h2>
+
+</div>
+
+<div class="card">
+
+<img class="food-img" src="maggie.jpeg">
+
+<div class="card-icons">
+
+<i class="fa-regular fa-heart fav-btn"
+onclick="toggleFav('Maggi Double Masala',this)">
+</i>
+
+<button class="add-btn"
+onclick="openItemPopup('Maggi Double Masala')">
++
+</button>
+
+</div>
+
+<h2>Maggi Double Masala</h2>
+
+</div>
+
+<div class="card">
+
+<img class="food-img" src="Milk.png">
+
+<div class="card-icons">
+
+<i class="fa-regular fa-heart fav-btn"
+onclick="toggleFav('Milk',this)">
+</i>
+
+<button class="add-btn"
+onclick="openItemPopup('Milk')">
++
+</button>
+
+</div>
+
+<h2>Milk</h2>
+
+</div>
+
+<div class="card">
+
+<img class="food-img" src="Coffie.webp">
+
+<div class="card-icons">
+
+<i class="fa-regular fa-heart fav-btn"
+onclick="toggleFav('Nescafe Coffee',this)">
+</i>
+
+<button class="add-btn"
+onclick="openItemPopup('Nescafe Coffee')">
++
+</button>
+
+</div>
+
+<h2>Nescafe Coffee</h2>
+
+</div>
+
+<div class="card">
+
+<img class="food-img" src="Coffie2.jpg">
+
+<div class="card-icons">
+
+<i class="fa-regular fa-heart fav-btn"
+onclick="toggleFav('BRU Coffee',this)">
+</i>
+
+<button class="add-btn"
+onclick="openItemPopup('BRU Coffee')">
++
+</button>
+
+</div>
+
+<h2>BRU Coffee</h2>
+
+</div>
+
+<div class="card">
+
+<img class="food-img" src="Chini.jpeg">
+
+<div class="card-icons">
+
+<i class="fa-regular fa-heart fav-btn"
+onclick="toggleFav('Chini',this)">
+</i>
+
+<button class="add-btn"
+onclick="openItemPopup('Chini')">
++
+</button>
+
+</div>
+
+<h2>Chini</h2>
+
+</div>
+
+<div class="card">
+
+<img class="food-img" src="Chaipatti1.jpg">
+
+<div class="card-icons">
+
+<i class="fa-regular fa-heart fav-btn"
+onclick="toggleFav('Tata Tea',this)">
+</i>
+
+<button class="add-btn"
+onclick="openItemPopup('Tata Tea')">
++
+</button>
+
+</div>
+
+<h2>Tata Tea</h2>
+
+</div>
+
+<div class="card">
+
+<img class="food-img" src="Chaipatti2.jpg">
+
+<div class="card-icons">
+
+<i class="fa-regular fa-heart fav-btn"
+onclick="toggleFav('Red Label',this)">
+</i>
+
+<button class="add-btn"
+onclick="openItemPopup('Red Label')">
++
+</button>
+
+</div>
+
+<h2>Red Label</h2>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- CART -->
+
+<div class="cart-overlay"
+id="cartOverlay"
+onclick="closeCart()"></div>
+
+<div class="cart-popup"
+id="cartPopup">
+
+<div class="cart-content">
+
+<h2>🛒 Your Cart</h2>
+
+<div id="popup-cart-items">
+Cart Empty
+</div>
+
+<button class="order-btn"
+onclick="placeOrder()">
+
+Place Order
+
+</button>
+
+<button class="close-btn"
+onclick="closeCart()">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ORDER FORM -->
+
+<div class="cart-overlay"
+id="orderOverlay"
+onclick="closeOrderForm()"></div>
+
+<div class="cart-popup"
+id="orderPopup">
+
+<div class="cart-content">
+
+<h2>🧾 Order Details</h2>
+
+<input type="text"
+id="customerName"
+placeholder="Enter Your Name"
+class="order-input">
+
+<input type="text"
+id="roomNumber"
+placeholder="Enter Room Number"
+class="order-input">
+
+<input type="text"
+id="hostelName"
+placeholder="Enter Hostel Name"
+class="order-input">
+
+<input type="number"
+id="phoneNumber"
+placeholder="Enter Phone Number"
+class="order-input">
+
+<select id="paymentMode"
+class="order-input">
+
+<option value="">
+Choose Payment Mode
+</option>
+
+<option>
+Cash
+</option>
+
+<option>
+Online
+</option>
+
+</select>
+
+<button class="order-btn"
+onclick="finalPlaceOrder()">
+
+Confirm Order
+
+</button>
+
+<button class="close-btn"
+onclick="closeOrderForm()">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+<!-- FAV -->
+
+<div class="cart-overlay"
+id="favOverlay"
+onclick="closeFav()"></div>
+
+<div class="cart-popup"
+id="favPopup">
+
+<div class="cart-content">
+
+<h2>❤️ Favourite</h2>
+
+<div id="fav-items">
+
+<p style="text-align:center;color:#aaa;">
+No favourite items yet
+</p>
+
+</div>
+
+<button class="close-btn"
+onclick="closeFav()">
+Close
+</button>
+
+</div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+
+<div class="bottom-nav">
+
+<a href="index.html">
+<div class="nav-item active">
+<i class="fa-solid fa-house"></i>
+<span>Home</span>
+</div>
+</a>
+
+<a href="category.html">
+<div class="nav-item">
+<i class="fa-solid fa-layer-group"></i>
+<span>Category</span>
+</div>
+</a>
+
+<a href="profile.html">
+<div class="nav-item">
+<i class="fa-solid fa-user"></i>
+<span>Profile</span>
+</div>
+</a>
+
+</div>
+
+<script>
+
+let cart = {
+
+"Parle G":0,
+"Tedhe Medhe":0,
+"Kurkure":0,
+"Cup Maggi":0,
+"Bourbon":0,
+"Maggi Double Masala":0,
+"Milk":0,
+"Nescafe Coffee":0,
+"BRU Coffee":0,
+"Chini":0,
+"Tata Tea":0,
+"Red Label":0
+
+};
+
+let favourites = [];
+let notifications = [];
+
+/* CART */
+
+function changeQty(item,value){
+
+cart[item]+=value;
+
+if(cart[item]<0){
+cart[item]=0;
+}
+
+
+updateCart();
+
+}
+
+function updateCart(){
+
+let total = 0;
+let html = "";
+
+for(let item in cart){
+
+if(cart[item] > 0){
+
+total += cart[item];
+
+html += `
+
+<div class="cart-item">
+
+<div style="width:100%;">
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+">
+
+<div>${item}</div>
+
+<div class="cart-controls">
+
+<button class="minus"
+onclick="changeQty('${item}',-1)">
+-
+</button>
+
+<span>${cart[item]}</span>
+
+<button class="plus"
+onclick="changeQty('${item}',1)">
++
+</button>
+
+</div>
+
+</div>
+
+<div style="
+display:flex;
+gap:10px;
+margin-top:10px;
+">
+
+<button class="close-btn"
+style="
+font-size:14px;
+padding:8px 12px;
+margin-top:0;
+width:auto;
+background:#00ff99;
+color:black;
+"
+onclick="moveToWishlist('${item}')">
+
+❤️ Wishlist
+
+</button>
+
+<button class="close-btn"
+style="
+font-size:14px;
+padding:8px 12px;
+margin-top:0;
+width:auto;
+"
+onclick="removeCartItem('${item}')">
+
+Remove
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+}
+
+if(html===""){
+html = "Cart Empty";
+}
+
+document.getElementById(
+"cart-badge"
+).innerText = total;
+
+document.getElementById(
+"popup-cart-items"
+).innerHTML = html;
+
+}
+
+/* ORDER FORM */
+
+function placeOrder(){
+if(!isStoreOpen()){
+
+alert(
+"Store is closed right now 😴\n\nOpens at 10 AM"
+);
+
+return;
+
+}
+
+let hasItem = false;
+
+for(let item in cart){
+
+if(cart[item] > 0){
+
+hasItem = true;
+
+}
+
+}
+
+if(!hasItem){
+
+alert("Please add items first");
+return;
+
+}
+
+openOrderForm();
+
+}
+
+function openOrderForm(){
+
+document.getElementById(
+"orderPopup"
+).classList.add("active");
+
+document.getElementById(
+"orderOverlay"
+).classList.add("active");
+
+}
+
+function closeOrderForm(){
+
+document.getElementById(
+"orderPopup"
+).classList.remove("active");
+
+document.getElementById(
+"orderOverlay"
+).classList.remove("active");
+
+}
+
+function finalPlaceOrder(){
+
+let name =
+document.getElementById(
+"customerName"
+).value;
+
+let room =
+document.getElementById(
+"roomNumber"
+).value;
+
+let hostel =
+document.getElementById(
+"hostelName"
+).value;
+
+let phone =
+document.getElementById(
+"phoneNumber"
+).value;
+
+let payment =
+document.getElementById(
+"paymentMode"
+).value;
+
+if(
+!name ||
+!room ||
+!hostel ||
+!phone ||
+!payment
+){
+
+alert("Please fill all details");
+return;
+
+}
+
+let order =
+"🍟 *Sadbhavna Files Order* %0A%0A";
+
+order +=
+"👤 Name: " + name + "%0A";
+
+order +=
+"🏠 Room No: " + room + "%0A";
+
+order +=
+"🏢 Hostel: " + hostel + "%0A";
+
+order +=
+"📞 Phone: " + phone + "%0A";
+
+order +=
+"💳 Payment: " + payment + "%0A%0A";
+
+for(let item in cart){
+
+if(cart[item] > 0){
+
+order +=
+"• " + item +
+" x " + cart[item] + "%0A";
+
+}
+
+}
+
+window.open(
+"https://wa.me/447781554727?text=" + order,
+"_blank"
+);
+
+closeOrderForm();
+
+}
+
+/* CART */
+
+function openCart(){
+
+document.getElementById(
+"cartPopup"
+).classList.add("active");
+
+document.getElementById(
+"cartOverlay"
+).classList.add("active");
+
+}
+
+function closeCart(){
+
+document.getElementById(
+"cartPopup"
+).classList.remove("active");
+
+document.getElementById(
+"cartOverlay"
+).classList.remove("active");
+
+}
+
+/* FAV */
+
+function openFav(){
+
+document.getElementById(
+"favPopup"
+).classList.add("active");
+
+document.getElementById(
+"favOverlay"
+).classList.add("active");
+
+}
+
+function closeFav(){
+
+document.getElementById(
+"favPopup"
+).classList.remove("active");
+
+document.getElementById(
+"favOverlay"
+).classList.remove("active");
+
+}
+
+function toggleFav(item,icon){
+
+if(favourites.includes(item)){
+
+favourites =
+favourites.filter(f => f !== item);
+
+icon.style.color = "transparent";
+
+}else{
+
+favourites.push(item);
+
+icon.style.color = "#ff2e63";
+
+}
+
+updateFav();
+
+}
+
+function updateFav(){
+
+let html = "";
+
+if(favourites.length === 0){
+
+html = `
+<p style="text-align:center;color:#aaa;">
+No favourite items yet
+</p>
+`;
+
+}else{
+
+favourites.forEach(item => {
+
+html += `
+
+<div class="cart-item">
+
+<div>${item}</div>
+
+<button class="close-btn"
+style="
+margin-top:0;
+width:auto;
+background:#00ff99;
+color:black;
+padding:10px 14px;
+"
+onclick="addFavToCart('${item}')">
+
+Add To Cart
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+document.getElementById(
+"fav-items"
+).innerHTML = html;
+
+}
+
+
+function addFavToCart(item){
+
+cart[item] += 1;
+
+favourites =
+favourites.filter(f => f !== item);
+
+updateCart();
+
+updateFav();
+
+}
+
+/* SEARCH */
+
+function searchItems(){
+
+let input =
+document.getElementById(
+"searchInput"
+).value.toLowerCase();
+
+let cards =
+document.getElementsByClassName(
+"card"
+);
+
+for(let i=0;i<cards.length;i++){
+
+let title =
+cards[i]
+.getElementsByTagName("h2")[0]
+.innerText
+.toLowerCase();
+
+if(title.includes(input)){
+
+cards[i].style.display="block";
+
+}else{
+
+cards[i].style.display="none";
+
+}
+
+}
+
+}
+
+/* STORE TIMING */
+
+function isStoreOpen(){
+
+let hour = new Date().getHours();
+
+/*
+
+Store Closed:
+3 AM to 10 AM
+
+*/
+
+if(hour >= 3 && hour < 10){
+
+return false;
+
+}
+
+return true;
+
+}
+
+function checkStoreStatus(){
+
+let oldStatus =
+document.getElementById("store-status");
+
+if(oldStatus){
+oldStatus.remove();
+}
+
+let status =
+document.createElement("div");
+
+status.id = "store-status";
+
+status.style.cssText = `
+position:fixed;
+top:90px;
+left:50%;
+transform:translateX(-50%);
+background:#ff3b3b;
+color:white;
+padding:12px 22px;
+border-radius:14px;
+font-weight:bold;
+z-index:9999;
+box-shadow:0 0 20px rgba(255,0,0,0.5);
+`;
+
+status.innerHTML =
+"🔒 Store Closed • Opens at 10 AM";
+
+if(!isStoreOpen()){
+
+document.body.appendChild(status);
+
+}
+
+}
+
+checkStoreStatus();
+
+let currentItem = "";
+
+function openItemPopup(item){
+
+currentItem = item;
+
+document.getElementById(
+"popup-title"
+).innerText = item;
+
+document.getElementById(
+"count1"
+).innerText = 0;
+
+document.getElementById(
+"count2"
+).innerText = 0;
+
+document.getElementById(
+"count4"
+).innerText = 0;
+
+document.getElementById(
+"itemPopup"
+).classList.add("active");
+
+document.getElementById(
+"itemOverlay"
+).classList.add("active");
+
+}
+
+function popupQty(value,type){
+
+if(type === 1){
+
+let count1 =
+document.getElementById("count1");
+
+count1.innerText =
+parseInt(count1.innerText) + value;
+
+if(parseInt(count1.innerText) < 0){
+count1.innerText = 0;
+}
+
+}
+
+if(type === 2){
+
+let count2 =
+document.getElementById("count2");
+
+count2.innerText =
+parseInt(count2.innerText) + value;
+
+if(parseInt(count2.innerText) < 0){
+count2.innerText = 0;
+}
+
+}
+
+if(type === 4){
+
+let count4 =
+document.getElementById("count4");
+
+count4.innerText =
+parseInt(count4.innerText) + value;
+
+if(parseInt(count4.innerText) < 0){
+count4.innerText = 0;
+}
+
+}
+
+let total =
+
+parseInt(
+document.getElementById("count1").innerText
+) +
+
+parseInt(
+document.getElementById("count2").innerText
+) +
+
+parseInt(
+document.getElementById("count4").innerText
+);
+
+cart[currentItem] = total;
+
+updateCart();
+
+}
+
+function closeItemPopup(){
+
+document.getElementById(
+"itemPopup"
+).classList.remove("active");
+
+document.getElementById(
+"itemOverlay"
+).classList.remove("active");
+
+}
+
+function addNotification(message){
+
+notifications.unshift(message);
+
+updateNotification();
+
+}
+
+function updateNotification(){
+
+let badge =
+document.getElementById(
+"notification-badge"
+);
+
+let container =
+document.getElementById(
+"notification-items"
+);
+
+if(notifications.length > 0){
+
+badge.style.display = "block";
+
+badge.innerText =
+notifications.length;
+
+}else{
+
+badge.style.display = "none";
+
+}
+
+let html = "";
+
+if(notifications.length === 0){
+
+html = `
+<p style="text-align:center;color:#aaa;">
+No notifications
+</p>
+`;
+
+}else{
+
+notifications.forEach((msg,index)=>{
+
+html += `
+
+<div class="cart-item">
+
+<div>${msg}</div>
+
+<button class="close-btn"
+style="width:auto;padding:8px 12px;"
+onclick="deleteNotification(${index})">
+
+X
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+container.innerHTML = html;
+
+}
+
+function deleteNotification(index){
+
+notifications.splice(index,1);
+
+updateNotification();
+
+}
+
+function openNotification(){
+
+document.getElementById(
+"notificationPopup"
+).classList.add("active");
+
+document.getElementById(
+"notificationOverlay"
+).classList.add("active");
+
+notifications = [];
+
+updateNotification();
+
+}
+
+function closeNotification(){
+
+document.getElementById(
+"notificationPopup"
+).classList.remove("active");
+
+document.getElementById(
+"notificationOverlay"
+).classList.remove("active");
+
+}
+
+function removeCartItem(item){
+
+cart[item] = 0;
+
+updateCart();
+
+}
+
+function moveToWishlist(item){
+
+if(!favourites.includes(item)){
+
+favourites.push(item);
+
+}
+
+cart[item] = 0;
+
+updateCart();
+
+updateFav();
+
+}
+
+updateCart();
+
+</script>
+
+<!-- ITEM POPUP -->
+
+<div class="cart-overlay"
+id="itemOverlay"
+onclick="closeItemPopup()">
+</div>
+
+<div class="cart-popup"
+id="itemPopup">
+
+<div class="cart-content">
+
+<h2 id="popup-title">
+Item 
+</h2>
+
+<div class="cart-item">
+
+<div>1x Pack</div>
+
+<div class="cart-controls">
+
+<button class="minus"
+onclick="popupQty(-1,1)">
+-
+</button>
+
+<span id="count1">0</span>
+
+<button class="plus"
+onclick="popupQty(1,1)">
++
+</button>
+
+</div>
+
+</div>
+
+<div class="cart-item">
+
+<div>2x Pack</div>
+
+<div class="cart-controls">
+
+<button class="minus"
+onclick="popupQty(-2,2)">
+-
+</button>
+
+<span id="count2">0</span>
+
+<button class="plus"
+onclick="popupQty(2,2)">
++
+</button>
+
+</div>
+
+</div>
+
+<div class="cart-item">
+
+<div>4x Pack</div>
+
+<div class="cart-controls">
+
+<button class="minus"
+onclick="popupQty(-4,4)">
+-
+</button>
+
+<span id="count4">0</span>
+
+<button class="plus"
+onclick="popupQty(4,4)">
++
+</button>
+
+</div>
+
+</div>
+
+<button class="order-btn"
+onclick="closeItemPopup()">
+
+Done
+
+</button>
+
+</div>
+
+</div>
+
+<!-- NOTIFICATION -->
+
+<div class="cart-overlay"
+id="notificationOverlay"
+onclick="closeNotification()">
+</div>
+
+<div class="cart-popup"
+id="notificationPopup">
+
+<div class="cart-content">
+
+<h2>🔔 Notifications</h2>
+
+<div id="notification-items">
+
+<p style="text-align:center;color:#aaa;">
+No notifications
+</p>
+
+</div>
+
+<button class="close-btn"
+onclick="closeNotification()">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+function logout() {
+    localStorage.removeItem("user_id");
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
+
+</html>

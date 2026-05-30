@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Orders</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#0f172a;
+color:white;
+padding:25px;
+padding-bottom:100px;
+}
+
+.header{
+display:flex;
+align-items:center;
+gap:15px;
+margin-bottom:30px;
+}
+
+.header a{
+color:#00ff99;
+font-size:26px;
+text-decoration:none;
+}
+
+.header h1{
+font-size:32px;
+color:#00ff99;
+}
+
+.orders{
+margin-top:20px;
+}
+
+.order-card{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
+padding:18px;
+border-radius:20px;
+margin-bottom:15px;
+}
+
+.order-card h2{
+color:#00ff99;
+margin-bottom:10px;
+}
+
+.order-card p{
+color:#ccc;
+margin:6px 0;
+}
+
+.empty{
+text-align:center;
+margin-top:100px;
+color:#777;
+font-size:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<a href="profile.html">
+<i class="fa-solid fa-arrow-left"></i>
+</a>
+
+<h1>Orders</h1>
+
+</div>
+
+<div class="orders"
+id="orders">
+
+<div class="empty">
+No Orders Yet 😴
+</div>
+
+</div>
+
+<script>
+
+let orders =
+JSON.parse(
+localStorage.getItem("orders")
+) || [];
+
+let ordersBox =
+document.getElementById("orders");
+
+if(orders.length > 0){
+
+let html = "";
+
+orders.reverse().forEach(order => {
+
+html += `
+
+<div class="order-card">
+
+<h2>${order.name}</h2>
+
+<p>${order.items}</p>
+
+<p>💳 ${order.payment}</p>
+
+<p>📍 Room ${order.room}</p>
+
+</div>
+
+`;
+
+});
+
+ordersBox.innerHTML = html;
+
+}
+
+</script>
+
+</body>
+
+</html>

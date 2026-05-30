@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Sadbhavna Files</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-auth-compat.js"></script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #000, #0f172a, #111827);
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .login-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 255, 153, 0.2);
+            padding: 40px 30px;
+            border-radius: 30px;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 30px rgba(0, 255, 153, 0.1);
+        }
+        h1 { color: #00ff99; margin-bottom: 20px; }
+        input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 15px;
+            border: 1px solid #333;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #00ff99;
+            color: black;
+            border: none;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        #recaptcha-container { margin: 15px 0; }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <h1>Sadbhavna Files</h1>
+    
+    <div id="phone-section">
+        <p>Enter Mobile Number</p>
+        <input type="tel" id="phoneNumber" placeholder="">
+        <div id="recaptcha-container"></div>
+        <button onclick="sendOTP()">Send OTP 🚀</button>
+    </div>
+
+    <div id="otp-section" style="display: none;">
+        <p>Enter 6-Digit OTP</p>
+        <input type="number" id="otpCode" placeholder="123456">
+        <button onclick="verifyOTP()">Verify & Login 🍕</button>
+    </div>
+</div>
+
+<script>
+
+
+    const firebaseConfig = {
+    apiKey: "AIzaSyAvI5gdaF9FifnIE2-nuuX_s6A7jBC8E8Q",
+    authDomain: "sadbhavnafiles.firebaseapp.com",
+    projectId: "sadbhavnafiles",
+    storageBucket: "sadbhavnafiles.firebasestorage.app",
+    messagingSenderId: "25290157191",
+    appId: "1:25290157191:web:deae8e7acb052e4b4b1c22"
+  };
+
+  // reCAPTCHA ko invisible rakha hai taaki user ko dikhe nahi
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+        'size': 'invisible'
+    });
+
+    function sendOTP() {
+        const phoneInput = document.getElementById('phoneNumber').value;
+        
+        // Validation: Check ki number 10 digit ka hai ya nahi
+        if (phoneInput.length < 10) {
+            return alert("Bhai, pura 10-digit mobile number daaliye!");
+        }
+        
+        const number = "+91" + phoneInput;
+        const appVerifier = window.recaptchaVerifier;
+
+        auth.signInWithPhoneNumber(number, appVerifier)
+            .then((confirmationResult) => {
+                window.confirmationResult = confirmationResult;
+                // Phone input chhupao aur OTP input dikhao
+                document.getElementById('phone-section').style.display = 'none';
+                document.getElementById('otp-section').style.display = 'block';
+                alert("OTP bhej diya gaya hai! Check kijiye. 📱");
+            }).catch((error) => {
+                console.error("SMS Error:", error);
+                
+                // Agar 'Identity Toolkit' wala error aaye toh Console check karein
+                if (error.code === 'auth/operation-not-allowed') {
+                    alert("Error: Firebase mein Phone Auth enable nahi hai!");
+                } else {
+                    alert("Error: " + error.message);
+                }
+
+                // Error aane par reCAPTCHA reset karna zaroori hai
+                window.recaptchaVerifier.render().then(function(widgetId) {
+                    grecaptcha.reset(widgetId);
+                });
+            });
+    }
+
+    function verifyOTP() {
+        const code = document.getElementById('otpCode').value;
+        confirmationResult.confirm(code).then((result) => {
+            localStorage.setItem("user_id", result.user.uid);
+            window.location.href = "index.html"; // Login ke baad home page
+        }).catch((error) => alert("Galat OTP!"));
+    }
+</script>
+
+</body>
+</html>
