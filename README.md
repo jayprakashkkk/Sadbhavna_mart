@@ -1,0 +1,216 @@
+<div align="center">
+
+# 🛒 SADBHAVNA MART (सद्भावना मार्ट)
+### *Mobile-First Hostel Quick-Commerce & Late-Night Essentials Web Platform*
+
+[![Platform](https://img.shields.io/badge/Platform-Mobile%20Web%20%7C%20PWA%20Ready-blue.svg?style=for-the-badge&logo=googlechrome&logoColor=white)](https://github.com/jayprakashkkk/Sadbhavna_files)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://github.com/jayprakashkkk/Sadbhavna_files)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://github.com/jayprakashkkk/Sadbhavna_files)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://github.com/jayprakashkkk/Sadbhavna_files)
+[![Font Awesome](https://img.shields.io/badge/Font_Awesome-6.5.1-528DD7?style=for-the-badge&logo=fontawesome&logoColor=white)](https://fontawesome.com/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+
+<br/>
+
+**Sadbhavna Mart** is a lightweight, mobile-first quick commerce web application specifically designed for hostel campuses and student residences. It solves late-night food cravings and emergency stationery/grocery needs by enabling students to browse daily essentials, manage a shopping cart, and place door-to-door room delivery orders directly via WhatsApp with zero setup latency.
+
+[Key Features](#-key-features) • [Catalog & Products](#-store-catalog--product-categories) • [App Architecture](#-application-architecture--pages) • [Tech Stack](#-technology-stack) • [Quick Start](#-quick-start) • [UI/UX Showcase](#-uiux-design-highlights)
+
+---
+
+</div>
+
+## 📑 Table of Contents
+
+- [About The Project](#-about-the-project)
+- [✨ Key Features](#-key-features)
+- [🏪 Store Catalog & Product Categories](#-store-catalog--product-categories)
+- [📱 Application Architecture & Pages](#-application-architecture--pages)
+  - [1. Storefront & Product Feed (`Index.html`)](#1-storefront--product-feed-indexhtml)
+  - [2. Category Browser (`category.html`)](#2-category-browser-categoryhtml)
+  - [3. Order History & Tracking (`orders.html`)](#3-order-history--tracking-ordershtml)
+  - [4. Student Profile & Address Hub (`profile.html`)](#4-student-profile--address-hub-profilehtml)
+  - [5. Wishlist & Bookmarked Cravings (`wishlist.html`)](#5-wishlist--bookmarked-cravings-wishlisthtml)
+  - [6. Authentication & Access (`login.html`)](#6-authentication--access-loginhtml)
+  - [7. Store Information & Policies (`about.html`, `policy.html`, `terms.html`)](#7-store-information--policies)
+- [🛍️ Order & Delivery Workflow](#-order--delivery-workflow)
+- [🛠️ Technology Stack](#-technology-stack)
+- [🚀 Quick Start (Local Setup)](#-quick-start)
+- [📂 Project Directory Structure](#-project-directory-structure)
+- [📄 License & Credits](#-license--author)
+
+---
+
+## 🌟 About The Project
+
+Late-night study sessions, exam preparation, and hostel living often bring sudden hunger pangs when campus cafeterias are closed and commercial delivery apps are either unavailable, charge exorbitant delivery fees, or are barred from entering hostel corridors.
+
+**Sadbhavna Mart** was created to address this exact micro-market challenge:
+- Provides a fast, frictionless digital catalog of popular hostel staples (Maggi, biscuits, snacks, tea, coffee, milk, chips).
+- Direct WhatsApp checkout workflow that transmits the user's selected items, total cost, payment method, and exact hostel room number.
+- Runs 100% on client-side technology with zero backend server dependencies or complicated database setups.
+
+---
+
+## ✨ Key Features
+
+- **⚡ Instant WhatsApp Checkout**: Converts the shopping cart into a structured, pre-formatted WhatsApp order message sent directly to the hostel inventory coordinator.
+- **📍 Room-Level Delivery Routing**: Native fields for hostel block and room numbers (`📍 Room 204`) ensure accurate delivery directly to the student's door.
+- **💳 Multi-Payment Method Support**: Accommodates student payment preferences including UPI (Google Pay, PhonePe, Paytm) and Cash on Delivery (COD).
+- **🛒 Dynamic Cart & State Persistence**: Local storage powered cart keeps items intact even if the browser is closed or refreshed.
+- **📦 Order History Log**: Dedicated order tracking screen displays past orders, timestamp, items ordered, and total bills.
+- **🌙 Cyberpunk Dark Mode Palette**: Ultra-sleek `#000` to `#0f172a` slate gradient aesthetic with high-contrast `#00ff99` neon emerald accents designed for night browsing.
+- **📱 Bottom Navigation Bar**: Native app-like bottom navigation with smooth transitions between Home, Categories, Wishlist, and Profile.
+
+---
+
+## 🏪 Store Catalog & Product Categories
+
+| Category | Available Inventory Items |
+| :--- | :--- |
+| **Instant Foods** | Classic 2-Minute Maggi, Cup Maggi, Instant Noodles |
+| **Biscuits & Cookies** | Parle-G, Britannia Bourbon Chocolate Biscuits |
+| **Crisps & Namkeen** | Kurkure Masala Munch, Tedhe Medhe, Potato Chips |
+| **Beverages & Tea** | Premium Tea Leaves (Chaipatti), Instant Coffee Powder, Dairy Milk Packets |
+| **Daily Pantry** | Refined White Sugar (Chini), Daily Hostel Essentials |
+
+---
+
+## 📱 Application Architecture & Pages
+
+```
+                       ┌───────────────────────────────┐
+                       │     SADBHAVNA STOREFRONT      │
+                       │         (Index.html)          │
+                       └──────────────┬────────────────┘
+                                      │
+         ┌──────────────┬─────────────┼──────────────┬──────────────┐
+         ▼              ▼             ▼              ▼              ▼
+   ┌───────────┐  ┌───────────┐ ┌───────────┐  ┌───────────┐  ┌───────────┐
+   │Categories │  │  Orders   │ │ Wishlist  │  │  Profile  │  │ WhatsApp  │
+   │category.  │  │orders.html│ │wishlist.  │  │profile.   │  │ Checkout  │
+   │   html    │  │           │ │   html    │  │   html    │  │  Gateway  │
+   └───────────┘  └───────────┘ └───────────┘  └───────────┘  └───────────┘
+```
+
+### 1. Storefront & Product Feed (`Index.html`)
+- Prominent promotional banners and category filter pills.
+- Interactive product cards displaying product image, title, pricing, and 1-tap "Add to Cart" CTA.
+- Sticky slide-over cart drawer with increment/decrement counters and live price recalculations.
+
+### 2. Category Browser (`category.html`)
+- Structured classification allowing students to rapidly jump to specific departments (Snacks, Drinks, Instant Meals).
+
+### 3. Order History & Tracking (`orders.html`)
+- Reads locally saved transaction logs from `localStorage`.
+- Displays card-based receipts showing order name, items, payment mode, and delivery room number.
+
+### 4. Student Profile & Address Hub (`profile.html`)
+- Manages user details (Name, Contact Number, Hostel Name, Room Number).
+- Quick links to Order History, App Settings, and Support.
+
+### 5. Wishlist & Bookmarked Cravings (`wishlist.html`)
+- Lets students bookmark frequently purchased midnight cravings for rapid re-ordering.
+
+### 6. Authentication & Access (`login.html`)
+- Student sign-in and registration screen with clean responsive inputs.
+
+### 7. Store Information & Policies
+- **`about.html`**: The story, mission, and operating hours of Sadbhavna Mart.
+- **`policy.html`**: Store policies covering returns, damaged goods, and delivery rules.
+- **`terms.html`**: Terms and conditions of service.
+
+---
+
+## 🛍️ Order & Delivery Workflow
+
+1. **Browse & Add**: Student explores items and adds desired quantities to cart.
+2. **Review Cart**: Cart drawer calculates subtotal and order summary.
+3. **Room Details**: Student enters room number and selects payment method (UPI / COD).
+4. **WhatsApp Dispatch**: Tapping "Order via WhatsApp" launches WhatsApp with a pre-filled message:
+   ```
+   *New Order from Sadbhavna Mart!*
+   👤 Student: Alex
+   📍 Room: B-312
+   📦 Items:
+      - 2x Cup Maggi (₹80)
+      - 1x Bourbon Biscuit (₹30)
+      - 1x Cold Coffee (₹40)
+   💰 Total: ₹150
+   💳 Payment: UPI
+   ```
+5. **Fulfillment**: The store coordinator confirms the order and delivers it directly to the student's room.
+
+---
+
+## 🛠️ Technology Stack
+
+- **Frontend**: Semantic HTML5 markup, modern CSS3 styling (Flexbox, CSS Grid, linear gradients, backdrop-filters).
+- **Icons & Typography**: Font Awesome 6.5.1 vector iconography, system-native sans-serif fonts.
+- **Client Logic & State**: Pure Vanilla JavaScript (ES6+), Web Storage API (`localStorage`) for cart, orders, and user profile persistence.
+- **Communication Gateway**: WhatsApp Click-to-Chat API URI scheme integration.
+
+---
+
+## 🚀 Quick Start
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/jayprakashkkk/Sadbhavna_files.git
+cd Sadbhavna_files
+```
+
+### 2. Launch in Browser
+No Node.js, Python, or build steps required! Simply double-click `Index.html` or run:
+```bash
+# macOS
+open Index.html
+
+# Windows
+start Index.html
+
+# Linux
+xdg-open Index.html
+```
+
+Or run with any local static HTTP server:
+```bash
+npx serve .
+# or
+python3 -m http.server 3000
+```
+
+---
+
+## 📂 Project Directory Structure
+
+```
+Sadbhavna_files/
+├── Index.html           # Main storefront, product listing & cart drawer
+├── category.html        # Category browsing interface
+├── orders.html          # Order history and receipts view
+├── profile.html         # User profile and room details
+├── wishlist.html        # Saved items and favorites
+├── login.html           # Student authentication page
+├── about.html           # About Sadbhavna Mart
+├── policy.html          # Store delivery & refund policies
+├── terms.html           # Terms and conditions
+├── *.jpg / *.png        # High-resolution optimized product imagery
+└── README.md            # Comprehensive project documentation
+```
+
+---
+
+## 🎨 UI/UX Design Highlights
+
+- **100% Fullscreen Fluid Responsive Layout**: Tailored for thumb-friendly navigation on iOS Safari and Android Chrome.
+- **Glassmorphic Accents**: Subtle glassmorphism (`backdrop-filter: blur(6px)`) on top navigation and action buttons.
+- **Zero Overhead**: Blazing-fast initial paint times with no external JavaScript bundles.
+
+---
+
+## 📄 License & Author
+
+Created by **[Jay Prakash](https://github.com/jayprakashkkk)**.
+
+Released under the **MIT License**. Feel free to adapt this for your own campus, dorm, or community grocery service!
