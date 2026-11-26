@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sadbhavna-mart-pwa-v2';
+const CACHE_NAME = 'sadbhavna-mart-pwa-v3';
 const APP_SHELL = [
   './',
   './index.html',
@@ -56,8 +56,14 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Network-first for HTML page navigations so updates reflect immediately
-  if (request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname === '/') {
+  // Network-first for HTML, CSS, and JS so updates reflect immediately
+  if (
+    request.mode === 'navigate' ||
+    url.pathname === '/' ||
+    url.pathname.endsWith('.html') ||
+    url.pathname.endsWith('.css') ||
+    url.pathname.endsWith('.js')
+  ) {
     event.respondWith(
       fetch(request)
         .then((response) => {

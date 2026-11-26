@@ -35,16 +35,22 @@
     return true;
   };
 
+  function getPageSlug(pathname) {
+    var clean = (pathname || '').toLowerCase().replace(/\/+$/, '');
+    var last = clean.split('/').pop() || '';
+    return last.replace(/\.html?$/, '');
+  }
+
   function detectNavIndex() {
-    var path = (window.location.pathname || '').toLowerCase();
-    if (path.endsWith('/category.html') || path.endsWith('category.html')) return 1;
+    var slug = getPageSlug(window.location.pathname);
+    if (slug === 'category') return 1;
     if (
-      path.endsWith('/profile.html') || path.endsWith('profile.html') ||
-      path.endsWith('/orders.html') || path.endsWith('orders.html') ||
-      path.endsWith('/wishlist.html') || path.endsWith('wishlist.html') ||
-      path.endsWith('/about.html') || path.endsWith('about.html') ||
-      path.endsWith('/policy.html') || path.endsWith('policy.html') ||
-      path.endsWith('/terms.html') || path.endsWith('terms.html')
+      slug === 'profile' ||
+      slug === 'orders' ||
+      slug === 'wishlist' ||
+      slug === 'about' ||
+      slug === 'policy' ||
+      slug === 'terms'
     ) {
       return 2;
     }
@@ -102,6 +108,8 @@
     }
 
     var navigating = false;
+    var currentSlug = getPageSlug(window.location.pathname) || 'index';
+
     links.forEach(function (link, idx) {
       link.addEventListener('click', function (e) {
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
@@ -110,7 +118,9 @@
         if (!href) return;
 
         var targetUrl = new URL(href, window.location.href);
-        if (targetUrl.pathname === window.location.pathname && idx === activeIdx) {
+        var targetSlug = getPageSlug(targetUrl.pathname) || 'index';
+
+        if (targetSlug === currentSlug) {
           e.preventDefault();
           var item = link.querySelector('.nav-item');
           if (item) {
@@ -141,6 +151,14 @@
     setActiveVisual(activeIdx);
     positionSlider(activeIdx, false);
 
+    window.addEventListener('load', function () {
+      if (!navigating) {
+        activeIdx = detectNavIndex();
+        setActiveVisual(activeIdx);
+        positionSlider(activeIdx, false);
+      }
+    });
+
     window.addEventListener('pageshow', function () {
       navigating = false;
       activeIdx = detectNavIndex();
@@ -149,7 +167,9 @@
     });
 
     window.addEventListener('resize', function () {
-      positionSlider(activeIdx, false);
+      if (!navigating) {
+        positionSlider(activeIdx, false);
+      }
     });
   }
 
