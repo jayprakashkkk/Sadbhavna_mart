@@ -20,42 +20,129 @@ body{
   width:100%;
   max-width:100%;
   min-height:100vh;
-  padding:22px;
-  padding-bottom:120px;
+  padding:18px;
+  padding-bottom:110px;
 }
 .header{
   display:flex;
   align-items:center;
-  gap:15px;
-  margin-bottom:24px;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
 }
 .header a{
   color:#00ff99;
-  font-size:24px;
+  font-size:22px;
   text-decoration:none;
 }
 .header h1{
-  font-size:30px;
+  font-size:26px;
   color:#00ff99;
 }
+
+/* STUDENT HERO CARD */
+.user-hero{
+  width:100%;
+  background:linear-gradient(135deg,rgba(0,255,153,0.12),rgba(56,189,248,0.08));
+  border:1px solid rgba(0,255,153,0.3);
+  border-radius:22px;
+  padding:18px;
+  margin-bottom:18px;
+  backdrop-filter:blur(10px);
+}
+.user-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.user-info{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.avatar{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  background:#00ff99;
+  color:#000;
+  font-size:22px;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 0 18px rgba(0,255,153,0.35);
+}
+.user-name{
+  font-size:18px;
+  font-weight:800;
+  color:#fff;
+}
+.user-sub{
+  font-size:13px;
+  color:#94a3b8;
+  margin-top:3px;
+}
+.edit-pill{
+  border:1px solid rgba(0,255,153,0.5);
+  background:rgba(0,255,153,0.12);
+  color:#00ff99;
+  padding:7px 13px;
+  border-radius:999px;
+  font-size:12.5px;
+  font-weight:700;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.stats-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:16px;
+}
+.stat-box{
+  background:rgba(15,23,42,0.75);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px;
+  padding:10px 8px;
+  text-align:center;
+  text-decoration:none;
+  color:#fff;
+}
+.stat-num{
+  font-size:18px;
+  font-weight:800;
+  color:#00ff99;
+}
+.stat-lbl{
+  font-size:11.5px;
+  color:#94a3b8;
+  margin-top:2px;
+}
+
 .profile-card{
   width:100%;
   max-width:100%;
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.1);
-  border-radius:26px;
-  padding:24px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:22px;
+  padding:18px;
   backdrop-filter:blur(10px);
-  box-shadow:0 0 30px rgba(0,255,153,0.1);
 }
 .section-title{
-  margin-bottom:16px;
-  font-size:22px;
+  margin-bottom:14px;
+  font-size:18px;
   color:#00ff99;
 }
 .options-grid{
   display:grid;
-  gap:14px;
+  gap:12px;
   grid-template-columns:1fr;
 }
 @media screen and (min-width:900px){
@@ -66,65 +153,111 @@ body{
 .option-box{
   background:rgba(255,255,255,0.05);
   border:1px solid rgba(255,255,255,0.08);
-  padding:18px 20px;
-  border-radius:18px;
+  padding:15px 16px;
+  border-radius:16px;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:10px;
   transition:0.2s;
   cursor:pointer;
 }
 .option-box:hover{
   transform:translateY(-2px);
-  box-shadow:0 0 18px rgba(0,255,153,0.2);
+  border-color:rgba(0,255,153,0.35);
 }
 .option-left{
   display:flex;
   align-items:center;
-  gap:14px;
-  font-size:17px;
+  gap:12px;
 }
 .option-left i{
-  font-size:21px;
+  font-size:19px;
   color:#00ff99;
+  width:24px;
+  text-align:center;
+}
+.option-title{
+  font-size:15.5px;
+  font-weight:700;
+  color:#fff;
+}
+.option-desc{
+  font-size:12px;
+  color:#94a3b8;
+  margin-top:2px;
 }
 .option-right{
   color:#94a3b8;
-  font-size:15px;
+  font-size:13.5px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  white-space:nowrap;
+}
+.count-pill{
+  background:rgba(0,255,153,0.14);
+  color:#00ff99;
+  font-size:11.5px;
+  font-weight:800;
+  padding:3px 9px;
+  border-radius:999px;
 }
 #languageSelect{
   background:#0f172a;
   color:#fff;
-  padding:8px 12px;
+  padding:7px 11px;
   border:1px solid rgba(255,255,255,0.15);
   border-radius:10px;
-  font-size:14px;
+  font-size:13.5px;
   outline:none;
   cursor:pointer;
+}
+.action-buttons{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+  margin-top:18px;
+}
+@media screen and (min-width:640px){
+  .action-buttons{
+    grid-template-columns:2fr 1fr;
+  }
 }
 .store-btn{
   display:block;
   width:100%;
   text-align:center;
   text-decoration:none;
-  padding:15px;
-  border-radius:16px;
-  margin-top:22px;
+  padding:14px;
+  border-radius:14px;
   background:#00ff99;
   color:#000;
-  font-size:17px;
-  font-weight:bold;
+  font-size:16px;
+  font-weight:800;
+}
+.reset-btn{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:1px solid rgba(239,68,68,0.45);
+  background:rgba(239,68,68,0.12);
+  color:#fca5a5;
+  font-size:14.5px;
+  font-weight:700;
+  cursor:pointer;
 }
 .footer{
   text-align:center;
-  margin-top:24px;
+  margin-top:20px;
   color:#94a3b8;
-  font-size:14px;
+  font-size:13px;
 }
 .link{
   text-decoration:none;
   color:#fff;
 }
+
 /* MODAL */
 .modal-overlay{
   position:fixed;
@@ -144,7 +277,7 @@ body{
   background:#0f172a;
   border:1px solid rgba(0,255,153,0.35);
   border-radius:22px;
-  padding:24px;
+  padding:22px;
   display:none;
   z-index:201;
 }
@@ -152,6 +285,7 @@ body{
 .modal-box h2{
   color:#00ff99;
   margin-bottom:14px;
+  font-size:20px;
 }
 .modal-input{
   width:100%;
@@ -189,6 +323,30 @@ body{
   font-weight:bold;
   cursor:pointer;
 }
+
+/* TOAST */
+#toastMsg{
+  position:fixed;
+  top:16px;
+  left:50%;
+  transform:translateX(-50%) translateY(-80px);
+  background:#0f172a;
+  color:#00ff99;
+  border:1px solid rgba(0,255,153,0.5);
+  padding:10px 18px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:700;
+  z-index:9999;
+  opacity:0;
+  transition:transform 0.25s ease, opacity 0.25s ease;
+  pointer-events:none;
+}
+#toastMsg.show{
+  transform:translateX(-50%) translateY(0);
+  opacity:1;
+}
+
 .bottom-nav{
   position:fixed;
   bottom:0;
@@ -226,47 +384,94 @@ body{
 
 <body>
 
+<div id="toastMsg"></div>
+
 <div class="header">
-  <a href="index.html?nav=1" aria-label="Back to Store"><i class="fa-solid fa-arrow-left"></i></a>
-  <h1 id="pageTitle" data-en="Profile" data-hi="प्रोफाइल">Profile</h1>
+  <div class="header-left">
+    <a href="index.html?nav=1" aria-label="Back to Store"><i class="fa-solid fa-arrow-left"></i></a>
+    <h1 class="i18n" data-en="My Profile" data-hi="मेरा प्रोफाइल">My Profile</h1>
+  </div>
+</div>
+
+<!-- STUDENT HERO + LIVE STATS -->
+<div class="user-hero">
+  <div class="user-top">
+    <div class="user-info">
+      <div class="avatar" id="userAvatar">S</div>
+      <div>
+        <div class="user-name" id="heroName">Hostel Student</div>
+        <div class="user-sub" id="heroSub">Tap Edit to save room &amp; hostel details</div>
+      </div>
+    </div>
+    <button class="edit-pill" onclick="openProfileModal()">
+      <i class="fa-solid fa-pen"></i> <span class="i18n" data-en="Edit" data-hi="बदलें">Edit</span>
+    </button>
+  </div>
+
+  <div class="stats-row">
+    <a href="orders.html" class="stat-box">
+      <div class="stat-num" id="statOrders">0</div>
+      <div class="stat-lbl i18n" data-en="Orders" data-hi="ऑर्डर्स">Orders</div>
+    </a>
+    <a href="wishlist.html" class="stat-box">
+      <div class="stat-num" id="statFavs">0</div>
+      <div class="stat-lbl i18n" data-en="Wishlist" data-hi="विशलिस्ट">Wishlist</div>
+    </a>
+    <a href="index.html?nav=1" class="stat-box">
+      <div class="stat-num" id="statCart">0</div>
+      <div class="stat-lbl i18n" data-en="In Cart" data-hi="कार्ट में">In Cart</div>
+    </a>
+  </div>
 </div>
 
 <div class="profile-card">
-  <h2 class="section-title" id="sectionTitle" data-en="Settings &amp; Quick Access" data-hi="सेटिंग्स और विकल्प">Settings &amp; Quick Access</h2>
+  <h2 class="section-title i18n" data-en="Account &amp; Store Settings" data-hi="अकाउंट और स्टोर सेटिंग्स">Account &amp; Store Settings</h2>
 
   <div class="options-grid">
     <div class="option-box" onclick="openProfileModal()">
       <div class="option-left">
-        <i class="fa-solid fa-user"></i>
-        <span class="i18n" data-en="Saved Delivery Details" data-hi="डिलीवरी विवरण">Saved Delivery Details</span>
-      </div>
-      <div class="option-right" id="savedNameBadge">Edit</div>
-    </div>
-
-    <a href="wishlist.html" class="link">
-      <div class="option-box">
-        <div class="option-left">
-          <i class="fa-solid fa-heart"></i>
-          <span class="i18n" data-en="Wishlist" data-hi="विशलिस्ट">Wishlist</span>
+        <i class="fa-solid fa-location-dot"></i>
+        <div>
+          <div class="option-title i18n" data-en="Saved Delivery Details" data-hi="डिलीवरी विवरण">Saved Delivery Details</div>
+          <div class="option-desc" id="deliveryPreview">Auto-fills WhatsApp checkout form</div>
         </div>
-        <div class="option-right"><i class="fa-solid fa-angle-right"></i></div>
       </div>
-    </a>
+      <div class="option-right"><i class="fa-solid fa-angle-right"></i></div>
+    </div>
 
     <a href="orders.html" class="link">
       <div class="option-box">
         <div class="option-left">
           <i class="fa-solid fa-box"></i>
-          <span class="i18n" data-en="Orders" data-hi="ऑर्डर्स">Orders</span>
+          <div>
+            <div class="option-title i18n" data-en="Order History" data-hi="ऑर्डर हिस्ट्री">Order History</div>
+            <div class="option-desc i18n" data-en="View receipts &amp; 1-tap WhatsApp reorder" data-hi="रसीद देखें और दोबारा ऑर्डर करें">View receipts &amp; 1-tap WhatsApp reorder</div>
+          </div>
         </div>
-        <div class="option-right"><i class="fa-solid fa-angle-right"></i></div>
+        <div class="option-right"><span class="count-pill" id="ordersPill">0</span><i class="fa-solid fa-angle-right"></i></div>
+      </div>
+    </a>
+
+    <a href="wishlist.html" class="link">
+      <div class="option-box">
+        <div class="option-left">
+          <i class="fa-solid fa-heart"></i>
+          <div>
+            <div class="option-title i18n" data-en="Wishlist" data-hi="विशलिस्ट">Wishlist</div>
+            <div class="option-desc i18n" data-en="Your saved favourite snacks &amp; items" data-hi="आपकी पसंदीदा चीज़ें">Your saved favourite snacks &amp; items</div>
+          </div>
+        </div>
+        <div class="option-right"><span class="count-pill" id="favsPill">0</span><i class="fa-solid fa-angle-right"></i></div>
       </div>
     </a>
 
     <div class="option-box">
       <div class="option-left">
         <i class="fa-solid fa-language"></i>
-        <span class="i18n" data-en="Language Settings" data-hi="भाषा सेटिंग्स">Language Settings</span>
+        <div>
+          <div class="option-title i18n" data-en="Language" data-hi="भाषा">Language</div>
+          <div class="option-desc i18n" data-en="Switch English / Hindi labels" data-hi="अंग्रेज़ी / हिंदी बदलें">Switch English / Hindi labels</div>
+        </div>
       </div>
       <select id="languageSelect">
         <option value="English">English</option>
@@ -278,7 +483,10 @@ body{
       <div class="option-box">
         <div class="option-left">
           <i class="fa-solid fa-circle-info"></i>
-          <span class="i18n" data-en="About Sadbhavna Mart" data-hi="सद्भावना मार्ट के बारे में">About Sadbhavna Mart</span>
+          <div>
+            <div class="option-title i18n" data-en="About Sadbhavna Mart" data-hi="सद्भावना मार्ट के बारे में">About Sadbhavna Mart</div>
+            <div class="option-desc i18n" data-en="Timings (10 AM – 3 AM) &amp; store info" data-hi="स्टोर टाइमिंग और जानकारी">Timings (10 AM – 3 AM) &amp; store info</div>
+          </div>
         </div>
         <div class="option-right"><i class="fa-solid fa-angle-right"></i></div>
       </div>
@@ -288,7 +496,10 @@ body{
       <div class="option-box">
         <div class="option-left">
           <i class="fa-solid fa-file-contract"></i>
-          <span class="i18n" data-en="Terms &amp; Conditions" data-hi="नियम और शर्तें">Terms &amp; Conditions</span>
+          <div>
+            <div class="option-title i18n" data-en="Terms &amp; Conditions" data-hi="नियम और शर्तें">Terms &amp; Conditions</div>
+            <div class="option-desc i18n" data-en="Delivery &amp; payment guidelines" data-hi="डिलीवरी और पेमेंट नियम">Delivery &amp; payment guidelines</div>
+          </div>
         </div>
         <div class="option-right"><i class="fa-solid fa-angle-right"></i></div>
       </div>
@@ -298,7 +509,10 @@ body{
       <div class="option-box">
         <div class="option-left">
           <i class="fa-solid fa-shield-halved"></i>
-          <span class="i18n" data-en="Privacy Policy" data-hi="प्राइवेसी पॉलिसी">Privacy Policy</span>
+          <div>
+            <div class="option-title i18n" data-en="Privacy Policy" data-hi="प्राइवेसी पॉलिसी">Privacy Policy</div>
+            <div class="option-desc i18n" data-en="How your local &amp; order data is handled" data-hi="आपका डेटा सुरक्षित है">How your local &amp; order data is handled</div>
+          </div>
         </div>
         <div class="option-right"><i class="fa-solid fa-angle-right"></i></div>
       </div>
@@ -308,29 +522,35 @@ body{
       <div class="option-box">
         <div class="option-left">
           <i class="fa-brands fa-whatsapp"></i>
-          <span class="i18n" data-en="WhatsApp Support" data-hi="व्हाट्सएप सहायता">WhatsApp Support</span>
+          <div>
+            <div class="option-title i18n" data-en="WhatsApp Support" data-hi="व्हाट्सएप सहायता">WhatsApp Support</div>
+            <div class="option-desc">+91 72097 93015 • Instant Help</div>
+          </div>
         </div>
         <div class="option-right" style="color:#00ff99;font-weight:bold;">Online</div>
       </div>
     </a>
   </div>
 
-  <a href="index.html?nav=1" class="store-btn" id="storeBtn" data-en="Back to Storefront" data-hi="स्टोर पर वापस जाएं">Back to Storefront</a>
+  <div class="action-buttons">
+    <a href="index.html?nav=1" class="store-btn i18n" data-en="Back to Storefront" data-hi="स्टोर पर वापस जाएं">Back to Storefront</a>
+    <button class="reset-btn i18n" data-en="Clear App Data" data-hi="डेटा साफ़ करें" onclick="clearSavedData()">Clear App Data</button>
+  </div>
 </div>
 
-<div class="footer" id="footerText" data-en="© 2026 Sadbhavna Mart" data-hi="© 2026 सद्भावना मार्ट">© 2026 Sadbhavna Mart</div>
+<div class="footer i18n" data-en="© 2026 Sadbhavna Mart • Hostel Quick-Commerce" data-hi="© 2026 सद्भावना मार्ट • हॉस्टल क्विक-कॉमर्स">© 2026 Sadbhavna Mart • Hostel Quick-Commerce</div>
 
 <!-- DELIVERY DETAILS MODAL -->
 <div class="modal-overlay" id="profileOverlay" onclick="closeProfileModal()"></div>
 <div class="modal-box" id="profileModal">
-  <h2>📝 Delivery Details</h2>
+  <h2 class="i18n" data-en="📝 Delivery Details" data-hi="📝 डिलीवरी विवरण">📝 Delivery Details</h2>
   <input type="text" id="profName" class="modal-input" placeholder="Your Name">
   <input type="text" id="profRoom" class="modal-input" placeholder="Room Number (e.g. 204)">
   <input type="text" id="profHostel" class="modal-input" placeholder="Hostel / Block Name">
   <input type="tel" id="profPhone" class="modal-input" placeholder="WhatsApp / Mobile Number">
   <div class="modal-actions">
-    <button class="btn-save" onclick="saveProfile()">Save Details</button>
-    <button class="btn-cancel" onclick="closeProfileModal()">Cancel</button>
+    <button class="btn-save i18n" data-en="Save Details" data-hi="सेव करें" onclick="saveProfile()">Save Details</button>
+    <button class="btn-cancel i18n" data-en="Cancel" data-hi="रद्द करें" onclick="closeProfileModal()">Cancel</button>
   </div>
 </div>
 
@@ -338,55 +558,88 @@ body{
   <a href="index.html?nav=1">
     <div class="nav-item">
       <i class="fa-solid fa-house"></i>
-      <span>Home</span>
+      <span class="i18n" data-en="Home" data-hi="होम">Home</span>
     </div>
   </a>
   <a href="category.html">
     <div class="nav-item">
       <i class="fa-solid fa-layer-group"></i>
-      <span>Category</span>
+      <span class="i18n" data-en="Category" data-hi="श्रेणी">Category</span>
     </div>
   </a>
   <a href="profile.html">
     <div class="nav-item active">
       <i class="fa-solid fa-user"></i>
-      <span>Profile</span>
+      <span class="i18n" data-en="Profile" data-hi="प्रोफाइल">Profile</span>
     </div>
   </a>
 </div>
 
 <script>
 const languageSelect = document.getElementById("languageSelect");
+let toastTimer = null;
+
+function showToast(msg) {
+  const t = document.getElementById("toastMsg");
+  t.innerText = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2000);
+}
 
 function applyLanguage(lang) {
   const key = lang === "Hindi" ? "hi" : "en";
-  document.getElementById("pageTitle").innerText = document.getElementById("pageTitle").dataset[key];
-  document.getElementById("sectionTitle").innerText = document.getElementById("sectionTitle").dataset[key];
-  document.getElementById("storeBtn").innerText = document.getElementById("storeBtn").dataset[key];
-  document.getElementById("footerText").innerText = document.getElementById("footerText").dataset[key];
   document.querySelectorAll(".i18n").forEach(el => {
-    el.innerText = el.dataset[key];
+    if (el.dataset[key]) el.innerText = el.dataset[key];
   });
 }
 
 languageSelect.addEventListener("change", function () {
   localStorage.setItem("sadbhavna_lang", this.value);
   applyLanguage(this.value);
+  showToast(this.value === "Hindi" ? "भाषा हिंदी में बदल गई" : "Language set to English");
 });
 
-function loadSavedProfile() {
-  try {
-    const p = JSON.parse(localStorage.getItem("sadbhavna_profile")) || {};
-    document.getElementById("profName").value = p.name || "";
-    document.getElementById("profRoom").value = p.room || "";
-    document.getElementById("profHostel").value = p.hostel || "";
-    document.getElementById("profPhone").value = p.phone || "";
-    document.getElementById("savedNameBadge").innerText = p.name ? p.name : "Edit";
-  } catch (e) {}
+function loadStatsAndProfile() {
+  let profile = {};
+  let orders = [];
+  let favs = [];
+  let cart = {};
+  try { profile = JSON.parse(localStorage.getItem("sadbhavna_profile")) || {}; } catch (e) {}
+  try { orders = JSON.parse(localStorage.getItem("orders")) || []; } catch (e) {}
+  try { favs = JSON.parse(localStorage.getItem("sadbhavna_favs")) || []; } catch (e) {}
+  try { cart = JSON.parse(localStorage.getItem("sadbhavna_cart")) || {}; } catch (e) {}
+
+  let cartCount = 0;
+  Object.values(cart).forEach(q => { cartCount += (Number(q) || 0); });
+
+  document.getElementById("statOrders").innerText = orders.length;
+  document.getElementById("statFavs").innerText = favs.length;
+  document.getElementById("statCart").innerText = cartCount;
+  document.getElementById("ordersPill").innerText = orders.length;
+  document.getElementById("favsPill").innerText = favs.length;
+
+  const displayName = profile.name || "Hostel Student";
+  document.getElementById("heroName").innerText = displayName;
+  document.getElementById("userAvatar").innerText = displayName.charAt(0).toUpperCase();
+
+  if (profile.hostel || profile.room) {
+    const loc = [profile.hostel, profile.room ? "Room " + profile.room : ""].filter(Boolean).join(" • ");
+    document.getElementById("heroSub").innerText = loc + (profile.phone ? " • " + profile.phone : "");
+    document.getElementById("deliveryPreview").innerText = loc;
+  } else {
+    document.getElementById("heroSub").innerText = "Tap Edit to save room & hostel details";
+    document.getElementById("deliveryPreview").innerText = "Auto-fills WhatsApp checkout form";
+  }
+
+  document.getElementById("profName").value = profile.name || "";
+  document.getElementById("profRoom").value = profile.room || "";
+  document.getElementById("profHostel").value = profile.hostel || "";
+  document.getElementById("profPhone").value = profile.phone || "";
 }
 
 function openProfileModal() {
-  loadSavedProfile();
+  loadStatsAndProfile();
   document.getElementById("profileOverlay").classList.add("active");
   document.getElementById("profileModal").classList.add("active");
 }
@@ -404,14 +657,26 @@ function saveProfile() {
     phone: document.getElementById("profPhone").value.trim()
   };
   localStorage.setItem("sadbhavna_profile", JSON.stringify(profile));
-  loadSavedProfile();
+  loadStatsAndProfile();
   closeProfileModal();
+  showToast("✅ Delivery details saved!");
+}
+
+function clearSavedData() {
+  if (!confirm("Clear saved cart, wishlist, order history, and profile details?")) return;
+  localStorage.removeItem("sadbhavna_cart");
+  localStorage.removeItem("sadbhavna_favs");
+  localStorage.removeItem("sadbhavna_notifications");
+  localStorage.removeItem("orders");
+  localStorage.removeItem("sadbhavna_profile");
+  loadStatsAndProfile();
+  showToast("🗑️ Local app data cleared");
 }
 
 const savedLang = localStorage.getItem("sadbhavna_lang") || "English";
 languageSelect.value = savedLang;
 applyLanguage(savedLang);
-loadSavedProfile();
+loadStatsAndProfile();
 </script>
 
 </body>

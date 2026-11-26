@@ -3,71 +3,87 @@
 
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>About — Sadbhavna Mart</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial,sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
 body{
   background:linear-gradient(135deg,#000,#0f172a,#111827);
   color:#fff;
   width:100%;
   max-width:100%;
-  padding:25px;
+  padding:20px;
+  padding-bottom:105px;
   min-height:100vh;
 }
-.top-bar{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  margin-bottom:25px;
-}
+.top-bar{display:flex;align-items:center;gap:14px;margin-bottom:22px;}
 .circle-btn{
-  width:45px;
-  height:45px;
-  border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-decoration:none;
-  color:#00ff99;
-  font-size:20px;
-  border:1px solid rgba(255,255,255,0.15);
-  backdrop-filter:blur(6px);
+  width:42px;height:42px;border-radius:50%;display:flex;justify-content:center;align-items:center;
+  text-decoration:none;color:#00ff99;font-size:18px;border:1px solid rgba(255,255,255,0.15);
 }
-h1{
-  color:#00ff99;
-  margin-bottom:20px;
-}
+h1{color:#00ff99;font-size:26px;}
+.grid{display:grid;gap:14px;grid-template-columns:1fr;}
+@media screen and (min-width:800px){ .grid{grid-template-columns:repeat(2,1fr);} }
 .box{
   width:100%;
   background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.08);
-  padding:24px;
-  border-radius:20px;
-  font-size:17px;
-  line-height:1.8;
-  color:#ddd;
+  border:1px solid rgba(255,255,255,0.09);
+  padding:20px;
+  border-radius:18px;
 }
+.box h2{color:#00ff99;font-size:17px;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.box p{font-size:15px;line-height:1.7;color:#cbd5e1;}
+.wa-cta{
+  display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:11px 18px;
+  border-radius:12px;background:#25D366;color:#000;font-weight:800;text-decoration:none;font-size:14px;
+}
+.bottom-nav{
+  position:fixed;bottom:0;left:0;width:100%;height:75px;background:rgba(10,15,28,0.94);
+  backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,0.1);
+  display:flex;justify-content:space-around;align-items:center;z-index:99;
+}
+.bottom-nav a{text-decoration:none;color:#94a3b8;}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:12px;padding:8px 18px;}
+.nav-item i{font-size:20px;}
 </style>
 </head>
 
 <body>
 <div class="top-bar">
   <a href="profile.html" class="circle-btn" aria-label="Back"><i class="fa-solid fa-arrow-left"></i></a>
+  <h1>ℹ️ About Sadbhavna Mart</h1>
 </div>
-<h1>ℹ️ About Sadbhavna Mart</h1>
-<div class="box">
-  Late night cravings? 😎
-  <br><br>
-  <strong>Sadbhavna Mart</strong> helps hostel students order daily essentials, Maggi, biscuits, tea, coffee, and snacks quickly and easily — with direct door-to-door room delivery via WhatsApp!
-  <br><br>
-  🕒 <strong>Store Timings:</strong> 10:00 AM to 3:00 AM daily.
+
+<div class="grid">
+  <div class="box">
+    <h2><i class="fa-solid fa-bolt"></i> Hostel Quick-Commerce</h2>
+    <p>Late-night cravings ya exam assignment ki tension? <strong>Sadbhavna Mart</strong> hostel students ke liye snacks, Maggi, coffee, biscuits, drinks, aur stationery (pens &amp; practical files) seedha room tak deliver karta hai.</p>
+  </div>
+
+  <div class="box">
+    <h2><i class="fa-regular fa-clock"></i> Store Timings &amp; Speed</h2>
+    <p><strong>Open Daily:</strong> 10:00 AM to 3:00 AM<br><strong>Delivery Time:</strong> 10–15 minutes door-to-door hostel room delivery.<br><strong>Payment:</strong> Cash on Delivery (COD) &amp; Online UPI.</p>
+  </div>
+
+  <div class="box">
+    <h2><i class="fa-brands fa-whatsapp"></i> Instant WhatsApp Ordering</h2>
+    <p>Koi account ya OTP login ki zaroorat nahi — items cart mein add karein, apna room number daalein, aur seedha WhatsApp par order bhej dein.</p>
+    <a href="https://wa.me/917209793015?text=Hi%20Sadbhavna%20Mart!" target="_blank" class="wa-cta">
+      <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp (+91 72097 93015)
+    </a>
+  </div>
+
+  <div class="box">
+    <h2><i class="fa-solid fa-layer-group"></i> Curated Hostel Catalog</h2>
+    <p>28+ handpicked essentials across <strong>Snacks</strong>, <strong>Instant Meals</strong>, <strong>Beverages &amp; Dairy</strong>, <strong>Pantry</strong>, aur <strong>Stationery</strong> (Linc Glycer, Pentonic ₹10 &amp; ₹20 B-RT, Practical Files ₹40–₹60).</p>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <a href="index.html?nav=1"><div class="nav-item"><i class="fa-solid fa-house"></i><span>Home</span></div></a>
+  <a href="category.html"><div class="nav-item"><i class="fa-solid fa-layer-group"></i><span>Category</span></div></a>
+  <a href="profile.html"><div class="nav-item"><i class="fa-solid fa-user"></i><span>Profile</span></div></a>
 </div>
 </body>
 </html>
