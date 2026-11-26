@@ -219,7 +219,8 @@ Sadbhavna_files/
 ├── stock.json             # Default product inventory manifest
 ├── stock.py               # Terminal CLI tool to add/set/list product stock
 ├── functions/api/stock.js # Cloudflare Pages Function for real-time shared stock
-├── images/                # 20 clean studio product images (JPG & vector SVG)
+├── images/                # Real product photos for newly added catalog items
+├── *.jpg / *.png / *.webp # Original real product photos
 └── README.md              # Project documentation
 ```
 

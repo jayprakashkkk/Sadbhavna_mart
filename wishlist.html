@@ -184,26 +184,26 @@ body{
 
 <script>
 const PRODUCT_IMAGES = {
-  "Parle G": "images/parle-g.jpg",
-  "Tedhe Medhe": "images/tedhe-medhe.jpg",
-  "Kurkure": "images/kurkure.jpg",
-  "Cup Maggi": "images/cup-maggi.jpg",
-  "Bourbon": "images/bourbon.jpg",
-  "Maggi Double Masala": "images/maggi-double-masala.jpg",
-  "Milk": "images/milk.jpg",
-  "Nescafe Coffee": "images/nescafe-coffee.jpg",
-  "BRU Coffee": "images/bru-coffee.svg",
-  "Chini": "images/chini.jpg",
-  "Tata Tea": "images/tata-tea.svg",
-  "Red Label": "images/red-label.svg",
-  "Lays Classic": "images/lays-classic.svg",
-  "Oreo": "images/oreo.svg",
-  "Good Day": "images/good-day.svg",
-  "Dairy Milk": "images/dairy-milk.svg",
-  "Frooti": "images/frooti.svg",
-  "Coca-Cola": "images/coca-cola.svg",
-  "Yippee Noodles": "images/yippee-noodles.svg",
-  "Bread": "images/bread.svg"
+  "Parle G": "ParleG.jpg",
+  "Tedhe Medhe": "Tedhe Medhe.webp",
+  "Kurkure": "Kurkure.jpg",
+  "Cup Maggi": "Cup Maggie.jpg",
+  "Bourbon": "Bourbon.jpg",
+  "Maggi Double Masala": "maggie.jpeg",
+  "Milk": "Milk.png",
+  "Nescafe Coffee": "Coffie.webp",
+  "BRU Coffee": "Coffie2.jpg",
+  "Chini": "Chini.jpeg",
+  "Tata Tea": "Chaipatti1.jpg",
+  "Red Label": "Chaipatti2.jpg",
+  "Lays Classic": "images/lays-classic.jpg",
+  "Oreo": "images/oreo.jpg",
+  "Good Day": "images/good-day.jpg",
+  "Dairy Milk": "images/dairy-milk.jpg",
+  "Frooti": "images/frooti.jpg",
+  "Coca-Cola": "images/coca-cola.jpg",
+  "Yippee Noodles": "images/yippee-noodles.jpg",
+  "Bread": "images/bread.jpg"
 };
 
 const PRODUCT_PRICES = {
@@ -249,7 +249,7 @@ function renderWishlist() {
   }
 
   grid.innerHTML = favs.map(name => {
-    const img = PRODUCT_IMAGES[name] || "images/maggi-double-masala.jpg";
+    const img = PRODUCT_IMAGES[name] || "maggie.jpeg";
     const price = PRODUCT_PRICES[name] || 0;
     const safeName = name.replace(/'/g, "\\'");
     return `
