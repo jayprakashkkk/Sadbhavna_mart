@@ -67,7 +67,7 @@ Late-night study sessions, exam preparation, and hostel living often bring sudde
 - **📦 Live Inventory & Low-Stock Alerts**: Tracks product quantities via `/api/stock` (Cloudflare Pages + Neon PostgreSQL) with `stock.json` fallback, automatically displays red **`Only X left`** warnings when `<= 5` remain, marks products **`Out of Stock`** at `0`, and deducts stock on WhatsApp checkout.
 - **🖥️ Terminal Stock CLI (`stock.py`)**: Add or set product stock directly from the terminal (`python3 stock.py add "Chini" 50`), optionally pushing to `stock.json` (`--push`) or updating the live API (`--api`).
 - **🌙 Cyberpunk Dark Mode Palette**: Ultra-sleek `#000` to `#0f172a` slate gradient aesthetic with high-contrast `#00ff99` neon emerald accents designed for night browsing.
-- **📱 Bottom Navigation Bar**: Native app-like bottom navigation with smooth transitions between Home, Categories, Wishlist, and Profile.
+- **📱 Bottom Navigation Bar (`nav-bar.css`)**: Unified frosted-glass bottom navigation with a gliding neon pill indicator and spring icon bounce animations across all storefront and profile subpages.
 
 ---
 
