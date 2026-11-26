@@ -1,0 +1,89 @@
+const CACHE_NAME = 'sadbhavna-mart-pwa-v1';
+const APP_SHELL = [
+  './',
+  './index.html',
+  './manifest.json',
+  './category.html',
+  './orders.html',
+  './profile.html',
+  './wishlist.html',
+  './about.html',
+  './policy.html',
+  './terms.html',
+  './images/icon-192.png',
+  './images/icon-512.png'
+];
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) =>
+      Promise.allSettled(
+        APP_SHELL.map((url) =>
+          cache.add(new Request(url, { cache: 'reload' })).catch(() => null)
+        )
+      )
+    )
+  );
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys
+          .filter((key) => key !== CACHE_NAME)
+          .map((key) => caches.delete(key))
+      )
+    ).then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+  const { request } = event;
+  if (request.method !== 'GET') return;
+
+  const url = new URL(request.url);
+  if (url.origin !== self.location.origin) return;
+
+  // Never serve stale stock API data
+  if (url.pathname.startsWith('/api/') || url.pathname.endsWith('/stock.json')) {
+    event.respondWith(
+      fetch(request).catch(() => caches.match(request))
+    );
+    return;
+  }
+
+  // Network-first for HTML page navigations so updates reflect immediately
+  if (request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname === '/') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          }
+          return response;
+        })
+        .catch(() => caches.match(request).then((res) => res || caches.match('./index.html')))
+    );
+    return;
+  }
+
+  // Cache-first with background refresh for local images/assets
+  event.respondWith(
+    caches.match(request).then((cached) => {
+      const fetchPromise = fetch(request)
+        .then((response) => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          }
+          return response;
+        })
+        .catch(() => cached);
+
+      return cached || fetchPromise;
+    })
+  );
+});

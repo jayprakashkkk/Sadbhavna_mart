@@ -5,6 +5,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Profile — Sadbhavna Mart</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00ff99">
+<link rel="icon" type="image/png" sizes="192x192" href="images/icon-192.png">
+<link rel="apple-touch-icon" href="images/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script src="pwa.js" defer></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 *{
@@ -477,6 +483,17 @@ body{
         <option value="English">English</option>
         <option value="Hindi">Hindi</option>
       </select>
+    </div>
+
+    <div class="option-box" data-pwa-install data-pwa-display="flex" style="display:none;" onclick="triggerPwaInstall()">
+      <div class="option-left">
+        <i class="fa-solid fa-mobile-screen-button"></i>
+        <div>
+          <div class="option-title i18n" data-en="Install Sadbhavna App" data-hi="सद्भावना ऐप इंस्टॉल करें">Install Sadbhavna App</div>
+          <div class="option-desc i18n" data-en="Add directly to your phone or desktop home screen" data-hi="सीधे होम स्क्रीन पर ऐप इंस्टॉल करें">Add directly to your phone or desktop home screen</div>
+        </div>
+      </div>
+      <div class="option-right"><span class="count-pill">PWA</span><i class="fa-solid fa-download"></i></div>
     </div>
 
     <a href="about.html" class="link">
