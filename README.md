@@ -26,7 +26,7 @@
 - [✨ Key Features](#-key-features)
 - [🏪 Store Catalog & Product Categories](#-store-catalog--product-categories)
 - [📱 Application Architecture & Pages](#-application-architecture--pages)
-  - [1. Storefront & Product Feed (`Index.html`)](#1-storefront--product-feed-indexhtml)
+  - [1. Storefront & Product Feed (`index.html`)](#1-storefront--product-feed-indexhtml)
   - [2. Category Browser (`category.html`)](#2-category-browser-categoryhtml)
   - [3. Order History & Tracking (`orders.html`)](#3-order-history--tracking-ordershtml)
   - [4. Student Profile & Address Hub (`profile.html`)](#4-student-profile--address-hub-profilehtml)
@@ -81,7 +81,7 @@ Late-night study sessions, exam preparation, and hostel living often bring sudde
 ```
                        ┌───────────────────────────────┐
                        │     SADBHAVNA STOREFRONT      │
-                       │         (Index.html)          │
+                       │         (index.html)          │
                        └──────────────┬────────────────┘
                                       │
          ┌──────────────┬─────────────┼──────────────┬──────────────┐
@@ -93,7 +93,8 @@ Late-night study sessions, exam preparation, and hostel living often bring sudde
    └───────────┘  └───────────┘ └───────────┘  └───────────┘  └───────────┘
 ```
 
-### 1. Storefront & Product Feed (`Index.html`)
+### 1. Storefront & Product Feed (`index.html`)
+- Fullscreen animated **"Welcome to Sadbhavna Mart"** splash screen with instant zero-login storefront access.
 - Prominent promotional banners and category filter pills.
 - Interactive product cards displaying product image, title, pricing, and 1-tap "Add to Cart" CTA.
 - Sticky slide-over cart drawer with increment/decrement counters and live price recalculations.
@@ -161,16 +162,16 @@ cd Sadbhavna_files
 ```
 
 ### 2. Launch in Browser
-No Node.js, Python, or build steps required! Simply double-click `Index.html` or run:
+No Node.js, Python, or build steps required! Simply double-click `index.html` or run:
 ```bash
 # macOS
-open Index.html
+open index.html
 
 # Windows
-start Index.html
+start index.html
 
 # Linux
-xdg-open Index.html
+xdg-open index.html
 ```
 
 Or run with any local static HTTP server:
@@ -186,7 +187,7 @@ python3 -m http.server 3000
 
 ```
 Sadbhavna_files/
-├── Index.html           # Main storefront, product listing & cart drawer
+├── index.html           # Main storefront, animated welcome splash, product listing & cart drawer
 ├── category.html        # Category browsing interface
 ├── orders.html          # Order history and receipts view
 ├── profile.html         # User profile and room details

@@ -152,8 +152,9 @@ padding:20px;
 display:grid;
 gap:22px;
 grid-template-columns:repeat(2,1fr);
-max-width:1600px;
-margin:auto;
+width:100%;
+max-width:100%;
+margin:0;
 }
 
 /* TABLET */
@@ -162,7 +163,8 @@ margin:auto;
 
 .menu{
 grid-template-columns:repeat(3,1fr);
-max-width:1100px;
+width:100%;
+max-width:100%;
 }
 
 }
@@ -173,7 +175,8 @@ max-width:1100px;
 
 .menu{
 grid-template-columns:repeat(5,1fr);
-max-width:1700px;
+width:100%;
+max-width:100%;
 }
 
 .food-img{
@@ -452,18 +455,139 @@ color:#00ff99;
 background:rgba(0,255,153,0.08);
 }
 
+/* ANIMATED WELCOME SPLASH */
+
+#welcome-splash{
+position:fixed;
+inset:0;
+width:100%;
+height:100%;
+z-index:9999;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:24px;
+text-align:center;
+background:radial-gradient(circle at 50% 35%, rgba(0,255,153,0.16), transparent 55%),
+           linear-gradient(135deg,#020617 0%,#0b1120 50%,#042f2e 100%);
+transition:opacity 0.55s ease, transform 0.55s ease;
+}
+
+#welcome-splash.hide{
+opacity:0;
+transform:scale(1.04);
+pointer-events:none;
+}
+
+.splash-badge{
+width:84px;
+height:84px;
+border-radius:24px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:38px;
+color:#00ff99;
+background:rgba(0,255,153,0.1);
+border:1.5px solid rgba(0,255,153,0.45);
+box-shadow:0 0 32px rgba(0,255,153,0.28);
+margin-bottom:22px;
+animation:splashPop 0.7s cubic-bezier(0.22,1,0.36,1) both, splashFloat 2.2s ease-in-out infinite 0.7s;
+}
+
+.splash-title{
+font-size:clamp(26px,5vw,44px);
+font-weight:800;
+letter-spacing:-0.5px;
+background:linear-gradient(90deg,#ffffff,#00ff99,#38bdf8,#ffffff);
+background-size:200% auto;
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+animation:splashSlideUp 0.75s cubic-bezier(0.22,1,0.36,1) 0.12s both, splashShimmer 2.8s linear infinite;
+}
+
+.splash-sub{
+margin-top:10px;
+font-size:clamp(13px,2.2vw,16px);
+color:#94a3b8;
+letter-spacing:0.6px;
+animation:splashSlideUp 0.75s cubic-bezier(0.22,1,0.36,1) 0.25s both;
+}
+
+.splash-bar{
+margin-top:26px;
+width:min(240px,68vw);
+height:5px;
+border-radius:999px;
+background:rgba(255,255,255,0.1);
+overflow:hidden;
+animation:splashSlideUp 0.75s cubic-bezier(0.22,1,0.36,1) 0.35s both;
+}
+
+.splash-bar-fill{
+width:0%;
+height:100%;
+border-radius:999px;
+background:linear-gradient(90deg,#00ff99,#38bdf8);
+box-shadow:0 0 12px rgba(0,255,153,0.7);
+animation:splashProgress 1.5s cubic-bezier(0.4,0,0.2,1) 0.25s forwards;
+}
+
+@keyframes splashPop{
+0%{opacity:0;transform:scale(0.6) translateY(14px);}
+100%{opacity:1;transform:scale(1) translateY(0);}
+}
+
+@keyframes splashFloat{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-6px);}
+}
+
+@keyframes splashSlideUp{
+0%{opacity:0;transform:translateY(18px);}
+100%{opacity:1;transform:translateY(0);}
+}
+
+@keyframes splashShimmer{
+0%{background-position:0% center;}
+100%{background-position:200% center;}
+}
+
+@keyframes splashProgress{
+0%{width:0%;}
+100%{width:100%;}
+}
+
 </style>
 
 </head>
 
 <body>
 
-<script>
-const user = localStorage.getItem("user_id");
+<div id="welcome-splash" role="status" aria-label="Welcome to Sadbhavna Mart">
+  <div class="splash-badge">
+    <i class="fa-solid fa-cart-shopping"></i>
+  </div>
+  <h2 class="splash-title">Welcome to Sadbhavna Mart</h2>
+  <p class="splash-sub">Hostel Essentials &amp; Late-Night Cravings • Ready in Seconds</p>
+  <div class="splash-bar">
+    <div class="splash-bar-fill"></div>
+  </div>
+</div>
 
-if (!user) {
-    window.location.href = "login.html";
-}
+<script>
+window.addEventListener("DOMContentLoaded", function () {
+  const splash = document.getElementById("welcome-splash");
+  if (!splash) return;
+  setTimeout(function () {
+    splash.classList.add("hide");
+    setTimeout(function () {
+      splash.remove();
+    }, 580);
+  }, 1750);
+});
 </script>
 
 <header class="top-header">
