@@ -2,140 +2,263 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Orders</title>
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Orders — Sadbhavna Mart</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+  -webkit-tap-highlight-color:transparent;
+}
 body{
-margin:0;
-font-family:Arial;
-background:#0f172a;
-color:white;
-padding:25px;
-padding-bottom:100px;
+  background:linear-gradient(135deg,#000,#0f172a,#111827);
+  color:#fff;
+  width:100%;
+  min-height:100vh;
+  padding:20px;
+  padding-bottom:110px;
 }
-
 .header{
-display:flex;
-align-items:center;
-gap:15px;
-margin-bottom:30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:24px;
 }
-
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
 .header a{
-color:#00ff99;
-font-size:26px;
-text-decoration:none;
+  color:#00ff99;
+  font-size:24px;
+  text-decoration:none;
 }
-
 .header h1{
-font-size:32px;
-color:#00ff99;
+  font-size:28px;
+  color:#00ff99;
 }
-
+.clear-btn{
+  border:1px solid rgba(255,59,59,0.45);
+  background:rgba(255,59,59,0.12);
+  color:#ff6b6b;
+  padding:8px 14px;
+  border-radius:12px;
+  font-size:13px;
+  font-weight:bold;
+  cursor:pointer;
+}
 .orders{
-margin-top:20px;
+  width:100%;
+  max-width:100%;
+  display:grid;
+  gap:16px;
+  grid-template-columns:repeat(1,1fr);
 }
-
+@media screen and (min-width:768px){
+  .orders{ grid-template-columns:repeat(2,1fr); }
+}
+@media screen and (min-width:1200px){
+  .orders{ grid-template-columns:repeat(3,1fr); }
+}
 .order-card{
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.08);
-padding:18px;
-border-radius:20px;
-margin-bottom:15px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.09);
+  padding:18px;
+  border-radius:20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:10px;
 }
-
+.order-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 .order-card h2{
-color:#00ff99;
-margin-bottom:10px;
+  color:#00ff99;
+  font-size:19px;
 }
-
+.order-id{
+  font-size:12px;
+  color:#94a3b8;
+  background:rgba(255,255,255,0.07);
+  padding:4px 10px;
+  border-radius:999px;
+}
 .order-card p{
-color:#ccc;
-margin:6px 0;
+  color:#cbd5e1;
+  font-size:14px;
+  line-height:1.5;
 }
-
+.reorder-btn{
+  margin-top:6px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:100%;
+  padding:11px 14px;
+  border-radius:12px;
+  border:none;
+  background:#25D366;
+  color:#000;
+  font-weight:bold;
+  font-size:14px;
+  cursor:pointer;
+}
 .empty{
-text-align:center;
-margin-top:100px;
-color:#777;
-font-size:20px;
+  grid-column:1 / -1;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:22px;
+  text-align:center;
+  padding:48px 20px;
+  color:#cbd5e1;
+  font-size:18px;
 }
-
+.browse-btn{
+  display:inline-block;
+  margin-top:16px;
+  padding:12px 24px;
+  border-radius:14px;
+  background:#00ff99;
+  color:#000;
+  font-weight:bold;
+  text-decoration:none;
+  font-size:15px;
+}
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:75px;
+  background:rgba(10,15,28,0.94);
+  backdrop-filter:blur(12px);
+  border-top:1px solid rgba(255,255,255,0.1);
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  z-index:99;
+}
+.bottom-nav a{
+  text-decoration:none;
+  color:#94a3b8;
+}
+.nav-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+  font-size:12px;
+  padding:8px 18px;
+  border-radius:16px;
+}
+.nav-item i{ font-size:20px; }
 </style>
-
 </head>
 
 <body>
 
 <div class="header">
-
-<a href="profile.html">
-<i class="fa-solid fa-arrow-left"></i>
-</a>
-
-<h1>Orders</h1>
-
+  <div class="header-left">
+    <a href="profile.html" aria-label="Back to Profile"><i class="fa-solid fa-arrow-left"></i></a>
+    <h1>📦 Orders</h1>
+  </div>
+  <button class="clear-btn" id="clearOrdersBtn" onclick="clearOrders()" style="display:none;">Clear History</button>
 </div>
 
-<div class="orders"
-id="orders">
+<div class="orders" id="orders"></div>
 
-<div class="empty">
-No Orders Yet 😴
-</div>
-
+<div class="bottom-nav">
+  <a href="index.html?nav=1">
+    <div class="nav-item">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </div>
+  </a>
+  <a href="category.html">
+    <div class="nav-item">
+      <i class="fa-solid fa-layer-group"></i>
+      <span>Category</span>
+    </div>
+  </a>
+  <a href="profile.html">
+    <div class="nav-item">
+      <i class="fa-solid fa-user"></i>
+      <span>Profile</span>
+    </div>
+  </a>
 </div>
 
 <script>
-
-let orders =
-JSON.parse(
-localStorage.getItem("orders")
-) || [];
-
-let ordersBox =
-document.getElementById("orders");
-
-if(orders.length > 0){
-
-let html = "";
-
-orders.reverse().forEach(order => {
-
-html += `
-
-<div class="order-card">
-
-<h2>${order.name}</h2>
-
-<p>${order.items}</p>
-
-<p>💳 ${order.payment}</p>
-
-<p>📍 Room ${order.room}</p>
-
-</div>
-
-`;
-
-});
-
-ordersBox.innerHTML = html;
-
+function getOrders() {
+  try { return JSON.parse(localStorage.getItem("orders")) || []; } catch(e) { return []; }
 }
 
+function reorderWhatsApp(idx) {
+  const orders = getOrders().slice().reverse();
+  const o = orders[idx];
+  if (!o) return;
+  let msg = "🍟 *Sadbhavna Mart Re-Order* %0A%0A";
+  msg += "👤 Name: " + encodeURIComponent(o.name || "") + "%0A";
+  msg += "🏠 Room No: " + encodeURIComponent(o.room || "") + "%0A";
+  if (o.hostel) msg += "🏢 Hostel: " + encodeURIComponent(o.hostel) + "%0A";
+  if (o.phone) msg += "📞 Phone: " + encodeURIComponent(o.phone) + "%0A";
+  msg += "💳 Payment: " + encodeURIComponent(o.payment || "Cash") + "%0A%0A";
+  msg += "📦 Items: " + encodeURIComponent(o.items || "");
+  window.open("https://wa.me/447781554727?text=" + msg, "_blank");
+}
+
+function clearOrders() {
+  localStorage.removeItem("orders");
+  renderOrders();
+}
+
+function renderOrders() {
+  const orders = getOrders();
+  const ordersBox = document.getElementById("orders");
+  const clearBtn = document.getElementById("clearOrdersBtn");
+
+  if (orders.length === 0) {
+    clearBtn.style.display = "none";
+    ordersBox.innerHTML = `
+      <div class="empty">
+        <p>No Orders Yet 😴</p>
+        <a href="index.html?nav=1" class="browse-btn">Order on WhatsApp</a>
+      </div>
+    `;
+    return;
+  }
+
+  clearBtn.style.display = "inline-block";
+  ordersBox.innerHTML = orders.slice().reverse().map((order, idx) => `
+    <div class="order-card">
+      <div>
+        <div class="order-top">
+          <h2>${order.name || "Customer"}</h2>
+          <span class="order-id">${order.id || "WhatsApp Order"}</span>
+        </div>
+        <p style="margin-top:8px;">🛍️ ${order.items || ""}</p>
+        <p>💳 ${order.payment || "Cash"} • 📍 ${order.hostel ? order.hostel + ", " : ""}Room ${order.room || "-"}</p>
+        ${order.date ? `<p style="color:#94a3b8;font-size:12px;">🕒 ${order.date}</p>` : ""}
+      </div>
+      <button class="reorder-btn" onclick="reorderWhatsApp(${idx})">
+        <i class="fa-brands fa-whatsapp"></i> Reorder via WhatsApp
+      </button>
+    </div>
+  `).join("");
+}
+
+renderOrders();
 </script>
 
 </body>
-
 </html>

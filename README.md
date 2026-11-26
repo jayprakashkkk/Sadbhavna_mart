@@ -100,18 +100,18 @@ Late-night study sessions, exam preparation, and hostel living often bring sudde
 - Sticky slide-over cart drawer with increment/decrement counters and live price recalculations.
 
 ### 2. Category Browser (`category.html`)
-- Structured classification allowing students to rapidly jump to specific departments (Snacks, Drinks, Instant Meals).
+- Interactive category filter tabs (*All*, *Biscuits & Snacks*, *Instant Meals*, *Beverages & Dairy*, *Daily Pantry*) with real-time search and `localStorage` cart/wishlist synchronization.
 
 ### 3. Order History & Tracking (`orders.html`)
-- Reads locally saved transaction logs from `localStorage`.
-- Displays card-based receipts showing order name, items, payment mode, and delivery room number.
+- Automatically logs every WhatsApp checkout to `localStorage` (`orders`).
+- Displays order IDs, timestamps, items ordered, payment mode, delivery room/hostel, and 1-tap **Reorder via WhatsApp** support.
 
-### 4. Student Profile & Address Hub (`profile.html`)
-- Manages user details (Name, Contact Number, Hostel Name, Room Number).
-- Quick links to Order History, App Settings, and Support.
+### 4. Student Profile & Delivery Hub (`profile.html`)
+- Interactive **Saved Delivery Details** modal (Name, Room Number, Hostel, Phone) that auto-fills the WhatsApp checkout form.
+- Persistent **English / Hindi** language toggle, direct **WhatsApp Support** link, and quick navigation to Orders, Wishlist, and Store Policies.
 
 ### 5. Wishlist & Bookmarked Cravings (`wishlist.html`)
-- Lets students bookmark frequently purchased midnight cravings for rapid re-ordering.
+- Synced with `localStorage` (`sadbhavna_favs`) so students can view saved items, move them straight to cart, or remove them across pages.
 
 ### 6. Authentication & Access (`login.html`)
 - Student sign-in and registration screen with clean responsive inputs.

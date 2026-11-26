@@ -1,103 +1,255 @@
-<!-- wishlist.html -->
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Wishlist</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Wishlist — Sadbhavna Mart</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+  -webkit-tap-highlight-color:transparent;
 }
-
 body{
-background:linear-gradient(
-135deg,
-#000,
-#0f172a,
-#111827
-);
-color:white;
-padding:25px;
-min-height:100vh;
+  background:linear-gradient(135deg,#000,#0f172a,#111827);
+  color:#fff;
+  width:100%;
+  min-height:100vh;
+  padding:20px;
+  padding-bottom:110px;
 }
-
-.top-bar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:25px;
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:24px;
 }
-
-.circle-btn{
-width:45px;
-height:45px;
-border-radius:50%;
-background:transparent;
-display:flex;
-justify-content:center;
-align-items:center;
-text-decoration:none;
-color:#00ff99;
-font-size:24px;
-border:1px solid rgba(255,255,255,0.15);
-backdrop-filter:blur(6px);
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
 }
-
-h1{
-color:#00ff99;
-margin-bottom:20px;
+.header a{
+  color:#00ff99;
+  font-size:24px;
+  text-decoration:none;
 }
-
-.box{
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.08);
-padding:22px;
-border-radius:20px;
-font-size:18px;
-line-height:1.8;
-color:#ddd;
-text-align:center;
+.header h1{
+  font-size:28px;
+  color:#00ff99;
 }
-
+.grid{
+  width:100%;
+  max-width:100%;
+  display:grid;
+  gap:18px;
+  grid-template-columns:repeat(1,1fr);
+}
+@media screen and (min-width:640px){
+  .grid{ grid-template-columns:repeat(2,1fr); }
+}
+@media screen and (min-width:1024px){
+  .grid{ grid-template-columns:repeat(4,1fr); }
+}
+.wish-card{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:20px;
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:12px;
+}
+.wish-card img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:14px;
+}
+.wish-card h2{
+  font-size:18px;
+  color:#fff;
+}
+.btn-row{
+  display:flex;
+  gap:10px;
+}
+.btn-add{
+  flex:1;
+  border:none;
+  border-radius:12px;
+  padding:10px 12px;
+  background:#00ff99;
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+}
+.btn-remove{
+  border:1px solid rgba(255,59,59,0.45);
+  border-radius:12px;
+  padding:10px 12px;
+  background:rgba(255,59,59,0.12);
+  color:#ff6b6b;
+  font-weight:bold;
+  cursor:pointer;
+}
+.empty-box{
+  grid-column:1 / -1;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  padding:42px 22px;
+  border-radius:22px;
+  font-size:18px;
+  color:#cbd5e1;
+  text-align:center;
+}
+.browse-btn{
+  display:inline-block;
+  margin-top:18px;
+  padding:12px 24px;
+  border-radius:14px;
+  background:#00ff99;
+  color:#000;
+  font-weight:bold;
+  text-decoration:none;
+}
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:75px;
+  background:rgba(10,15,28,0.94);
+  backdrop-filter:blur(12px);
+  border-top:1px solid rgba(255,255,255,0.1);
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  z-index:99;
+}
+.bottom-nav a{
+  text-decoration:none;
+  color:#94a3b8;
+}
+.nav-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+  font-size:12px;
+  padding:8px 18px;
+  border-radius:16px;
+}
+.nav-item i{ font-size:20px; }
 </style>
-
 </head>
 
 <body>
 
-<div class="top-bar">
-
-<a href="javascript:history.back()"
-class="circle-btn">
-
-<
-
-</a>
-
-</a>
-
+<div class="header">
+  <div class="header-left">
+    <a href="profile.html" aria-label="Back to Profile"><i class="fa-solid fa-arrow-left"></i></a>
+    <h1>❤️ Wishlist</h1>
+  </div>
 </div>
 
-<h1>❤️ Wishlist</h1>
+<div class="grid" id="wishlistGrid"></div>
 
-<div class="box">
-
-No favourite items yet 😔
-
+<div class="bottom-nav">
+  <a href="index.html?nav=1">
+    <div class="nav-item">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </div>
+  </a>
+  <a href="category.html">
+    <div class="nav-item">
+      <i class="fa-solid fa-layer-group"></i>
+      <span>Category</span>
+    </div>
+  </a>
+  <a href="profile.html">
+    <div class="nav-item">
+      <i class="fa-solid fa-user"></i>
+      <span>Profile</span>
+    </div>
+  </a>
 </div>
+
+<script>
+const PRODUCT_IMAGES = {
+  "Parle G": "ParleG.jpg",
+  "Tedhe Medhe": "Tedhe Medhe.webp",
+  "Kurkure": "Kurkure.jpg",
+  "Cup Maggi": "Cup Maggie.jpg",
+  "Bourbon": "Bourbon.jpg",
+  "Maggi Double Masala": "maggie.jpeg",
+  "Milk": "Milk.png",
+  "Nescafe Coffee": "Coffie.webp",
+  "BRU Coffee": "Coffie2.jpg",
+  "Chini": "Chini.jpeg",
+  "Tata Tea": "Chaipatti1.jpg",
+  "Red Label": "Chaipatti2.jpg"
+};
+
+let favs = [];
+let cart = {};
+try { favs = JSON.parse(localStorage.getItem("sadbhavna_favs")) || []; } catch(e) { favs = []; }
+try { cart = JSON.parse(localStorage.getItem("sadbhavna_cart")) || {}; } catch(e) { cart = {}; }
+
+function saveAndRender() {
+  localStorage.setItem("sadbhavna_favs", JSON.stringify(favs));
+  localStorage.setItem("sadbhavna_cart", JSON.stringify(cart));
+  renderWishlist();
+}
+
+function addToCart(name) {
+  cart[name] = (Number(cart[name]) || 0) + 1;
+  favs = favs.filter(x => x !== name);
+  saveAndRender();
+}
+
+function removeFav(name) {
+  favs = favs.filter(x => x !== name);
+  saveAndRender();
+}
+
+function renderWishlist() {
+  const grid = document.getElementById("wishlistGrid");
+  if (favs.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-box">
+        <p>No favourite items yet 😔</p>
+        <a href="index.html?nav=1" class="browse-btn">Browse Snacks</a>
+      </div>
+    `;
+    return;
+  }
+
+  grid.innerHTML = favs.map(name => {
+    const img = PRODUCT_IMAGES[name] || "maggie.jpeg";
+    const safeName = name.replace(/'/g, "\\'");
+    return `
+      <div class="wish-card">
+        <img src="${img}" alt="${name}">
+        <h2>${name}</h2>
+        <div class="btn-row">
+          <button class="btn-add" onclick="addToCart('${safeName}')">Add to Cart</button>
+          <button class="btn-remove" onclick="removeFav('${safeName}')">Remove</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+renderWishlist();
+</script>
 
 </body>
-
 </html>

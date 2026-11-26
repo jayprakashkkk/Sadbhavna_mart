@@ -1,143 +1,386 @@
-<!-- category.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Category</title>
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Categories — Sadbhavna Mart</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+  -webkit-tap-highlight-color:transparent;
 }
-
 body{
-background:linear-gradient(
-135deg,
-#000,
-#0f172a,
-#111827
-);
-color:white;
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:20px;
-overflow:hidden;
+  background:linear-gradient(135deg,#000,#0f172a,#111827);
+  color:#fff;
+  min-height:100vh;
+  width:100%;
+  padding-bottom:110px;
+  overflow-x:hidden;
 }
-
-/* CARD */
-
-.coming-box{
-width:100%;
-max-width:500px;
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(12px);
-border:1px solid rgba(255,255,255,0.1);
-border-radius:30px;
-padding:45px 30px;
-text-align:center;
-box-shadow:0 0 30px rgba(0,255,153,0.15);
-animation:fadeUp 0.7s ease;
+.top-header{
+  width:100%;
+  padding:18px 20px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(0,0,0,0.78);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
 }
-
-.coming-box i{
-font-size:70px;
-color:#00ff99;
-margin-bottom:25px;
+.top-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:14px;
 }
-
-.coming-box h1{
-font-size:38px;
-color:#00ff99;
-margin-bottom:18px;
+.top-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
-
-.coming-box p{
-font-size:20px;
-color:#ccc;
-line-height:1.8;
+.top-left a{
+  color:#00ff99;
+  font-size:22px;
+  text-decoration:none;
 }
-
-/* BUTTON */
-
-.back-btn{
-display:inline-block;
-margin-top:35px;
-padding:14px 30px;
-border-radius:16px;
-background:#00ff99;
-color:black;
-font-size:18px;
-font-weight:bold;
-text-decoration:none;
-transition:0.3s;
+.top-bar h1{
+  color:#00ff99;
+  font-size:24px;
 }
-
-.back-btn:hover{
-transform:scale(1.05);
+.cart-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:#00ff99;
+  color:#000;
+  font-weight:bold;
+  padding:8px 14px;
+  border-radius:999px;
+  text-decoration:none;
+  font-size:14px;
 }
-
-/* ANIMATION */
-
-@keyframes fadeUp{
-
-from{
-opacity:0;
-transform:translateY(25px);
+.search-box input{
+  width:100%;
+  padding:12px 16px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.1);
+  outline:none;
+  background:rgba(255,255,255,0.06);
+  color:#fff;
+  font-size:15px;
 }
-
-to{
-opacity:1;
-transform:translateY(0);
+.tabs{
+  width:100%;
+  display:flex;
+  gap:10px;
+  padding:16px 20px 6px;
+  overflow-x:auto;
+  scrollbar-width:none;
 }
-
+.tabs::-webkit-scrollbar{ display:none; }
+.tab-btn{
+  flex:0 0 auto;
+  padding:10px 18px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.14);
+  background:rgba(255,255,255,0.05);
+  color:#cbd5e1;
+  font-size:14px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.2s;
 }
-
+.tab-btn.active{
+  background:#00ff99;
+  color:#000;
+  border-color:#00ff99;
+}
+.grid{
+  width:100%;
+  max-width:100%;
+  padding:16px 20px;
+  display:grid;
+  gap:20px;
+  grid-template-columns:repeat(2,1fr);
+}
+@media screen and (min-width:768px){
+  .grid{ grid-template-columns:repeat(3,1fr); }
+}
+@media screen and (min-width:1100px){
+  .grid{ grid-template-columns:repeat(5,1fr); }
+}
+.card{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:20px;
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:0.2s;
+}
+.card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(0,255,153,0.4);
+}
+.card img{
+  width:100%;
+  height:145px;
+  object-fit:cover;
+  border-radius:14px;
+  margin-bottom:10px;
+  background:#0f172a;
+}
+.cat-tag{
+  display:inline-block;
+  font-size:11px;
+  color:#00ff99;
+  background:rgba(0,255,153,0.1);
+  padding:3px 9px;
+  border-radius:999px;
+  margin-bottom:6px;
+  width:fit-content;
+}
+.card h2{
+  font-size:17px;
+  margin-bottom:10px;
+  color:#fff;
+}
+.actions{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+.fav-icon{
+  font-size:20px;
+  cursor:pointer;
+  color:#94a3b8;
+}
+.fav-icon.liked{
+  color:#ff2e63;
+}
+.qty-wrap{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.qty-btn{
+  width:32px;
+  height:32px;
+  border:none;
+  border-radius:10px;
+  background:#00ff99;
+  color:#000;
+  font-weight:bold;
+  font-size:16px;
+  cursor:pointer;
+}
+.qty-btn.minus{
+  background:rgba(255,255,255,0.14);
+  color:#fff;
+}
+.qty-num{
+  min-width:18px;
+  text-align:center;
+  font-weight:bold;
+}
+.empty-msg{
+  grid-column:1 / -1;
+  text-align:center;
+  padding:50px 20px;
+  color:#94a3b8;
+  font-size:18px;
+}
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:75px;
+  background:rgba(10,15,28,0.94);
+  backdrop-filter:blur(12px);
+  border-top:1px solid rgba(255,255,255,0.1);
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  z-index:99;
+}
+.bottom-nav a{
+  text-decoration:none;
+  color:#94a3b8;
+}
+.nav-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+  font-size:12px;
+  padding:8px 18px;
+  border-radius:16px;
+}
+.nav-item i{ font-size:20px; }
+.nav-item.active{
+  color:#00ff99;
+  background:rgba(0,255,153,0.08);
+}
 </style>
-
 </head>
 
 <body>
 
-<div class="coming-box">
+<header class="top-header">
+  <div class="top-bar">
+    <div class="top-left">
+      <a href="index.html?nav=1" aria-label="Back to Home"><i class="fa-solid fa-arrow-left"></i></a>
+      <h1>🗂️ Categories</h1>
+    </div>
+    <a href="index.html?nav=1" class="cart-pill" id="cart-pill">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span id="cart-count">0</span> Items
+    </a>
+  </div>
+  <div class="search-box">
+    <input type="text" id="catSearch" placeholder="Search in categories..." oninput="renderItems()">
+  </div>
+</header>
 
-<i class="fa-solid fa-layer-group"></i>
-
-<h1>Coming Soon...</h1>
-
-<p>
-
-Categories feature is under development 🚀
-
-<br><br>
-
-New snack categories will be available very soon 😎
-
-</p>
-
-<a href="index.html"
-class="back-btn">
-
-⬅ Back To Home
-
-</a>
-
+<div class="tabs" id="categoryTabs">
+  <button class="tab-btn active" onclick="selectCategory('All', this)">All</button>
+  <button class="tab-btn" onclick="selectCategory('Biscuits & Snacks', this)">🍪 Biscuits &amp; Snacks</button>
+  <button class="tab-btn" onclick="selectCategory('Instant Meals', this)">🍜 Instant Meals</button>
+  <button class="tab-btn" onclick="selectCategory('Beverages & Dairy', this)">☕ Beverages &amp; Dairy</button>
+  <button class="tab-btn" onclick="selectCategory('Daily Pantry', this)">🧂 Daily Pantry</button>
 </div>
 
-</body>
+<div class="grid" id="productGrid"></div>
 
+<div class="bottom-nav">
+  <a href="index.html?nav=1">
+    <div class="nav-item">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </div>
+  </a>
+  <a href="category.html">
+    <div class="nav-item active">
+      <i class="fa-solid fa-layer-group"></i>
+      <span>Category</span>
+    </div>
+  </a>
+  <a href="profile.html">
+    <div class="nav-item">
+      <i class="fa-solid fa-user"></i>
+      <span>Profile</span>
+    </div>
+  </a>
+</div>
+
+<script>
+const PRODUCTS = [
+  { name: "Parle G", img: "ParleG.jpg", category: "Biscuits & Snacks" },
+  { name: "Bourbon", img: "Bourbon.jpg", category: "Biscuits & Snacks" },
+  { name: "Tedhe Medhe", img: "Tedhe Medhe.webp", category: "Biscuits & Snacks" },
+  { name: "Kurkure", img: "Kurkure.jpg", category: "Biscuits & Snacks" },
+  { name: "Cup Maggi", img: "Cup Maggie.jpg", category: "Instant Meals" },
+  { name: "Maggi Double Masala", img: "maggie.jpeg", category: "Instant Meals" },
+  { name: "Milk", img: "Milk.png", category: "Beverages & Dairy" },
+  { name: "Nescafe Coffee", img: "Coffie.webp", category: "Beverages & Dairy" },
+  { name: "BRU Coffee", img: "Coffie2.jpg", category: "Beverages & Dairy" },
+  { name: "Tata Tea", img: "Chaipatti1.jpg", category: "Beverages & Dairy" },
+  { name: "Red Label", img: "Chaipatti2.jpg", category: "Beverages & Dairy" },
+  { name: "Chini", img: "Chini.jpeg", category: "Daily Pantry" }
+];
+
+let activeCategory = "All";
+let cart = {};
+let favs = [];
+
+try { cart = JSON.parse(localStorage.getItem("sadbhavna_cart")) || {}; } catch(e) { cart = {}; }
+try { favs = JSON.parse(localStorage.getItem("sadbhavna_favs")) || []; } catch(e) { favs = []; }
+
+function saveState() {
+  localStorage.setItem("sadbhavna_cart", JSON.stringify(cart));
+  localStorage.setItem("sadbhavna_favs", JSON.stringify(favs));
+  updateBadge();
+}
+
+function updateBadge() {
+  let total = 0;
+  Object.values(cart).forEach(q => { total += (Number(q) || 0); });
+  document.getElementById("cart-count").innerText = total;
+}
+
+function selectCategory(cat, btn) {
+  activeCategory = cat;
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  renderItems();
+}
+
+function changeItemQty(name, delta) {
+  const next = Math.max(0, (Number(cart[name]) || 0) + delta);
+  cart[name] = next;
+  saveState();
+  renderItems();
+}
+
+function toggleFavItem(name) {
+  if (favs.includes(name)) {
+    favs = favs.filter(x => x !== name);
+  } else {
+    favs.push(name);
+  }
+  saveState();
+  renderItems();
+}
+
+function renderItems() {
+  const query = document.getElementById("catSearch").value.trim().toLowerCase();
+  const filtered = PRODUCTS.filter(p => {
+    const matchCat = activeCategory === "All" || p.category === activeCategory;
+    const matchSearch = !query || p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query);
+    return matchCat && matchSearch;
+  });
+
+  const grid = document.getElementById("productGrid");
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="empty-msg">No items found matching "${query}"</div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(p => {
+    const qty = Number(cart[p.name]) || 0;
+    const isLiked = favs.includes(p.name);
+    const safeName = p.name.replace(/'/g, "\\'");
+    return `
+      <div class="card">
+        <div>
+          <img src="${p.img}" alt="${p.name}">
+          <span class="cat-tag">${p.category}</span>
+          <h2>${p.name}</h2>
+        </div>
+        <div class="actions">
+          <i class="${isLiked ? 'fa-solid' : 'fa-regular'} fa-heart fav-icon ${isLiked ? 'liked' : ''}" onclick="toggleFavItem('${safeName}')"></i>
+          <div class="qty-wrap">
+            ${qty > 0 ? `<button class="qty-btn minus" onclick="changeItemQty('${safeName}', -1)">-</button><span class="qty-num">${qty}</span>` : ''}
+            <button class="qty-btn" onclick="changeItemQty('${safeName}', 1)">+</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+updateBadge();
+renderItems();
+</script>
+
+</body>
 </html>

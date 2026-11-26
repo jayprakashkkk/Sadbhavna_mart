@@ -10,7 +10,7 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<title>Sadbhavna Files</title>
+<title>Sadbhavna Mart</title>
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -581,6 +581,11 @@ animation:splashProgress 1.5s cubic-bezier(0.4,0,0.2,1) 0.25s forwards;
 window.addEventListener("DOMContentLoaded", function () {
   const splash = document.getElementById("welcome-splash");
   if (!splash) return;
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("nav") === "1") {
+    splash.remove();
+    return;
+  }
   setTimeout(function () {
     splash.classList.add("hide");
     setTimeout(function () {
@@ -594,7 +599,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
 <div class="top-bar">
 
-<h1>🍟 Sadbhavna Files</h1>
+<h1>🍟 Sadbhavna Mart</h1>
 
 <div class="top-icons">
 
@@ -1043,7 +1048,7 @@ Close
 
 <div class="bottom-nav">
 
-<a href="index.html">
+<a href="index.html?nav=1">
 <div class="nav-item active">
 <i class="fa-solid fa-house"></i>
 <span>Home</span>
@@ -1068,8 +1073,7 @@ Close
 
 <script>
 
-let cart = {
-
+const DEFAULT_CART = {
 "Parle G":0,
 "Tedhe Medhe":0,
 "Kurkure":0,
@@ -1082,11 +1086,23 @@ let cart = {
 "Chini":0,
 "Tata Tea":0,
 "Red Label":0
-
 };
 
+let savedCart = {};
+try { savedCart = JSON.parse(localStorage.getItem("sadbhavna_cart")) || {}; } catch(e) { savedCart = {}; }
+let cart = Object.assign({}, DEFAULT_CART, savedCart);
+
 let favourites = [];
+try { favourites = JSON.parse(localStorage.getItem("sadbhavna_favs")) || []; } catch(e) { favourites = []; }
+
 let notifications = [];
+try { notifications = JSON.parse(localStorage.getItem("sadbhavna_notifications")) || []; } catch(e) { notifications = []; }
+
+function saveState(){
+  localStorage.setItem("sadbhavna_cart", JSON.stringify(cart));
+  localStorage.setItem("sadbhavna_favs", JSON.stringify(favourites));
+  localStorage.setItem("sadbhavna_notifications", JSON.stringify(notifications));
+}
 
 /* CART */
 
@@ -1098,7 +1114,7 @@ if(cart[item]<0){
 cart[item]=0;
 }
 
-
+saveState();
 updateCart();
 
 }
@@ -1244,6 +1260,14 @@ openOrderForm();
 
 function openOrderForm(){
 
+try{
+  const savedProfile = JSON.parse(localStorage.getItem("sadbhavna_profile")) || {};
+  if(savedProfile.name && !document.getElementById("customerName").value) document.getElementById("customerName").value = savedProfile.name;
+  if(savedProfile.room && !document.getElementById("roomNumber").value) document.getElementById("roomNumber").value = savedProfile.room;
+  if(savedProfile.hostel && !document.getElementById("hostelName").value) document.getElementById("hostelName").value = savedProfile.hostel;
+  if(savedProfile.phone && !document.getElementById("phoneNumber").value) document.getElementById("phoneNumber").value = savedProfile.phone;
+}catch(e){}
+
 document.getElementById(
 "orderPopup"
 ).classList.add("active");
@@ -1271,22 +1295,22 @@ function finalPlaceOrder(){
 let name =
 document.getElementById(
 "customerName"
-).value;
+).value.trim();
 
 let room =
 document.getElementById(
 "roomNumber"
-).value;
+).value.trim();
 
 let hostel =
 document.getElementById(
 "hostelName"
-).value;
+).value.trim();
 
 let phone =
 document.getElementById(
 "phoneNumber"
-).value;
+).value.trim();
 
 let payment =
 document.getElementById(
@@ -1307,41 +1331,64 @@ return;
 }
 
 let order =
-"🍟 *Sadbhavna Files Order* %0A%0A";
+"🍟 *Sadbhavna Mart Order* %0A%0A";
 
 order +=
-"👤 Name: " + name + "%0A";
+"👤 Name: " + encodeURIComponent(name) + "%0A";
 
 order +=
-"🏠 Room No: " + room + "%0A";
+"🏠 Room No: " + encodeURIComponent(room) + "%0A";
 
 order +=
-"🏢 Hostel: " + hostel + "%0A";
+"🏢 Hostel: " + encodeURIComponent(hostel) + "%0A";
 
 order +=
-"📞 Phone: " + phone + "%0A";
+"📞 Phone: " + encodeURIComponent(phone) + "%0A";
 
 order +=
-"💳 Payment: " + payment + "%0A%0A";
+"💳 Payment: " + encodeURIComponent(payment) + "%0A%0A";
 
+let orderedItems = [];
 for(let item in cart){
 
 if(cart[item] > 0){
 
+orderedItems.push(item + " x " + cart[item]);
 order +=
-"• " + item +
+"• " + encodeURIComponent(item) +
 " x " + cart[item] + "%0A";
 
 }
 
 }
 
+try{
+  const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+  existingOrders.push({
+    id: "ORD-" + Date.now().toString().slice(-5),
+    name: name,
+    room: room,
+    hostel: hostel,
+    phone: phone,
+    payment: payment,
+    items: orderedItems.join(", "),
+    date: new Date().toLocaleString()
+  });
+  localStorage.setItem("orders", JSON.stringify(existingOrders));
+  localStorage.setItem("sadbhavna_profile", JSON.stringify({ name, room, hostel, phone }));
+}catch(e){}
+
 window.open(
 "https://wa.me/447781554727?text=" + order,
 "_blank"
 );
 
+for(let item in cart){ cart[item] = 0; }
+addNotification("Order placed on WhatsApp (" + orderedItems.length + " item types)");
+saveState();
+updateCart();
 closeOrderForm();
+closeCart();
 
 }
 
@@ -1414,6 +1461,7 @@ icon.style.color = "#ff2e63";
 
 }
 
+saveState();
 updateFav();
 
 }
@@ -1476,8 +1524,9 @@ cart[item] += 1;
 favourites =
 favourites.filter(f => f !== item);
 
+saveState();
 updateCart();
-
+syncFavIcons();
 updateFav();
 
 }
@@ -1594,7 +1643,7 @@ document.getElementById(
 
 document.getElementById(
 "count1"
-).innerText = 0;
+).innerText = cart[item] || 0;
 
 document.getElementById(
 "count2"
@@ -1674,6 +1723,7 @@ document.getElementById("count4").innerText
 
 cart[currentItem] = total;
 
+saveState();
 updateCart();
 
 }
@@ -1767,6 +1817,7 @@ function deleteNotification(index){
 
 notifications.splice(index,1);
 
+saveState();
 updateNotification();
 
 }
@@ -1780,8 +1831,6 @@ document.getElementById(
 document.getElementById(
 "notificationOverlay"
 ).classList.add("active");
-
-notifications = [];
 
 updateNotification();
 
@@ -1803,6 +1852,7 @@ function removeCartItem(item){
 
 cart[item] = 0;
 
+saveState();
 updateCart();
 
 }
@@ -1817,13 +1867,27 @@ favourites.push(item);
 
 cart[item] = 0;
 
+saveState();
 updateCart();
-
+syncFavIcons();
 updateFav();
 
 }
 
+function syncFavIcons(){
+  document.querySelectorAll(".fav-btn").forEach(function(icon){
+    const attr = icon.getAttribute("onclick") || "";
+    const match = attr.match(/toggleFav\('([^']+)'/);
+    if(match){
+      icon.style.color = favourites.includes(match[1]) ? "#ff2e63" : "transparent";
+    }
+  });
+}
+
 updateCart();
+updateFav();
+syncFavIcons();
+updateNotification();
 
 </script>
 
@@ -1952,13 +2016,6 @@ Close
 </div>
 
 </div>
-
-<script>
-function logout() {
-    localStorage.removeItem("user_id");
-    window.location.href = "login.html";
-}
-</script>
 
 </body>
 
