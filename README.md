@@ -61,6 +61,7 @@ Late-night study sessions, exam preparation, and hostel living often bring sudde
 - **📦 Order History Log**: Dedicated order tracking screen displays past orders, timestamp, items ordered, and total bills.
 - **💰 Live Pricing, Free Delivery Meter & Subtotal**: Every product displays its price (`₹`), calculates live item subtotals in the cart drawer & floating checkout bar, shows a progress bar toward free hostel room delivery (`₹99+`), and includes the itemized total inside the WhatsApp order message.
 - **⚡ 1-Tap Hostel Combos & Quick Filters**: Scrollable category filter pills (*Snacks*, *Meals*, *Drinks*, *Pantry*, *In Stock*) and 1-tap combos (*Study Fuel*, *Chai Break*, *Movie Munch*) directly on the storefront.
+- **🛒 Smart Cart Upsell (*"Add with this"*) & Digital Receipt**: Recommends complementary snacks, drinks, or stationery right inside the cart drawer, and displays an itemized digital receipt popup with Order ID after WhatsApp checkout.
 - **📱 PWA Ready (`manifest.json`) & Toast Feedback**: Installable standalone mobile web app experience with non-blocking toast notifications and optional delivery instructions.
 - **📦 Live Inventory & Low-Stock Alerts**: Tracks product quantities via `/api/stock` (Cloudflare Pages + Neon PostgreSQL) with `stock.json` fallback, automatically displays red **`Only X left`** warnings when `<= 5` remain, marks products **`Out of Stock`** at `0`, and deducts stock on WhatsApp checkout.
 - **🖥️ Terminal Stock CLI (`stock.py`)**: Add or set product stock directly from the terminal (`python3 stock.py add "Chini" 50`), optionally pushing to `stock.json` (`--push`) or updating the live API (`--api`).
@@ -77,6 +78,7 @@ Late-night study sessions, exam preparation, and hostel living often bring sudde
 | **Biscuits & Snacks** | Parle G, Bourbon, Oreo, Good Day, Lay's Classic, Kurkure, Tedhe Medhe, Dairy Milk |
 | **Beverages & Dairy** | Milk, Nescafe Coffee, BRU Coffee, Tata Tea, Red Label, Frooti, Coca-Cola |
 | **Daily Pantry** | Refined Sugar (Chini), Fresh Sandwich Bread |
+| **Stationery** | Linc Glycer Blue & Black (₹10), Pentonic Blue & Black (₹10), Pentonic V-RT (₹20), Practical Files (₹40, ₹50, ₹60) |
 
 ---
 

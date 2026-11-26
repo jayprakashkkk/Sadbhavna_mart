@@ -334,6 +334,7 @@ body{
   <button class="tab-btn" onclick="selectCategory('Instant Meals', this)">🍜 Instant Meals</button>
   <button class="tab-btn" onclick="selectCategory('Beverages & Dairy', this)">☕ Beverages &amp; Dairy</button>
   <button class="tab-btn" onclick="selectCategory('Daily Pantry', this)">🧂 Daily Pantry</button>
+  <button class="tab-btn" onclick="selectCategory('Stationery', this)">📚 Stationery</button>
 </div>
 
 <div class="grid" id="productGrid"></div>
@@ -380,7 +381,15 @@ const PRODUCTS = [
   { name: "Frooti", img: "images/frooti.jpg", category: "Beverages & Dairy", price: 20 },
   { name: "Coca-Cola", img: "images/coca-cola.jpg", category: "Beverages & Dairy", price: 40 },
   { name: "Chini", img: "Chini.jpeg", category: "Daily Pantry", price: 45 },
-  { name: "Bread", img: "images/bread.jpg", category: "Daily Pantry", price: 40 }
+  { name: "Bread", img: "images/bread.jpg", category: "Daily Pantry", price: 40 },
+  { name: "Linc Glycer Blue", img: "images/linc-glycer-blue.jpg", category: "Stationery", price: 10 },
+  { name: "Linc Glycer Black", img: "images/linc-glycer-black.jpg", category: "Stationery", price: 10 },
+  { name: "Pentonic Blue", img: "images/pentonic-blue.jpg", category: "Stationery", price: 10 },
+  { name: "Pentonic Black", img: "images/pentonic-black.jpg", category: "Stationery", price: 10 },
+  { name: "Pentonic V-RT", img: "images/pentonic-vrt.jpg", category: "Stationery", price: 20 },
+  { name: "Practical File (100p)", img: "images/practical-file-40.jpg", category: "Stationery", price: 40 },
+  { name: "Practical File (140p)", img: "images/practical-file-50.jpg", category: "Stationery", price: 50 },
+  { name: "Practical File (Hardcover)", img: "images/practical-file-60.jpg", category: "Stationery", price: 60 }
 ];
 
 let activeCategory = "All";

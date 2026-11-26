@@ -324,6 +324,173 @@ transform:translateX(-50%) translateY(0);
 opacity:1;
 }
 
+/* SMART CART UPSELL */
+.upsell-section{
+margin:14px 0 8px;
+padding:12px;
+border-radius:14px;
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.09);
+}
+.upsell-title{
+font-size:12.5px;
+font-weight:800;
+color:#00ff99;
+margin-bottom:10px;
+letter-spacing:0.3px;
+}
+.upsell-row{
+display:flex;
+gap:8px;
+overflow-x:auto;
+scrollbar-width:none;
+}
+.upsell-row::-webkit-scrollbar{display:none;}
+.upsell-chip{
+flex:0 0 auto;
+width:128px;
+background:rgba(15,23,42,0.9);
+border:1px solid rgba(255,255,255,0.12);
+border-radius:12px;
+padding:8px;
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+gap:5px;
+}
+.upsell-chip img{
+width:56px;
+height:56px;
+object-fit:contain;
+background:#fff;
+border-radius:8px;
+padding:3px;
+}
+.upsell-chip-name{
+font-size:11.5px;
+font-weight:700;
+color:#f8fafc;
+line-height:1.2;
+}
+.upsell-chip-btn{
+width:100%;
+border:none;
+border-radius:8px;
+background:#00ff99;
+color:#000;
+font-size:11px;
+font-weight:800;
+padding:5px 6px;
+cursor:pointer;
+}
+
+/* DIGITAL RECEIPT POPUP */
+#receiptOverlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.8);
+backdrop-filter:blur(6px);
+display:none;
+z-index:1100;
+}
+#receiptOverlay.active{display:block;}
+#receiptModal{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0.95);
+width:92%;
+max-width:430px;
+max-height:90vh;
+overflow-y:auto;
+background:linear-gradient(160deg,#0b1120,#0f172a);
+border:1.5px solid rgba(0,255,153,0.45);
+border-radius:22px;
+padding:22px;
+display:none;
+z-index:1101;
+box-shadow:0 18px 50px rgba(0,255,153,0.2);
+}
+#receiptModal.active{
+display:block;
+transform:translate(-50%,-50%) scale(1);
+}
+.receipt-head{
+text-align:center;
+margin-bottom:14px;
+}
+.receipt-check{
+width:52px;
+height:52px;
+border-radius:50%;
+background:rgba(0,255,153,0.14);
+border:2px solid #00ff99;
+color:#00ff99;
+font-size:24px;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+margin-bottom:10px;
+}
+.receipt-head h2{
+color:#00ff99;
+font-size:20px;
+}
+.receipt-id{
+display:inline-block;
+margin-top:6px;
+padding:3px 10px;
+border-radius:999px;
+background:rgba(255,255,255,0.08);
+color:#cbd5e1;
+font-size:12px;
+font-weight:700;
+}
+.receipt-divider{
+border:none;
+border-top:1px dashed rgba(255,255,255,0.2);
+margin:12px 0;
+}
+.receipt-meta p,
+.receipt-items p{
+font-size:13px;
+color:#cbd5e1;
+margin:4px 0;
+display:flex;
+justify-content:space-between;
+gap:10px;
+}
+.receipt-total{
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-size:17px;
+font-weight:800;
+color:#00ff99;
+margin-top:8px;
+}
+.receipt-actions{
+display:flex;
+flex-direction:column;
+gap:8px;
+margin-top:16px;
+}
+.wa-reopen-btn{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+width:100%;
+padding:12px;
+border-radius:12px;
+background:#25D366;
+color:#000;
+font-weight:800;
+font-size:14px;
+text-decoration:none;
+}
+
 /* MENU */
 
 .menu{
@@ -997,6 +1164,7 @@ onkeyup="searchItems()">
   <button class="filter-pill" onclick="setHomeFilter('Instant Meals', this)">🍜 Meals</button>
   <button class="filter-pill" onclick="setHomeFilter('Beverages & Dairy', this)">☕ Drinks</button>
   <button class="filter-pill" onclick="setHomeFilter('Daily Pantry', this)">🧂 Pantry</button>
+  <button class="filter-pill" onclick="setHomeFilter('Stationery', this)">📚 Stationery</button>
   <button class="filter-pill" onclick="setHomeFilter('In Stock', this)">✅ In Stock</button>
 </div>
 
@@ -1059,6 +1227,20 @@ onkeyup="searchItems()">
         <p>YiPPee + BRU + Good Day • ₹70</p>
       </div>
       <button class="combo-btn" onclick="addCombo(['Yippee Noodles','BRU Coffee','Good Day'], 'Exam Night Pack')">+ Add</button>
+    </div>
+    <div class="combo-card">
+      <div class="combo-info">
+        <h3>📝 Exam Ready Pack</h3>
+        <p>Pentonic Blue &amp; Black + File • ₹60</p>
+      </div>
+      <button class="combo-btn" onclick="addCombo(['Pentonic Blue','Pentonic Black','Practical File (100p)'], 'Exam Ready Pack')">+ Add</button>
+    </div>
+    <div class="combo-card">
+      <div class="combo-info">
+        <h3>✒️ Assignment Duo</h3>
+        <p>Linc Glycer Blue + File (140p) • ₹60</p>
+      </div>
+      <button class="combo-btn" onclick="addCombo(['Linc Glycer Blue','Practical File (140p)'], 'Assignment Duo')">+ Add</button>
     </div>
   </div>
 </div>
@@ -1189,6 +1371,54 @@ onkeyup="searchItems()">
   <h2>Bread</h2>
 </div>
 
+<div class="card">
+  <img class="food-img" src="images/linc-glycer-blue.jpg" alt="Linc Glycer Blue">
+  <div class="card-icons"><i class="fa-regular fa-heart fav-btn" onclick="toggleFav('Linc Glycer Blue',this)"></i></div>
+  <h2>Linc Glycer Blue</h2>
+</div>
+
+<div class="card">
+  <img class="food-img" src="images/linc-glycer-black.jpg" alt="Linc Glycer Black">
+  <div class="card-icons"><i class="fa-regular fa-heart fav-btn" onclick="toggleFav('Linc Glycer Black',this)"></i></div>
+  <h2>Linc Glycer Black</h2>
+</div>
+
+<div class="card">
+  <img class="food-img" src="images/pentonic-blue.jpg" alt="Pentonic Blue">
+  <div class="card-icons"><i class="fa-regular fa-heart fav-btn" onclick="toggleFav('Pentonic Blue',this)"></i></div>
+  <h2>Pentonic Blue</h2>
+</div>
+
+<div class="card">
+  <img class="food-img" src="images/pentonic-black.jpg" alt="Pentonic Black">
+  <div class="card-icons"><i class="fa-regular fa-heart fav-btn" onclick="toggleFav('Pentonic Black',this)"></i></div>
+  <h2>Pentonic Black</h2>
+</div>
+
+<div class="card">
+  <img class="food-img" src="images/pentonic-vrt.jpg" alt="Pentonic V-RT">
+  <div class="card-icons"><i class="fa-regular fa-heart fav-btn" onclick="toggleFav('Pentonic V-RT',this)"></i></div>
+  <h2>Pentonic V-RT</h2>
+</div>
+
+<div class="card">
+  <img class="food-img" src="images/practical-file-40.jpg" alt="Practical File (100p)">
+  <div class="card-icons"><i class="fa-regular fa-heart fav-btn" onclick="toggleFav('Practical File (100p)',this)"></i></div>
+  <h2>Practical File (100p)</h2>
+</div>
+
+<div class="card">
+  <img class="food-img" src="images/practical-file-50.jpg" alt="Practical File (140p)">
+  <div class="card-icons"><i class="fa-regular fa-heart fav-btn" onclick="toggleFav('Practical File (140p)',this)"></i></div>
+  <h2>Practical File (140p)</h2>
+</div>
+
+<div class="card">
+  <img class="food-img" src="images/practical-file-60.jpg" alt="Practical File (Hardcover)">
+  <div class="card-icons"><i class="fa-regular fa-heart fav-btn" onclick="toggleFav('Practical File (Hardcover)',this)"></i></div>
+  <h2>Practical File (Hardcover)</h2>
+</div>
+
 </div>
 
 <!-- FLOATING CHECKOUT BAR -->
@@ -1217,6 +1447,12 @@ id="cartPopup">
 
 <div id="popup-cart-items">
 Cart Empty
+</div>
+
+<!-- SMART CART UPSELL -->
+<div class="upsell-section" id="cartUpsellBox" style="display:none;">
+  <div class="upsell-title">✨ Add with this</div>
+  <div class="upsell-row" id="cartUpsellRow"></div>
 </div>
 
 <div class="cart-summary-box" id="cartSummaryBox" style="display:none;">
@@ -1323,6 +1559,31 @@ Close
 
 </div>
 
+<!-- DIGITAL RECEIPT POPUP -->
+<div id="receiptOverlay" onclick="closeReceipt()"></div>
+<div id="receiptModal" role="dialog" aria-label="Digital Order Receipt">
+  <div class="receipt-head">
+    <div class="receipt-check"><i class="fa-solid fa-check"></i></div>
+    <h2>Order Ready on WhatsApp!</h2>
+    <span class="receipt-id" id="receiptOrderId">ORD-00000</span>
+  </div>
+  <hr class="receipt-divider">
+  <div class="receipt-meta" id="receiptMeta"></div>
+  <hr class="receipt-divider">
+  <div class="receipt-items" id="receiptItems"></div>
+  <hr class="receipt-divider">
+  <div class="receipt-total">
+    <span>Total Payable</span>
+    <span id="receiptTotal">₹0</span>
+  </div>
+  <div class="receipt-actions">
+    <a href="#" target="_blank" id="receiptWaBtn" class="wa-reopen-btn">
+      <i class="fa-brands fa-whatsapp"></i> Open WhatsApp Order
+    </a>
+    <button class="close-btn" style="margin-top:0;background:rgba(255,255,255,0.12);" onclick="closeReceipt()">Done</button>
+  </div>
+</div>
+
 <!-- FAV -->
 
 <div class="cart-overlay"
@@ -1402,7 +1663,15 @@ const DEFAULT_CART = {
 "Frooti":0,
 "Coca-Cola":0,
 "Yippee Noodles":0,
-"Bread":0
+"Bread":0,
+"Linc Glycer Blue":0,
+"Linc Glycer Black":0,
+"Pentonic Blue":0,
+"Pentonic Black":0,
+"Pentonic V-RT":0,
+"Practical File (100p)":0,
+"Practical File (140p)":0,
+"Practical File (Hardcover)":0
 };
 
 let savedCart = {};
@@ -1435,7 +1704,15 @@ const PRICE_MAP = {
 "Frooti": 20,
 "Coca-Cola": 40,
 "Yippee Noodles": 25,
-"Bread": 40
+"Bread": 40,
+"Linc Glycer Blue": 10,
+"Linc Glycer Black": 10,
+"Pentonic Blue": 10,
+"Pentonic Black": 10,
+"Pentonic V-RT": 20,
+"Practical File (100p)": 40,
+"Practical File (140p)": 50,
+"Practical File (Hardcover)": 60
 };
 
 const CATEGORY_MAP = {
@@ -1458,7 +1735,46 @@ const CATEGORY_MAP = {
 "Frooti": "Beverages & Dairy",
 "Coca-Cola": "Beverages & Dairy",
 "Chini": "Daily Pantry",
-"Bread": "Daily Pantry"
+"Bread": "Daily Pantry",
+"Linc Glycer Blue": "Stationery",
+"Linc Glycer Black": "Stationery",
+"Pentonic Blue": "Stationery",
+"Pentonic Black": "Stationery",
+"Pentonic V-RT": "Stationery",
+"Practical File (100p)": "Stationery",
+"Practical File (140p)": "Stationery",
+"Practical File (Hardcover)": "Stationery"
+};
+
+const IMAGE_MAP = {
+"Parle G": "ParleG.jpg",
+"Tedhe Medhe": "Tedhe Medhe.webp",
+"Kurkure": "Kurkure.jpg",
+"Cup Maggi": "Cup Maggie.jpg",
+"Bourbon": "Bourbon.jpg",
+"Maggi Double Masala": "maggie.jpeg",
+"Milk": "Milk.png",
+"Nescafe Coffee": "Coffie.webp",
+"BRU Coffee": "Coffie2.jpg",
+"Chini": "Chini.jpeg",
+"Tata Tea": "Chaipatti1.jpg",
+"Red Label": "Chaipatti2.jpg",
+"Lays Classic": "images/lays-classic.jpg",
+"Oreo": "images/oreo.jpg",
+"Good Day": "images/good-day.jpg",
+"Dairy Milk": "images/dairy-milk.jpg",
+"Frooti": "images/frooti.jpg",
+"Coca-Cola": "images/coca-cola.jpg",
+"Yippee Noodles": "images/yippee-noodles.jpg",
+"Bread": "images/bread.jpg",
+"Linc Glycer Blue": "images/linc-glycer-blue.jpg",
+"Linc Glycer Black": "images/linc-glycer-black.jpg",
+"Pentonic Blue": "images/pentonic-blue.jpg",
+"Pentonic Black": "images/pentonic-black.jpg",
+"Pentonic V-RT": "images/pentonic-vrt.jpg",
+"Practical File (100p)": "images/practical-file-40.jpg",
+"Practical File (140p)": "images/practical-file-50.jpg",
+"Practical File (Hardcover)": "images/practical-file-60.jpg"
 };
 
 let activeHomeFilter = "All";
@@ -1813,8 +2129,55 @@ if(floatBar && floatText){
   }
 }
 
+renderCartUpsell(total);
 renderStockUI();
 
+}
+
+function renderCartUpsell(totalCount){
+  const box = document.getElementById("cartUpsellBox");
+  const row = document.getElementById("cartUpsellRow");
+  if(!box || !row) return;
+  if(totalCount <= 0){
+    box.style.display = "none";
+    return;
+  }
+
+  // Pick complementary suggestions based on items currently in cart
+  let hasStationery = false;
+  let hasMealOrSnack = false;
+  for(const k in cart){
+    if(cart[k] > 0){
+      const cat = CATEGORY_MAP[k];
+      if(cat === "Stationery") hasStationery = true;
+      if(cat === "Instant Meals" || cat === "Biscuits & Snacks") hasMealOrSnack = true;
+    }
+  }
+
+  let pool = ["Coca-Cola", "Frooti", "Dairy Milk", "Lays Classic", "Oreo", "Nescafe Coffee", "Linc Glycer Blue", "Pentonic V-RT"];
+  if(hasStationery){
+    pool = ["Linc Glycer Blue", "Pentonic Black", "Pentonic V-RT", "Practical File (100p)", "Nescafe Coffee", "Dairy Milk"];
+  }else if(hasMealOrSnack){
+    pool = ["Coca-Cola", "Frooti", "Nescafe Coffee", "Dairy Milk", "Oreo", "Parle G"];
+  }
+
+  const suggestions = pool.filter(name => (cart[name] || 0) === 0 && getStock(name) > 0).slice(0, 4);
+  if(suggestions.length === 0){
+    box.style.display = "none";
+    return;
+  }
+
+  box.style.display = "block";
+  row.innerHTML = suggestions.map(name => {
+    const safe = name.replace(/'/g, "\\'");
+    return `
+      <div class="upsell-chip">
+        <img src="${IMAGE_MAP[name] || 'ParleG.jpg'}" alt="${name}">
+        <div class="upsell-chip-name">${name}</div>
+        <button class="upsell-chip-btn" onclick="changeQty('${safe}', 1)">+ Add ₹${getPrice(name)}</button>
+      </div>
+    `;
+  }).join("");
 }
 
 /* ORDER FORM */
@@ -1998,35 +2361,77 @@ if(usingLiveStockApi){
   localStorage.setItem("sadbhavna_local_stock", JSON.stringify(stockMap));
 }
 
+const orderId = "ORD-" + Date.now().toString().slice(-5);
+const orderDate = new Date().toLocaleString();
+const waUrl = "https://wa.me/447781554727?text=" + order;
+const receiptLines = [];
+for(let item in orderedMap){
+  receiptLines.push({ name: item, qty: orderedMap[item], total: orderedMap[item] * getPrice(item) });
+}
+
 try{
   const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
   existingOrders.push({
-    id: "ORD-" + Date.now().toString().slice(-5),
+    id: orderId,
     name: name,
     room: room,
     hostel: hostel,
     phone: phone,
     payment: payment,
     items: orderedItems.join(", "),
-    date: new Date().toLocaleString()
+    date: orderDate
   });
   localStorage.setItem("orders", JSON.stringify(existingOrders));
   localStorage.setItem("sadbhavna_profile", JSON.stringify({ name, room, hostel, phone }));
 }catch(e){}
 
-window.open(
-"https://wa.me/447781554727?text=" + order,
-"_blank"
-);
+window.open(waUrl, "_blank");
 
 for(let item in cart){ cart[item] = 0; }
-addNotification("Order placed on WhatsApp (" + orderedItems.length + " item types)");
+addNotification("Order " + orderId + " placed on WhatsApp (₹" + orderSubtotal + ")");
 saveState();
 updateCart();
 renderStockUI();
 closeOrderForm();
 closeCart();
 
+openReceipt({
+  id: orderId,
+  name: name,
+  room: room,
+  hostel: hostel,
+  phone: phone,
+  payment: payment,
+  note: note,
+  date: orderDate,
+  lines: receiptLines,
+  subtotal: orderSubtotal,
+  waUrl: waUrl
+});
+
+}
+
+function openReceipt(r){
+  document.getElementById("receiptOrderId").innerText = r.id + " • " + r.date;
+  document.getElementById("receiptMeta").innerHTML = `
+    <p><span>Customer</span><strong>${r.name}</strong></p>
+    <p><span>Hostel &amp; Room</span><strong>${r.hostel}, Room ${r.room}</strong></p>
+    <p><span>Phone</span><strong>${r.phone}</strong></p>
+    <p><span>Payment</span><strong>${r.payment}</strong></p>
+    ${r.note ? `<p><span>Note</span><strong>${r.note}</strong></p>` : ""}
+  `;
+  document.getElementById("receiptItems").innerHTML = r.lines.map(l =>
+    `<p><span>${l.name} × ${l.qty}</span><strong>₹${l.total}</strong></p>`
+  ).join("");
+  document.getElementById("receiptTotal").innerText = "₹" + r.subtotal;
+  document.getElementById("receiptWaBtn").href = r.waUrl;
+  document.getElementById("receiptOverlay").classList.add("active");
+  document.getElementById("receiptModal").classList.add("active");
+}
+
+function closeReceipt(){
+  document.getElementById("receiptOverlay").classList.remove("active");
+  document.getElementById("receiptModal").classList.remove("active");
 }
 
 /* CART */
