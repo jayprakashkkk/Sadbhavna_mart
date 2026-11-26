@@ -1,0 +1,16 @@
+{
+  "name": "Sadbhavna Mart",
+  "short_name": "Sadbhavna",
+  "description": "Hostel quick-commerce & late-night essentials with instant WhatsApp delivery.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#00ff99",
+  "icons": [
+    {
+      "src": "maggie.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    }
+  ]
+}

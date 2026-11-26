@@ -11,6 +11,8 @@
 content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>Sadbhavna Mart</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00ff99">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -149,10 +151,177 @@ margin-top:8px;
 background:rgba(220,38,38,0.18);
 border:1px solid rgba(239,68,68,0.5);
 color:#fca5a5;
-padding:6px 14px;
+padding:5px 12px;
 border-radius:999px;
-font-size:12px;
+font-size:11.5px;
 font-weight:700;
+}
+
+.store-open-pill{
+display:inline-flex;
+align-items:center;
+gap:6px;
+margin-top:6px;
+background:rgba(0,255,153,0.12);
+border:1px solid rgba(0,255,153,0.4);
+color:#00ff99;
+padding:4px 11px;
+border-radius:999px;
+font-size:11px;
+font-weight:700;
+}
+
+/* QUICK CATEGORY PILLS & COMBOS */
+.filter-strip{
+width:100%;
+display:flex;
+gap:8px;
+padding:8px 12px 4px;
+overflow-x:auto;
+scrollbar-width:none;
+}
+.filter-strip::-webkit-scrollbar{display:none;}
+.filter-pill{
+flex:0 0 auto;
+padding:7px 13px;
+border-radius:999px;
+border:1px solid rgba(255,255,255,0.14);
+background:rgba(255,255,255,0.05);
+color:#cbd5e1;
+font-size:12.5px;
+font-weight:700;
+cursor:pointer;
+}
+.filter-pill.active{
+background:#00ff99;
+color:#000;
+border-color:#00ff99;
+}
+
+.combos-section{
+width:100%;
+padding:10px 12px 2px;
+}
+.combos-title{
+font-size:13px;
+font-weight:800;
+color:#cbd5e1;
+margin-bottom:8px;
+letter-spacing:0.3px;
+}
+.combos-row{
+display:flex;
+gap:10px;
+overflow-x:auto;
+scrollbar-width:none;
+}
+.combos-row::-webkit-scrollbar{display:none;}
+.combo-card{
+flex:0 0 auto;
+min-width:205px;
+background:linear-gradient(135deg,rgba(0,255,153,0.1),rgba(56,189,248,0.08));
+border:1px solid rgba(0,255,153,0.3);
+border-radius:14px;
+padding:10px 12px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+}
+.combo-info h3{
+font-size:13px;
+color:#fff;
+margin-bottom:2px;
+}
+.combo-info p{
+font-size:11px;
+color:#94a3b8;
+}
+.combo-btn{
+border:none;
+border-radius:9px;
+background:#00ff99;
+color:#000;
+font-size:11.5px;
+font-weight:800;
+padding:7px 10px;
+cursor:pointer;
+white-space:nowrap;
+}
+
+.price-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:4px;
+}
+.price-tag{
+font-size:13px;
+font-weight:800;
+color:#00ff99;
+}
+
+.delivery-meter{
+background:rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.1);
+border-radius:12px;
+padding:10px 12px;
+margin-bottom:14px;
+}
+.delivery-meter p{
+font-size:12.5px;
+color:#e2e8f0;
+margin-bottom:7px;
+font-weight:700;
+}
+.meter-track{
+width:100%;
+height:6px;
+border-radius:999px;
+background:rgba(255,255,255,0.12);
+overflow:hidden;
+}
+.meter-fill{
+height:100%;
+width:0%;
+border-radius:999px;
+background:linear-gradient(90deg,#00ff99,#38bdf8);
+transition:width 0.3s ease;
+}
+.cart-summary-box{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 14px;
+border-radius:12px;
+background:rgba(0,255,153,0.1);
+border:1px solid rgba(0,255,153,0.35);
+margin:10px 0 4px;
+font-weight:800;
+color:#fff;
+}
+#toastBanner{
+position:fixed;
+top:14px;
+left:50%;
+transform:translateX(-50%) translateY(-80px);
+background:#0f172a;
+color:#00ff99;
+border:1px solid rgba(0,255,153,0.5);
+padding:10px 18px;
+border-radius:999px;
+font-size:13px;
+font-weight:700;
+z-index:10000;
+box-shadow:0 8px 24px rgba(0,0,0,0.45);
+transition:transform 0.28s ease, opacity 0.28s ease;
+opacity:0;
+pointer-events:none;
+white-space:nowrap;
+}
+#toastBanner.show{
+transform:translateX(-50%) translateY(0);
+opacity:1;
 }
 
 /* MENU */
@@ -802,9 +971,49 @@ onkeyup="searchItems()">
 
 <h2>Hostel Snacks Corner 😎</h2>
 
-<p>Order snacks instantly on WhatsApp</p>
+<p>Order snacks instantly on WhatsApp • 10–15 min room delivery</p>
 
 </section>
+
+<!-- QUICK CATEGORY FILTER PILLS -->
+<div class="filter-strip" id="homeFilterStrip">
+  <button class="filter-pill active" onclick="setHomeFilter('All', this)">All</button>
+  <button class="filter-pill" onclick="setHomeFilter('Biscuits & Snacks', this)">🍪 Snacks</button>
+  <button class="filter-pill" onclick="setHomeFilter('Instant Meals', this)">🍜 Meals</button>
+  <button class="filter-pill" onclick="setHomeFilter('Beverages & Dairy', this)">☕ Drinks</button>
+  <button class="filter-pill" onclick="setHomeFilter('Daily Pantry', this)">🧂 Pantry</button>
+  <button class="filter-pill" onclick="setHomeFilter('In Stock', this)">✅ In Stock</button>
+</div>
+
+<!-- MIDNIGHT COMBOS -->
+<div class="combos-section">
+  <div class="combos-title">⚡ Quick Hostel Combos (1-Tap Add)</div>
+  <div class="combos-row">
+    <div class="combo-card">
+      <div class="combo-info">
+        <h3>🍜 Study Fuel</h3>
+        <p>Maggi + Nescafe • ₹48</p>
+      </div>
+      <button class="combo-btn" onclick="addCombo(['Maggi Double Masala','Nescafe Coffee'], 'Study Fuel')">+ Add</button>
+    </div>
+    <div class="combo-card">
+      <div class="combo-info">
+        <h3>☕ Chai Break</h3>
+        <p>Tata Tea + Parle G • ₹70</p>
+      </div>
+      <button class="combo-btn" onclick="addCombo(['Tata Tea','Parle G'], 'Chai Break')">+ Add</button>
+    </div>
+    <div class="combo-card">
+      <div class="combo-info">
+        <h3>🍿 Movie Munch</h3>
+        <p>Kurkure + Tedhe + Bourbon • ₹70</p>
+      </div>
+      <button class="combo-btn" onclick="addCombo(['Kurkure','Tedhe Medhe','Bourbon'], 'Movie Munch')">+ Add</button>
+    </div>
+  </div>
+</div>
+
+<div id="toastBanner"></div>
 
 <div class="menu">
 
@@ -1082,14 +1291,32 @@ id="cartPopup">
 
 <h2>🛒 Your Cart</h2>
 
+<div class="delivery-meter" id="deliveryMeter">
+  <p id="deliveryMeterText">Add ₹99 for FREE Hostel Room Delivery</p>
+  <div class="meter-track"><div class="meter-fill" id="deliveryMeterFill"></div></div>
+</div>
+
 <div id="popup-cart-items">
 Cart Empty
+</div>
+
+<div class="cart-summary-box" id="cartSummaryBox" style="display:none;">
+  <span>Total Payable</span>
+  <span id="cartTotalValue">₹0</span>
 </div>
 
 <button class="order-btn"
 onclick="placeOrder()">
 
-Place Order
+Place Order on WhatsApp
+
+</button>
+
+<button class="close-btn"
+style="background:rgba(255,255,255,0.12);"
+onclick="clearCartItems()">
+
+Clear Cart
 
 </button>
 
@@ -1135,6 +1362,11 @@ class="order-input">
 <input type="number"
 id="phoneNumber"
 placeholder="Enter Phone Number"
+class="order-input">
+
+<input type="text"
+id="orderNote"
+placeholder="Delivery Note (Optional: e.g. Call at gate)"
 class="order-input">
 
 <select id="paymentMode"
@@ -1256,6 +1488,80 @@ try { favourites = JSON.parse(localStorage.getItem("sadbhavna_favs")) || []; } c
 let notifications = [];
 try { notifications = JSON.parse(localStorage.getItem("sadbhavna_notifications")) || []; } catch(e) { notifications = []; }
 
+const PRICE_MAP = {
+"Parle G": 10,
+"Tedhe Medhe": 20,
+"Kurkure": 20,
+"Cup Maggi": 50,
+"Bourbon": 30,
+"Maggi Double Masala": 28,
+"Milk": 30,
+"Nescafe Coffee": 20,
+"BRU Coffee": 20,
+"Chini": 45,
+"Tata Tea": 60,
+"Red Label": 65
+};
+
+const CATEGORY_MAP = {
+"Parle G": "Biscuits & Snacks",
+"Bourbon": "Biscuits & Snacks",
+"Tedhe Medhe": "Biscuits & Snacks",
+"Kurkure": "Biscuits & Snacks",
+"Cup Maggi": "Instant Meals",
+"Maggi Double Masala": "Instant Meals",
+"Milk": "Beverages & Dairy",
+"Nescafe Coffee": "Beverages & Dairy",
+"BRU Coffee": "Beverages & Dairy",
+"Tata Tea": "Beverages & Dairy",
+"Red Label": "Beverages & Dairy",
+"Chini": "Daily Pantry"
+};
+
+let activeHomeFilter = "All";
+let toastTimer = null;
+
+function getPrice(item){
+  return PRICE_MAP[item] || 0;
+}
+
+function showToast(msg){
+  const el = document.getElementById("toastBanner");
+  if(!el) return;
+  el.innerText = msg;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 2000);
+}
+
+function setHomeFilter(filterName, btn){
+  activeHomeFilter = filterName;
+  document.querySelectorAll("#homeFilterStrip .filter-pill").forEach(b => b.classList.remove("active"));
+  if(btn) btn.classList.add("active");
+  searchItems();
+}
+
+function addCombo(items, comboName){
+  for(const item of items){
+    const avail = getStock(item);
+    if((cart[item] || 0) + 1 > avail){
+      showToast("❌ " + item + " only has " + avail + " left!");
+      return;
+    }
+  }
+  items.forEach(item => { cart[item] = (cart[item] || 0) + 1; });
+  saveState();
+  updateCart();
+  showToast("✅ Added " + comboName + " to cart!");
+}
+
+function clearCartItems(){
+  for(let k in cart){ cart[k] = 0; }
+  saveState();
+  updateCart();
+  showToast("🗑️ Cart cleared");
+}
+
 let stockMap = Object.assign({}, DEFAULT_CART);
 for (let k in stockMap) { stockMap[k] = 50; }
 let usingLiveStockApi = false;
@@ -1277,10 +1583,19 @@ function renderStockUI(){
     const item = titleEl.innerText.trim();
     const qty = getStock(item);
     const inCart = Number(cart[item]) || 0;
+    const price = getPrice(item);
 
     // Remove legacy floating + button over product image
     const legacyAdd = card.querySelector(".card-icons .add-btn");
     if(legacyAdd) legacyAdd.remove();
+
+    let priceEl = card.querySelector(".price-row");
+    if(!priceEl){
+      priceEl = document.createElement("div");
+      priceEl.className = "price-row";
+      priceEl.innerHTML = `<span class="price-tag">₹${price}</span>`;
+      titleEl.insertAdjacentElement("afterend", priceEl);
+    }
 
     let msgEl = card.querySelector(".stock-msg");
     if(!msgEl){
@@ -1334,6 +1649,7 @@ function renderStockUI(){
       }
     }
   });
+  searchItems();
 }
 
 function clampCartToStock(){
@@ -1387,15 +1703,19 @@ async function loadStock(){
 
 function changeQty(item,value){
 
-const next = (cart[item] || 0) + value;
+const prev = cart[item] || 0;
+const next = prev + value;
 const available = getStock(item);
 
 if(next > available){
-alert("Only " + available + " left in stock for " + item + "!");
+showToast("⚠️ Only " + available + " left for " + item);
 return;
 }
 
 cart[item] = Math.max(0, next);
+if(value > 0 && cart[item] > prev){
+  showToast("✅ Added " + item);
+}
 
 saveState();
 updateCart();
@@ -1405,6 +1725,7 @@ updateCart();
 function updateCart(){
 
 let total = 0;
+let subtotal = 0;
 let html = "";
 
 for(let item in cart){
@@ -1412,6 +1733,8 @@ for(let item in cart){
 if(cart[item] > 0){
 
 total += cart[item];
+const lineTotal = cart[item] * getPrice(item);
+subtotal += lineTotal;
 
 html += `
 
@@ -1425,7 +1748,10 @@ justify-content:space-between;
 align-items:center;
 ">
 
-<div>${item}</div>
+<div>
+  <div>${item}</div>
+  <div style="font-size:12px;color:#00ff99;">₹${getPrice(item)} × ${cart[item]} = ₹${lineTotal}</div>
+</div>
 
 <div class="cart-controls">
 
@@ -1492,7 +1818,7 @@ Remove
 }
 
 if(html===""){
-html = "Cart Empty";
+html = `<p style="text-align:center;color:#94a3b8;padding:18px 0;">Your cart is empty 🛒</p>`;
 }
 
 document.getElementById(
@@ -1503,12 +1829,30 @@ document.getElementById(
 "popup-cart-items"
 ).innerHTML = html;
 
+const summaryBox = document.getElementById("cartSummaryBox");
+const totalValueEl = document.getElementById("cartTotalValue");
+const meterText = document.getElementById("deliveryMeterText");
+const meterFill = document.getElementById("deliveryMeterFill");
+if(summaryBox && totalValueEl){
+  summaryBox.style.display = total > 0 ? "flex" : "none";
+  totalValueEl.innerText = "₹" + subtotal;
+}
+if(meterText && meterFill){
+  const pct = Math.min(100, Math.round((subtotal / 99) * 100));
+  meterFill.style.width = pct + "%";
+  if(subtotal >= 99){
+    meterText.innerText = "🎉 Unlocked FREE Hostel Room Delivery!";
+  }else{
+    meterText.innerText = "Add ₹" + (99 - subtotal) + " more for FREE Room Delivery";
+  }
+}
+
 const floatBar = document.getElementById("floatingCartBar");
 const floatText = document.getElementById("floatingCartText");
 if(floatBar && floatText){
   if(total > 0){
     floatBar.classList.add("active");
-    floatText.innerText = "🛒 " + total + (total === 1 ? " Item in Cart" : " Items in Cart");
+    floatText.innerText = "🛒 " + total + (total === 1 ? " Item" : " Items") + " • ₹" + subtotal;
   }else{
     floatBar.classList.remove("active");
   }
@@ -1613,6 +1957,9 @@ document.getElementById(
 "paymentMode"
 ).value;
 
+let noteEl = document.getElementById("orderNote");
+let note = noteEl ? noteEl.value.trim() : "";
+
 if(
 !name ||
 !room ||
@@ -1642,10 +1989,17 @@ order +=
 "📞 Phone: " + encodeURIComponent(phone) + "%0A";
 
 order +=
-"💳 Payment: " + encodeURIComponent(payment) + "%0A%0A";
+"💳 Payment: " + encodeURIComponent(payment) + "%0A";
+
+if(note){
+order += "📝 Note: " + encodeURIComponent(note) + "%0A";
+}
+
+order += "%0A";
 
 let orderedItems = [];
 let orderedMap = {};
+let orderSubtotal = 0;
 for(let item in cart){
 
 if(cart[item] > 0){
@@ -1656,15 +2010,19 @@ if(cart[item] > available){
   return;
 }
 
+const linePrice = cart[item] * getPrice(item);
+orderSubtotal += linePrice;
 orderedMap[item] = cart[item];
-orderedItems.push(item + " x " + cart[item]);
+orderedItems.push(item + " x " + cart[item] + " (₹" + linePrice + ")");
 order +=
 "• " + encodeURIComponent(item) +
-" x " + cart[item] + "%0A";
+" x " + cart[item] + " (₹" + linePrice + ")%0A";
 
 }
 
 }
+
+order += "%0A💰 *Total: ₹" + orderSubtotal + "*";
 
 for(let item in orderedMap){
   stockMap[item] = Math.max(0, getStock(item) - orderedMap[item]);
@@ -1873,33 +2231,26 @@ updateFav();
 
 function searchItems(){
 
-let input =
-document.getElementById(
-"searchInput"
-).value.toLowerCase();
+let inputEl = document.getElementById("searchInput");
+let input = inputEl ? inputEl.value.toLowerCase().trim() : "";
 
-let cards =
-document.getElementsByClassName(
-"card"
-);
+let cards = document.getElementsByClassName("card");
 
 for(let i=0;i<cards.length;i++){
 
-let title =
-cards[i]
-.getElementsByTagName("h2")[0]
-.innerText
-.toLowerCase();
+let title = cards[i].getElementsByTagName("h2")[0].innerText.trim();
+let cat = CATEGORY_MAP[title] || "";
+let inStock = getStock(title) > 0;
 
-if(title.includes(input)){
-
-cards[i].style.display="block";
-
-}else{
-
-cards[i].style.display="none";
-
+let matchSearch = !input || title.toLowerCase().includes(input) || cat.toLowerCase().includes(input);
+let matchFilter = true;
+if(activeHomeFilter === "In Stock"){
+  matchFilter = inStock;
+}else if(activeHomeFilter !== "All"){
+  matchFilter = (cat === activeHomeFilter);
 }
+
+cards[i].style.display = (matchSearch && matchFilter) ? "flex" : "none";
 
 }
 
@@ -1937,16 +2288,19 @@ if(oldStatus){
 oldStatus.remove();
 }
 
+const hero = document.querySelector(".hero");
+if(!hero) return;
+
+let status = document.createElement("div");
+status.id = "store-status";
 if(!isStoreOpen()){
-  const hero = document.querySelector(".hero");
-  if(hero){
-    let status = document.createElement("div");
-    status.id = "store-status";
-    status.className = "store-closed-banner";
-    status.innerHTML = "🔒 Store Closed • Opens at 10 AM";
-    hero.appendChild(status);
-  }
+  status.className = "store-closed-banner";
+  status.innerHTML = "🔒 Store Closed • Opens at 10 AM";
+}else{
+  status.className = "store-open-pill";
+  status.innerHTML = "🟢 Open Now • Till 3 AM";
 }
+hero.appendChild(status);
 
 }
 

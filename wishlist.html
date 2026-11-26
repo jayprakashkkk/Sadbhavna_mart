@@ -198,6 +198,12 @@ const PRODUCT_IMAGES = {
   "Red Label": "Chaipatti2.jpg"
 };
 
+const PRODUCT_PRICES = {
+  "Parle G": 10, "Tedhe Medhe": 20, "Kurkure": 20, "Cup Maggi": 50,
+  "Bourbon": 30, "Maggi Double Masala": 28, "Milk": 30, "Nescafe Coffee": 20,
+  "BRU Coffee": 20, "Chini": 45, "Tata Tea": 60, "Red Label": 65
+};
+
 let favs = [];
 let cart = {};
 try { favs = JSON.parse(localStorage.getItem("sadbhavna_favs")) || []; } catch(e) { favs = []; }
@@ -234,11 +240,15 @@ function renderWishlist() {
 
   grid.innerHTML = favs.map(name => {
     const img = PRODUCT_IMAGES[name] || "maggie.jpeg";
+    const price = PRODUCT_PRICES[name] || 0;
     const safeName = name.replace(/'/g, "\\'");
     return `
       <div class="wish-card">
         <img src="${img}" alt="${name}">
-        <h2>${name}</h2>
+        <div>
+          <h2>${name}</h2>
+          <p style="color:#00ff99;font-weight:bold;margin-top:4px;">₹${price}</p>
+        </div>
         <div class="btn-row">
           <button class="btn-add" onclick="addToCart('${safeName}')">Add to Cart</button>
           <button class="btn-remove" onclick="removeFav('${safeName}')">Remove</button>
