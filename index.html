@@ -261,33 +261,6 @@ font-weight:800;
 color:#00ff99;
 }
 
-.delivery-meter{
-background:rgba(255,255,255,0.06);
-border:1px solid rgba(255,255,255,0.1);
-border-radius:12px;
-padding:10px 12px;
-margin-bottom:14px;
-}
-.delivery-meter p{
-font-size:12.5px;
-color:#e2e8f0;
-margin-bottom:7px;
-font-weight:700;
-}
-.meter-track{
-width:100%;
-height:6px;
-border-radius:999px;
-background:rgba(255,255,255,0.12);
-overflow:hidden;
-}
-.meter-fill{
-height:100%;
-width:0%;
-border-radius:999px;
-background:linear-gradient(90deg,#00ff99,#38bdf8);
-transition:width 0.3s ease;
-}
 .cart-summary-box{
 display:flex;
 justify-content:space-between;
@@ -1440,11 +1413,6 @@ id="cartPopup">
 
 <h2>🛒 Your Cart</h2>
 
-<div class="delivery-meter" id="deliveryMeter">
-  <p id="deliveryMeterText">Add ₹99 for FREE Hostel Room Delivery</p>
-  <div class="meter-track"><div class="meter-fill" id="deliveryMeterFill"></div></div>
-</div>
-
 <div id="popup-cart-items">
 Cart Empty
 </div>
@@ -2102,20 +2070,9 @@ document.getElementById(
 
 const summaryBox = document.getElementById("cartSummaryBox");
 const totalValueEl = document.getElementById("cartTotalValue");
-const meterText = document.getElementById("deliveryMeterText");
-const meterFill = document.getElementById("deliveryMeterFill");
 if(summaryBox && totalValueEl){
   summaryBox.style.display = total > 0 ? "flex" : "none";
   totalValueEl.innerText = "₹" + subtotal;
-}
-if(meterText && meterFill){
-  const pct = Math.min(100, Math.round((subtotal / 99) * 100));
-  meterFill.style.width = pct + "%";
-  if(subtotal >= 99){
-    meterText.innerText = "🎉 Unlocked FREE Hostel Room Delivery!";
-  }else{
-    meterText.innerText = "Add ₹" + (99 - subtotal) + " more for FREE Room Delivery";
-  }
 }
 
 const floatBar = document.getElementById("floatingCartBar");

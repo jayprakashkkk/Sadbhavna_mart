@@ -59,7 +59,7 @@ Late-night study sessions, exam preparation, and hostel living often bring sudde
 - **💳 Multi-Payment Method Support**: Accommodates student payment preferences including UPI (Google Pay, PhonePe, Paytm) and Cash on Delivery (COD).
 - **🛒 Dynamic Cart & State Persistence**: Local storage powered cart keeps items intact even if the browser is closed or refreshed.
 - **📦 Order History Log**: Dedicated order tracking screen displays past orders, timestamp, items ordered, and total bills.
-- **💰 Live Pricing, Free Delivery Meter & Subtotal**: Every product displays its price (`₹`), calculates live item subtotals in the cart drawer & floating checkout bar, shows a progress bar toward free hostel room delivery (`₹99+`), and includes the itemized total inside the WhatsApp order message.
+- **💰 Live Pricing & Subtotal**: Every product displays its price (`₹`), calculates live item subtotals in the cart drawer & floating checkout bar, and includes the itemized total inside the WhatsApp order message.
 - **⚡ 1-Tap Hostel Combos & Quick Filters**: Scrollable category filter pills (*Snacks*, *Meals*, *Drinks*, *Pantry*, *In Stock*) and 1-tap combos (*Study Fuel*, *Chai Break*, *Movie Munch*) directly on the storefront.
 - **🛒 Smart Cart Upsell (*"Add with this"*) & Digital Receipt**: Recommends complementary snacks, drinks, or stationery right inside the cart drawer, and displays an itemized digital receipt popup with Order ID after WhatsApp checkout.
 - **📱 PWA Ready (`manifest.json`) & Toast Feedback**: Installable standalone mobile web app experience with non-blocking toast notifications and optional delivery instructions.
