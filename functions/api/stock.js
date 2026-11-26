@@ -35,7 +35,7 @@ const DEFAULT_STOCK = {
   "Linc Glycer Black": 50,
   "Pentonic Blue": 50,
   "Pentonic Black": 50,
-  "Pentonic V-RT": 50,
+  "Pentonic B-RT": 50,
   "Practical File (100p)": 50,
   "Practical File (140p)": 50,
   "Practical File (Hardcover)": 50

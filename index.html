@@ -1396,9 +1396,9 @@ onkeyup="searchItems()">
 </div>
 
 <div class="card">
-  <img class="food-img" src="images/pentonic-vrt.jpg" alt="Pentonic V-RT">
-  <div class="card-icons"><i class="fa-regular fa-heart fav-btn" onclick="toggleFav('Pentonic V-RT',this)"></i></div>
-  <h2>Pentonic V-RT</h2>
+  <img class="food-img" src="images/pentonic-vrt.jpg" alt="Pentonic B-RT">
+  <div class="card-icons"><i class="fa-regular fa-heart fav-btn" onclick="toggleFav('Pentonic B-RT',this)"></i></div>
+  <h2>Pentonic B-RT</h2>
 </div>
 
 <div class="card">
@@ -1668,7 +1668,7 @@ const DEFAULT_CART = {
 "Linc Glycer Black":0,
 "Pentonic Blue":0,
 "Pentonic Black":0,
-"Pentonic V-RT":0,
+"Pentonic B-RT":0,
 "Practical File (100p)":0,
 "Practical File (140p)":0,
 "Practical File (Hardcover)":0
@@ -1709,7 +1709,7 @@ const PRICE_MAP = {
 "Linc Glycer Black": 10,
 "Pentonic Blue": 10,
 "Pentonic Black": 10,
-"Pentonic V-RT": 20,
+"Pentonic B-RT": 20,
 "Practical File (100p)": 40,
 "Practical File (140p)": 50,
 "Practical File (Hardcover)": 60
@@ -1740,7 +1740,7 @@ const CATEGORY_MAP = {
 "Linc Glycer Black": "Stationery",
 "Pentonic Blue": "Stationery",
 "Pentonic Black": "Stationery",
-"Pentonic V-RT": "Stationery",
+"Pentonic B-RT": "Stationery",
 "Practical File (100p)": "Stationery",
 "Practical File (140p)": "Stationery",
 "Practical File (Hardcover)": "Stationery"
@@ -1771,7 +1771,7 @@ const IMAGE_MAP = {
 "Linc Glycer Black": "images/linc-glycer-black.jpg",
 "Pentonic Blue": "images/pentonic-blue.jpg",
 "Pentonic Black": "images/pentonic-black.jpg",
-"Pentonic V-RT": "images/pentonic-vrt.jpg",
+"Pentonic B-RT": "images/pentonic-vrt.jpg",
 "Practical File (100p)": "images/practical-file-40.jpg",
 "Practical File (140p)": "images/practical-file-50.jpg",
 "Practical File (Hardcover)": "images/practical-file-60.jpg"
@@ -2154,9 +2154,9 @@ function renderCartUpsell(totalCount){
     }
   }
 
-  let pool = ["Coca-Cola", "Frooti", "Dairy Milk", "Lays Classic", "Oreo", "Nescafe Coffee", "Linc Glycer Blue", "Pentonic V-RT"];
+  let pool = ["Coca-Cola", "Frooti", "Dairy Milk", "Lays Classic", "Oreo", "Nescafe Coffee", "Linc Glycer Blue", "Pentonic B-RT"];
   if(hasStationery){
-    pool = ["Linc Glycer Blue", "Pentonic Black", "Pentonic V-RT", "Practical File (100p)", "Nescafe Coffee", "Dairy Milk"];
+    pool = ["Linc Glycer Blue", "Pentonic Black", "Pentonic B-RT", "Practical File (100p)", "Nescafe Coffee", "Dairy Milk"];
   }else if(hasMealOrSnack){
     pool = ["Coca-Cola", "Frooti", "Nescafe Coffee", "Dairy Milk", "Oreo", "Parle G"];
   }

@@ -78,7 +78,7 @@ Late-night study sessions, exam preparation, and hostel living often bring sudde
 | **Biscuits & Snacks** | Parle G, Bourbon, Oreo, Good Day, Lay's Classic, Kurkure, Tedhe Medhe, Dairy Milk |
 | **Beverages & Dairy** | Milk, Nescafe Coffee, BRU Coffee, Tata Tea, Red Label, Frooti, Coca-Cola |
 | **Daily Pantry** | Refined Sugar (Chini), Fresh Sandwich Bread |
-| **Stationery** | Linc Glycer Blue & Black (₹10), Pentonic Blue & Black (₹10), Pentonic V-RT (₹20), Practical Files (₹40, ₹50, ₹60) |
+| **Stationery** | Linc Glycer Blue & Black (₹10), Pentonic Blue & Black (₹10), Pentonic B-RT Click (₹20), Practical Files (₹40, ₹50, ₹60) |
 
 ---
 
