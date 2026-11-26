@@ -59,6 +59,8 @@ Late-night study sessions, exam preparation, and hostel living often bring sudde
 - **💳 Multi-Payment Method Support**: Accommodates student payment preferences including UPI (Google Pay, PhonePe, Paytm) and Cash on Delivery (COD).
 - **🛒 Dynamic Cart & State Persistence**: Local storage powered cart keeps items intact even if the browser is closed or refreshed.
 - **📦 Order History Log**: Dedicated order tracking screen displays past orders, timestamp, items ordered, and total bills.
+- **📦 Live Inventory & Low-Stock Alerts**: Tracks product quantities via `/api/stock` (Cloudflare Pages + Neon PostgreSQL) with `stock.json` fallback, automatically displays red **`Only X left`** warnings when `<= 5` remain, marks products **`Out of Stock`** at `0`, and deducts stock on WhatsApp checkout.
+- **🖥️ Terminal Stock CLI (`stock.py`)**: Add or set product stock directly from the terminal (`python3 stock.py add "Chini" 50`), optionally pushing to `stock.json` (`--push`) or updating the live API (`--api`).
 - **🌙 Cyberpunk Dark Mode Palette**: Ultra-sleek `#000` to `#0f172a` slate gradient aesthetic with high-contrast `#00ff99` neon emerald accents designed for night browsing.
 - **📱 Bottom Navigation Bar**: Native app-like bottom navigation with smooth transitions between Home, Categories, Wishlist, and Profile.
 
@@ -181,23 +183,42 @@ npx serve .
 python3 -m http.server 3000
 ```
 
+### 3. Manage Product Stock from Terminal (`stock.py`)
+```bash
+# View current stock levels
+python3 stock.py list
+
+# Add 50 units to Chini and push to GitHub/Cloudflare Pages
+python3 stock.py add "Chini" 50 --push
+
+# Set exact stock (e.g., 5 left triggers red "Only 5 left" warning)
+python3 stock.py set "Chini" 5
+
+# Optional: Update live Cloudflare + Neon DB immediately without redeploy
+python3 stock.py add "Chini" 50 --api https://sadbhavnamart.pages.dev/api/stock --key YOUR_ADMIN_KEY
+```
+
+*(To enable shared real-time stock across all visitors, set `NEON_SQL_URL`, `NEON_CONN_STR`, and `ADMIN_KEY` in Cloudflare Pages → Settings → Environment variables.)*
+
 ---
 
 ## 📂 Project Directory Structure
 
 ```
 Sadbhavna_files/
-├── index.html           # Main storefront, animated welcome splash, product listing & cart drawer
-├── category.html        # Category browsing interface
-├── orders.html          # Order history and receipts view
-├── profile.html         # User profile and room details
-├── wishlist.html        # Saved items and favorites
-├── login.html           # Student authentication page
-├── about.html           # About Sadbhavna Mart
-├── policy.html          # Store delivery & refund policies
-├── terms.html           # Terms and conditions
-├── *.jpg / *.png        # High-resolution optimized product imagery
-└── README.md            # Comprehensive project documentation
+├── index.html             # Main storefront, animated welcome splash, stock alerts & cart drawer
+├── category.html          # Interactive category filter browser synced with stock & cart
+├── orders.html            # Order history and WhatsApp reorder view
+├── profile.html           # User profile, saved delivery details & settings
+├── wishlist.html          # Synced favourite items
+├── about.html             # About Sadbhavna Mart
+├── policy.html            # Store delivery & privacy policies
+├── terms.html             # Terms and conditions
+├── stock.json             # Default product inventory manifest
+├── stock.py               # Terminal CLI tool to add/set/list product stock
+├── functions/api/stock.js # Cloudflare Pages Function for real-time shared stock
+├── *.jpg / *.png          # Product imagery
+└── README.md              # Project documentation
 ```
 
 ---

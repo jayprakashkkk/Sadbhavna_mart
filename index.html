@@ -132,39 +132,198 @@ outline:none;
 
 .hero{
 text-align:center;
-padding:20px;
+padding:14px 16px 8px;
 }
 
 .hero h2{
 color:#00ff99;
-font-size:28px;
+font-size:22px;
 }
 
 .hero p{
 color:#aaa;
-margin-top:10px;
+margin-top:6px;
+font-size:14px;
 }
 
 /* MENU */
 
 .menu{
-padding:20px;
+padding:12px;
 display:grid;
-gap:22px;
+gap:12px;
 grid-template-columns:repeat(2,1fr);
 width:100%;
 max-width:100%;
 margin:0;
 }
 
+.card{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+border-radius:16px;
+padding:10px;
+position:relative;
+overflow:hidden;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+.card-icons{
+position:absolute;
+top:14px;
+left:14px;
+right:14px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:5;
+}
+
+.fav-btn{
+width:32px;
+height:32px;
+border-radius:50%;
+background:rgba(15,23,42,0.78);
+backdrop-filter:blur(4px);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:15px;
+color:#fff;
+cursor:pointer;
+}
+
+.add-btn{
+width:32px;
+height:32px;
+border:none;
+border-radius:50%;
+background:#00ff99;
+color:#000;
+font-size:20px;
+font-weight:bold;
+line-height:1;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 2px 10px rgba(0,255,153,0.35);
+}
+
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 0 22px rgba(0,255,153,0.28);
+}
+
+.food-img{
+width:100%;
+height:112px;
+object-fit:contain;
+background:white;
+border-radius:12px;
+padding:6px;
+}
+
+.food-img:hover{
+transform:scale(1.03);
+}
+
+.card h2{
+color:#00ff99;
+margin-top:9px;
+font-size:14.5px;
+line-height:1.3;
+}
+
+.stock-msg{
+margin-top:4px;
+font-size:12px;
+font-weight:700;
+min-height:16px;
+}
+
+.stock-msg.low{
+color:#ff3b3b;
+animation:lowPulse 1.4s ease-in-out infinite;
+}
+
+.stock-msg.out{
+color:#ff4d4d;
+}
+
+.stock-msg.ok{
+color:#94a3b8;
+font-weight:500;
+}
+
+@keyframes lowPulse{
+0%,100%{opacity:1;}
+50%{opacity:0.55;}
+}
+
+.card.out-of-stock .food-img{
+filter:grayscale(100%) opacity(0.45);
+}
+
+.card.out-of-stock .add-btn{
+background:#475569;
+color:#cbd5e1;
+box-shadow:none;
+cursor:not-allowed;
+}
+
+.out-badge{
+position:absolute;
+top:50px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(220,38,38,0.92);
+color:#fff;
+font-size:11px;
+font-weight:800;
+letter-spacing:0.6px;
+padding:5px 10px;
+border-radius:999px;
+z-index:6;
+white-space:nowrap;
+}
+
 /* TABLET */
 
 @media screen and (min-width:768px){
 
+.hero h2{
+font-size:26px;
+}
+
 .menu{
+padding:18px;
+gap:18px;
 grid-template-columns:repeat(3,1fr);
 width:100%;
 max-width:100%;
+}
+
+.food-img{
+height:145px;
+padding:8px;
+}
+
+.card{
+padding:14px;
+border-radius:18px;
+}
+
+.card h2{
+font-size:16.5px;
+}
+
+.fav-btn, .add-btn{
+width:36px;
+height:36px;
+font-size:17px;
 }
 
 }
@@ -174,13 +333,15 @@ max-width:100%;
 @media screen and (min-width:1100px){
 
 .menu{
+padding:20px;
+gap:20px;
 grid-template-columns:repeat(5,1fr);
 width:100%;
 max-width:100%;
 }
 
 .food-img{
-height:170px;
+height:165px;
 }
 
 .card{
@@ -188,73 +349,9 @@ padding:14px;
 }
 
 .card h2{
-font-size:18px;
+font-size:17px;
 }
 
-}
-
-.card{
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.1);
-border-radius:22px;
-padding:18px;
-}
-
-.card{
-position:relative;
-overflow:hidden;
-}
-
-.card-icons{
-position:absolute;
-top:15px;
-left:15px;
-right:15px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-z-index:5;
-}
-
-.fav-btn{ 
-font-size:26px; 
-color:#fff; 
-cursor:pointer; 
-}
-
-.add-btn{
-width:45px;
-height:45px;
-border:none;
-border-radius:50%;
-background:#00ff99;
-color:#000;
-font-size:28px;
-font-weight:bold;
-cursor:pointer;
-}
-
-.card:hover{
-transform:translateY(-5px);
-box-shadow:0 0 25px #00ff99;
-}
-
-.food-img{
-width:100%;
-height:220px;
-object-fit:contain;
-background:white;
-border-radius:18px;
-padding:10px;
-}
-
-.food-img:hover{
-transform:scale(1.03);
-}
-
-.card h2{
-color:#00ff99;
-margin-top:15px;
 }
 
 .fav-icon{
@@ -1098,21 +1195,107 @@ try { favourites = JSON.parse(localStorage.getItem("sadbhavna_favs")) || []; } c
 let notifications = [];
 try { notifications = JSON.parse(localStorage.getItem("sadbhavna_notifications")) || []; } catch(e) { notifications = []; }
 
+let stockMap = Object.assign({}, DEFAULT_CART);
+for (let k in stockMap) { stockMap[k] = 50; }
+let usingLiveStockApi = false;
+
 function saveState(){
   localStorage.setItem("sadbhavna_cart", JSON.stringify(cart));
   localStorage.setItem("sadbhavna_favs", JSON.stringify(favourites));
   localStorage.setItem("sadbhavna_notifications", JSON.stringify(notifications));
 }
 
+function getStock(item){
+  return typeof stockMap[item] === "number" ? stockMap[item] : 0;
+}
+
+function renderStockUI(){
+  document.querySelectorAll(".menu .card").forEach(function(card){
+    const titleEl = card.querySelector("h2");
+    if(!titleEl) return;
+    const item = titleEl.innerText.trim();
+    const qty = getStock(item);
+
+    let msgEl = card.querySelector(".stock-msg");
+    if(!msgEl){
+      msgEl = document.createElement("div");
+      msgEl.className = "stock-msg";
+      card.appendChild(msgEl);
+    }
+
+    let badgeEl = card.querySelector(".out-badge");
+    const addBtn = card.querySelector(".add-btn");
+
+    if(qty <= 0){
+      card.classList.add("out-of-stock");
+      msgEl.className = "stock-msg out";
+      msgEl.innerText = "Out of Stock";
+      if(!badgeEl){
+        badgeEl = document.createElement("div");
+        badgeEl.className = "out-badge";
+        badgeEl.innerText = "OUT OF STOCK";
+        card.appendChild(badgeEl);
+      }
+      if(addBtn) addBtn.disabled = true;
+    }else{
+      card.classList.remove("out-of-stock");
+      if(badgeEl) badgeEl.remove();
+      if(addBtn) addBtn.disabled = false;
+      if(qty <= 5){
+        msgEl.className = "stock-msg low";
+        msgEl.innerText = "Only " + qty + " left";
+      }else{
+        msgEl.className = "stock-msg ok";
+        msgEl.innerText = "In Stock (" + qty + ")";
+      }
+    }
+  });
+}
+
+async function loadStock(){
+  try{
+    const res = await fetch("/api/stock", { cache: "no-store" });
+    if(res.ok){
+      const data = await res.json();
+      if(data && data.stock){
+        stockMap = Object.assign({}, stockMap, data.stock);
+        usingLiveStockApi = true;
+        renderStockUI();
+        return;
+      }
+    }
+  }catch(e){}
+
+  try{
+    const res = await fetch("stock.json?t=" + Date.now(), { cache: "no-store" });
+    if(res.ok){
+      const baseStock = await res.json();
+      const rawSnapshot = JSON.stringify(baseStock);
+      const prevSnapshot = localStorage.getItem("sadbhavna_stock_snapshot");
+      if(prevSnapshot !== rawSnapshot){
+        localStorage.setItem("sadbhavna_stock_snapshot", rawSnapshot);
+        localStorage.setItem("sadbhavna_local_stock", rawSnapshot);
+      }
+      const localOverrides = JSON.parse(localStorage.getItem("sadbhavna_local_stock") || rawSnapshot);
+      stockMap = Object.assign({}, baseStock, localOverrides);
+    }
+  }catch(e){}
+  renderStockUI();
+}
+
 /* CART */
 
 function changeQty(item,value){
 
-cart[item]+=value;
+const next = (cart[item] || 0) + value;
+const available = getStock(item);
 
-if(cart[item]<0){
-cart[item]=0;
+if(next > available){
+alert("Only " + available + " left in stock for " + item + "!");
+return;
 }
+
+cart[item] = Math.max(0, next);
 
 saveState();
 updateCart();
@@ -1349,10 +1532,18 @@ order +=
 "💳 Payment: " + encodeURIComponent(payment) + "%0A%0A";
 
 let orderedItems = [];
+let orderedMap = {};
 for(let item in cart){
 
 if(cart[item] > 0){
 
+const available = getStock(item);
+if(cart[item] > available){
+  alert("Only " + available + " left in stock for " + item + ". Please adjust quantity.");
+  return;
+}
+
+orderedMap[item] = cart[item];
 orderedItems.push(item + " x " + cart[item]);
 order +=
 "• " + encodeURIComponent(item) +
@@ -1360,6 +1551,25 @@ order +=
 
 }
 
+}
+
+for(let item in orderedMap){
+  stockMap[item] = Math.max(0, getStock(item) - orderedMap[item]);
+}
+
+if(usingLiveStockApi){
+  fetch("/api/stock", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ action: "order", items: orderedMap })
+  }).then(r => r.json()).then(d => {
+    if(d && d.stock){
+      stockMap = Object.assign({}, stockMap, d.stock);
+      renderStockUI();
+    }
+  }).catch(() => {});
+}else{
+  localStorage.setItem("sadbhavna_local_stock", JSON.stringify(stockMap));
 }
 
 try{
@@ -1387,6 +1597,7 @@ for(let item in cart){ cart[item] = 0; }
 addNotification("Order placed on WhatsApp (" + orderedItems.length + " item types)");
 saveState();
 updateCart();
+renderStockUI();
 closeOrderForm();
 closeCart();
 
@@ -1451,13 +1662,17 @@ if(favourites.includes(item)){
 favourites =
 favourites.filter(f => f !== item);
 
-icon.style.color = "transparent";
+icon.style.color = "#ffffff";
+icon.classList.remove("fa-solid");
+icon.classList.add("fa-regular");
 
 }else{
 
 favourites.push(item);
 
 icon.style.color = "#ff2e63";
+icon.classList.remove("fa-regular");
+icon.classList.add("fa-solid");
 
 }
 
@@ -1519,7 +1734,17 @@ document.getElementById(
 
 function addFavToCart(item){
 
-cart[item] += 1;
+const available = getStock(item);
+if(available <= 0){
+alert(item + " is currently Out of Stock!");
+return;
+}
+if((cart[item] || 0) + 1 > available){
+alert("Only " + available + " left in stock for " + item + "!");
+return;
+}
+
+cart[item] = (cart[item] || 0) + 1;
 
 favourites =
 favourites.filter(f => f !== item);
@@ -1635,11 +1860,17 @@ let currentItem = "";
 
 function openItemPopup(item){
 
+const available = getStock(item);
+if(available <= 0){
+alert(item + " is currently Out of Stock!");
+return;
+}
+
 currentItem = item;
 
 document.getElementById(
 "popup-title"
-).innerText = item;
+).innerText = item + " (Stock: " + available + ")";
 
 document.getElementById(
 "count1"
@@ -1665,61 +1896,25 @@ document.getElementById(
 
 function popupQty(value,type){
 
-if(type === 1){
+const c1 = parseInt(document.getElementById("count1").innerText);
+const c2 = parseInt(document.getElementById("count2").innerText);
+const c4 = parseInt(document.getElementById("count4").innerText);
+const available = getStock(currentItem);
 
-let count1 =
-document.getElementById("count1");
+let new1 = c1, new2 = c2, new4 = c4;
+if(type === 1) new1 = Math.max(0, c1 + value);
+if(type === 2) new2 = Math.max(0, c2 + value);
+if(type === 4) new4 = Math.max(0, c4 + value);
 
-count1.innerText =
-parseInt(count1.innerText) + value;
-
-if(parseInt(count1.innerText) < 0){
-count1.innerText = 0;
+let total = new1 + new2 + new4;
+if(total > available){
+alert("Only " + available + " left in stock for " + currentItem + "!");
+return;
 }
 
-}
-
-if(type === 2){
-
-let count2 =
-document.getElementById("count2");
-
-count2.innerText =
-parseInt(count2.innerText) + value;
-
-if(parseInt(count2.innerText) < 0){
-count2.innerText = 0;
-}
-
-}
-
-if(type === 4){
-
-let count4 =
-document.getElementById("count4");
-
-count4.innerText =
-parseInt(count4.innerText) + value;
-
-if(parseInt(count4.innerText) < 0){
-count4.innerText = 0;
-}
-
-}
-
-let total =
-
-parseInt(
-document.getElementById("count1").innerText
-) +
-
-parseInt(
-document.getElementById("count2").innerText
-) +
-
-parseInt(
-document.getElementById("count4").innerText
-);
+document.getElementById("count1").innerText = new1;
+document.getElementById("count2").innerText = new2;
+document.getElementById("count4").innerText = new4;
 
 cart[currentItem] = total;
 
@@ -1879,7 +2074,15 @@ function syncFavIcons(){
     const attr = icon.getAttribute("onclick") || "";
     const match = attr.match(/toggleFav\('([^']+)'/);
     if(match){
-      icon.style.color = favourites.includes(match[1]) ? "#ff2e63" : "transparent";
+      if(favourites.includes(match[1])){
+        icon.style.color = "#ff2e63";
+        icon.classList.remove("fa-regular");
+        icon.classList.add("fa-solid");
+      }else{
+        icon.style.color = "#ffffff";
+        icon.classList.remove("fa-solid");
+        icon.classList.add("fa-regular");
+      }
     }
   });
 }
@@ -1888,6 +2091,7 @@ updateCart();
 updateFav();
 syncFavIcons();
 updateNotification();
+loadStock();
 
 </script>
 

@@ -24,7 +24,7 @@ body{
 }
 .top-header{
   width:100%;
-  padding:18px 20px;
+  padding:16px;
   position:sticky;
   top:0;
   z-index:100;
@@ -37,7 +37,7 @@ body{
   justify-content:space-between;
   align-items:center;
   gap:12px;
-  margin-bottom:14px;
+  margin-bottom:12px;
 }
 .top-left{
   display:flex;
@@ -51,7 +51,7 @@ body{
 }
 .top-bar h1{
   color:#00ff99;
-  font-size:24px;
+  font-size:22px;
 }
 .cart-pill{
   display:inline-flex;
@@ -63,12 +63,12 @@ body{
   padding:8px 14px;
   border-radius:999px;
   text-decoration:none;
-  font-size:14px;
+  font-size:13.5px;
 }
 .search-box input{
   width:100%;
-  padding:12px 16px;
-  border-radius:14px;
+  padding:12px 14px;
+  border-radius:12px;
   border:1px solid rgba(255,255,255,0.1);
   outline:none;
   background:rgba(255,255,255,0.06);
@@ -78,20 +78,20 @@ body{
 .tabs{
   width:100%;
   display:flex;
-  gap:10px;
-  padding:16px 20px 6px;
+  gap:8px;
+  padding:12px 14px 4px;
   overflow-x:auto;
   scrollbar-width:none;
 }
 .tabs::-webkit-scrollbar{ display:none; }
 .tab-btn{
   flex:0 0 auto;
-  padding:10px 18px;
+  padding:8px 14px;
   border-radius:999px;
   border:1px solid rgba(255,255,255,0.14);
   background:rgba(255,255,255,0.05);
   color:#cbd5e1;
-  font-size:14px;
+  font-size:13px;
   font-weight:bold;
   cursor:pointer;
   transition:0.2s;
@@ -104,25 +104,20 @@ body{
 .grid{
   width:100%;
   max-width:100%;
-  padding:16px 20px;
+  padding:12px;
   display:grid;
-  gap:20px;
+  gap:12px;
   grid-template-columns:repeat(2,1fr);
-}
-@media screen and (min-width:768px){
-  .grid{ grid-template-columns:repeat(3,1fr); }
-}
-@media screen and (min-width:1100px){
-  .grid{ grid-template-columns:repeat(5,1fr); }
 }
 .card{
   background:rgba(255,255,255,0.05);
   border:1px solid rgba(255,255,255,0.09);
-  border-radius:20px;
-  padding:14px;
+  border-radius:16px;
+  padding:10px;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
+  position:relative;
   transition:0.2s;
 }
 .card:hover{
@@ -131,27 +126,52 @@ body{
 }
 .card img{
   width:100%;
-  height:145px;
-  object-fit:cover;
-  border-radius:14px;
-  margin-bottom:10px;
-  background:#0f172a;
+  height:112px;
+  object-fit:contain;
+  background:#fff;
+  padding:6px;
+  border-radius:12px;
+  margin-bottom:8px;
+}
+.card.out-of-stock img{
+  filter:grayscale(100%) opacity(0.45);
+}
+.out-badge{
+  position:absolute;
+  top:46px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(220,38,38,0.92);
+  color:#fff;
+  font-size:10.5px;
+  font-weight:800;
+  padding:4px 9px;
+  border-radius:999px;
+  white-space:nowrap;
 }
 .cat-tag{
   display:inline-block;
-  font-size:11px;
+  font-size:10.5px;
   color:#00ff99;
   background:rgba(0,255,153,0.1);
-  padding:3px 9px;
+  padding:2px 8px;
   border-radius:999px;
-  margin-bottom:6px;
+  margin-bottom:5px;
   width:fit-content;
 }
 .card h2{
-  font-size:17px;
-  margin-bottom:10px;
+  font-size:14.5px;
+  margin-bottom:4px;
   color:#fff;
 }
+.stock-msg{
+  font-size:11.5px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+.stock-msg.low{ color:#ff3b3b; }
+.stock-msg.out{ color:#ff4d4d; }
+.stock-msg.ok{ color:#94a3b8; font-weight:500; }
 .actions{
   display:flex;
   justify-content:space-between;
@@ -159,9 +179,9 @@ body{
   gap:8px;
 }
 .fav-icon{
-  font-size:20px;
+  font-size:18px;
   cursor:pointer;
-  color:#94a3b8;
+  color:#cbd5e1;
 }
 .fav-icon.liked{
   color:#ff2e63;
@@ -169,27 +189,43 @@ body{
 .qty-wrap{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:6px;
 }
 .qty-btn{
-  width:32px;
-  height:32px;
+  width:30px;
+  height:30px;
   border:none;
-  border-radius:10px;
+  border-radius:9px;
   background:#00ff99;
   color:#000;
   font-weight:bold;
-  font-size:16px;
+  font-size:15px;
   cursor:pointer;
+}
+.qty-btn:disabled{
+  background:#475569;
+  color:#cbd5e1;
+  cursor:not-allowed;
 }
 .qty-btn.minus{
   background:rgba(255,255,255,0.14);
   color:#fff;
 }
 .qty-num{
-  min-width:18px;
+  min-width:16px;
   text-align:center;
   font-weight:bold;
+  font-size:14px;
+}
+@media screen and (min-width:768px){
+  .grid{ padding:18px; gap:18px; grid-template-columns:repeat(3,1fr); }
+  .card{ padding:14px; border-radius:18px; }
+  .card img{ height:145px; padding:8px; }
+  .card h2{ font-size:16.5px; }
+}
+@media screen and (min-width:1100px){
+  .grid{ padding:20px; gap:20px; grid-template-columns:repeat(5,1fr); }
+  .card img{ height:165px; }
 }
 .empty-msg{
   grid-column:1 / -1;
@@ -301,6 +337,8 @@ const PRODUCTS = [
 let activeCategory = "All";
 let cart = {};
 let favs = [];
+let stockMap = {};
+PRODUCTS.forEach(p => { stockMap[p.name] = 50; });
 
 try { cart = JSON.parse(localStorage.getItem("sadbhavna_cart")) || {}; } catch(e) { cart = {}; }
 try { favs = JSON.parse(localStorage.getItem("sadbhavna_favs")) || []; } catch(e) { favs = []; }
@@ -317,6 +355,40 @@ function updateBadge() {
   document.getElementById("cart-count").innerText = total;
 }
 
+function getStock(name) {
+  return typeof stockMap[name] === "number" ? stockMap[name] : 0;
+}
+
+async function loadStock() {
+  try {
+    const res = await fetch("/api/stock", { cache: "no-store" });
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.stock) {
+        stockMap = Object.assign({}, stockMap, data.stock);
+        renderItems();
+        return;
+      }
+    }
+  } catch (e) {}
+
+  try {
+    const res = await fetch("stock.json?t=" + Date.now(), { cache: "no-store" });
+    if (res.ok) {
+      const baseStock = await res.json();
+      const rawSnapshot = JSON.stringify(baseStock);
+      const prevSnapshot = localStorage.getItem("sadbhavna_stock_snapshot");
+      if (prevSnapshot !== rawSnapshot) {
+        localStorage.setItem("sadbhavna_stock_snapshot", rawSnapshot);
+        localStorage.setItem("sadbhavna_local_stock", rawSnapshot);
+      }
+      const localOverrides = JSON.parse(localStorage.getItem("sadbhavna_local_stock") || rawSnapshot);
+      stockMap = Object.assign({}, baseStock, localOverrides);
+    }
+  } catch (e) {}
+  renderItems();
+}
+
 function selectCategory(cat, btn) {
   activeCategory = cat;
   document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
@@ -325,7 +397,12 @@ function selectCategory(cat, btn) {
 }
 
 function changeItemQty(name, delta) {
+  const available = getStock(name);
   const next = Math.max(0, (Number(cart[name]) || 0) + delta);
+  if (next > available) {
+    alert("Only " + available + " left in stock for " + name + "!");
+    return;
+  }
   cart[name] = next;
   saveState();
   renderItems();
@@ -357,20 +434,31 @@ function renderItems() {
 
   grid.innerHTML = filtered.map(p => {
     const qty = Number(cart[p.name]) || 0;
+    const available = getStock(p.name);
     const isLiked = favs.includes(p.name);
     const safeName = p.name.replace(/'/g, "\\'");
+
+    let stockHtml = `<div class="stock-msg ok">In Stock (${available})</div>`;
+    if (available <= 0) {
+      stockHtml = `<div class="stock-msg out">Out of Stock</div>`;
+    } else if (available <= 5) {
+      stockHtml = `<div class="stock-msg low">Only ${available} left</div>`;
+    }
+
     return `
-      <div class="card">
+      <div class="card ${available <= 0 ? 'out-of-stock' : ''}">
+        ${available <= 0 ? '<div class="out-badge">OUT OF STOCK</div>' : ''}
         <div>
           <img src="${p.img}" alt="${p.name}">
           <span class="cat-tag">${p.category}</span>
           <h2>${p.name}</h2>
+          ${stockHtml}
         </div>
         <div class="actions">
           <i class="${isLiked ? 'fa-solid' : 'fa-regular'} fa-heart fav-icon ${isLiked ? 'liked' : ''}" onclick="toggleFavItem('${safeName}')"></i>
           <div class="qty-wrap">
             ${qty > 0 ? `<button class="qty-btn minus" onclick="changeItemQty('${safeName}', -1)">-</button><span class="qty-num">${qty}</span>` : ''}
-            <button class="qty-btn" onclick="changeItemQty('${safeName}', 1)">+</button>
+            <button class="qty-btn" ${available <= 0 ? 'disabled' : ''} onclick="changeItemQty('${safeName}', 1)">+</button>
           </div>
         </div>
       </div>
@@ -379,7 +467,7 @@ function renderItems() {
 }
 
 updateBadge();
-renderItems();
+loadStock();
 </script>
 
 </body>
