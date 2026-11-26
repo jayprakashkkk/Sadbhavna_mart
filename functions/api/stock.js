@@ -20,9 +20,17 @@ const DEFAULT_STOCK = {
   "Milk": 50,
   "Nescafe Coffee": 50,
   "BRU Coffee": 50,
-  "Chini": 50,
+  "Chini": 5,
   "Tata Tea": 50,
-  "Red Label": 50
+  "Red Label": 50,
+  "Lays Classic": 50,
+  "Oreo": 50,
+  "Good Day": 50,
+  "Dairy Milk": 50,
+  "Frooti": 50,
+  "Coca-Cola": 50,
+  "Yippee Noodles": 50,
+  "Bread": 50
 };
 
 function jsonResponse(body, status = 200) {

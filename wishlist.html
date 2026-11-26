@@ -184,24 +184,34 @@ body{
 
 <script>
 const PRODUCT_IMAGES = {
-  "Parle G": "ParleG.jpg",
-  "Tedhe Medhe": "Tedhe Medhe.webp",
-  "Kurkure": "Kurkure.jpg",
-  "Cup Maggi": "Cup Maggie.jpg",
-  "Bourbon": "Bourbon.jpg",
-  "Maggi Double Masala": "maggie.jpeg",
-  "Milk": "Milk.png",
-  "Nescafe Coffee": "Coffie.webp",
-  "BRU Coffee": "Coffie2.jpg",
-  "Chini": "Chini.jpeg",
-  "Tata Tea": "Chaipatti1.jpg",
-  "Red Label": "Chaipatti2.jpg"
+  "Parle G": "images/parle-g.jpg",
+  "Tedhe Medhe": "images/tedhe-medhe.jpg",
+  "Kurkure": "images/kurkure.jpg",
+  "Cup Maggi": "images/cup-maggi.jpg",
+  "Bourbon": "images/bourbon.jpg",
+  "Maggi Double Masala": "images/maggi-double-masala.jpg",
+  "Milk": "images/milk.jpg",
+  "Nescafe Coffee": "images/nescafe-coffee.jpg",
+  "BRU Coffee": "images/bru-coffee.svg",
+  "Chini": "images/chini.jpg",
+  "Tata Tea": "images/tata-tea.svg",
+  "Red Label": "images/red-label.svg",
+  "Lays Classic": "images/lays-classic.svg",
+  "Oreo": "images/oreo.svg",
+  "Good Day": "images/good-day.svg",
+  "Dairy Milk": "images/dairy-milk.svg",
+  "Frooti": "images/frooti.svg",
+  "Coca-Cola": "images/coca-cola.svg",
+  "Yippee Noodles": "images/yippee-noodles.svg",
+  "Bread": "images/bread.svg"
 };
 
 const PRODUCT_PRICES = {
   "Parle G": 10, "Tedhe Medhe": 20, "Kurkure": 20, "Cup Maggi": 50,
   "Bourbon": 30, "Maggi Double Masala": 28, "Milk": 30, "Nescafe Coffee": 20,
-  "BRU Coffee": 20, "Chini": 45, "Tata Tea": 60, "Red Label": 65
+  "BRU Coffee": 20, "Chini": 45, "Tata Tea": 60, "Red Label": 65,
+  "Lays Classic": 20, "Oreo": 30, "Good Day": 25, "Dairy Milk": 40,
+  "Frooti": 20, "Coca-Cola": 40, "Yippee Noodles": 25, "Bread": 40
 };
 
 let favs = [];
@@ -239,7 +249,7 @@ function renderWishlist() {
   }
 
   grid.innerHTML = favs.map(name => {
-    const img = PRODUCT_IMAGES[name] || "maggie.jpeg";
+    const img = PRODUCT_IMAGES[name] || "images/maggi-double-masala.jpg";
     const price = PRODUCT_PRICES[name] || 0;
     const safeName = name.replace(/'/g, "\\'");
     return `

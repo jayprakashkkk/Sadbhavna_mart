@@ -8,8 +8,8 @@
   "theme_color": "#00ff99",
   "icons": [
     {
-      "src": "maggie.jpeg",
-      "sizes": "192x192",
+      "src": "images/maggi-double-masala.jpg",
+      "sizes": "512x512",
       "type": "image/jpeg"
     }
   ]

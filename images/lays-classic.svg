@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="bag" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="55%" stop-color="#facc15"/>
+      <stop offset="100%" stop-color="#eab308"/>
+    </linearGradient>
+    <radialGradient id="sh" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#000" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="#fff"/>
+  <ellipse cx="200" cy="346" rx="125" ry="18" fill="url(#sh)"/>
+  <!-- Yellow Chips Bag -->
+  <path d="M98,64 Q200,76 302,64 L314,324 Q200,340 86,324 Z" fill="url(#bag)"/>
+  <rect x="104" y="82" width="22" height="225" rx="11" fill="#fff" opacity="0.25"/>
+  <!-- Red Ribbon Circle -->
+  <circle cx="200" cy="175" r="72" fill="#dc2626" stroke="#fff" stroke-width="5"/>
+  <rect x="115" y="152" width="170" height="46" rx="10" fill="#fef08a"/>
+  <text x="200" y="185" text-anchor="middle" font-family="Arial,sans-serif" font-size="30" font-weight="900" fill="#b91c1c">LAY'S</text>
+  <text x="200" y="274" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="800" fill="#78350f">CLASSIC SALTED</text>
+  <!-- Crispy Chips -->
+  <ellipse cx="275" cy="316" rx="24" ry="15" transform="rotate(-15 275 316)" fill="#fde047" stroke="#ca8a04" stroke-width="2"/>
+  <ellipse cx="305" cy="328" rx="22" ry="14" transform="rotate(20 305 328)" fill="#facc15" stroke="#ca8a04" stroke-width="2"/>
+</svg>

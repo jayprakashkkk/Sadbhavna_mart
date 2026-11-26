@@ -73,11 +73,10 @@ Late-night study sessions, exam preparation, and hostel living often bring sudde
 
 | Category | Available Inventory Items |
 | :--- | :--- |
-| **Instant Foods** | Classic 2-Minute Maggi, Cup Maggi, Instant Noodles |
-| **Biscuits & Cookies** | Parle-G, Britannia Bourbon Chocolate Biscuits |
-| **Crisps & Namkeen** | Kurkure Masala Munch, Tedhe Medhe, Potato Chips |
-| **Beverages & Tea** | Premium Tea Leaves (Chaipatti), Instant Coffee Powder, Dairy Milk Packets |
-| **Daily Pantry** | Refined White Sugar (Chini), Daily Hostel Essentials |
+| **Instant Foods** | Maggi Double Masala, Cup Maggi, YiPPee! Noodles |
+| **Biscuits & Snacks** | Parle G, Bourbon, Oreo, Good Day, Lay's Classic, Kurkure, Tedhe Medhe, Dairy Milk |
+| **Beverages & Dairy** | Milk, Nescafe Coffee, BRU Coffee, Tata Tea, Red Label, Frooti, Coca-Cola |
+| **Daily Pantry** | Refined Sugar (Chini), Fresh Sandwich Bread |
 
 ---
 
@@ -220,7 +219,7 @@ Sadbhavna_files/
 ├── stock.json             # Default product inventory manifest
 ├── stock.py               # Terminal CLI tool to add/set/list product stock
 ├── functions/api/stock.js # Cloudflare Pages Function for real-time shared stock
-├── *.jpg / *.png          # Product imagery
+├── images/                # 20 clean studio product images (JPG & vector SVG)
 └── README.md              # Project documentation
 ```
 
