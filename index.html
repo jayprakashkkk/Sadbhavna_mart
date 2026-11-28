@@ -1944,6 +1944,141 @@ Close
 
 </div>
 
+<!-- ITEM POPUP -->
+
+<div class="cart-overlay"
+id="itemOverlay"
+onclick="closeItemPopup()">
+</div>
+
+<div class="cart-popup"
+id="itemPopup">
+
+<div class="cart-content">
+
+<h2 id="popup-title">
+Item 
+</h2>
+
+<div class="cart-item">
+
+<div>1x Pack</div>
+
+<div class="cart-controls">
+
+<button class="minus"
+onclick="popupQty(-1,1)">
+-
+</button>
+
+<span id="count1">0</span>
+
+<button class="plus"
+onclick="popupQty(1,1)">
++
+</button>
+
+</div>
+
+</div>
+
+<div class="cart-item">
+
+<div>2x Pack</div>
+
+<div class="cart-controls">
+
+<button class="minus"
+onclick="popupQty(-2,2)">
+-
+</button>
+
+<span id="count2">0</span>
+
+<button class="plus"
+onclick="popupQty(2,2)">
++
+</button>
+
+</div>
+
+</div>
+
+<div class="cart-item">
+
+<div>4x Pack</div>
+
+<div class="cart-controls">
+
+<button class="minus"
+onclick="popupQty(-4,4)">
+-
+</button>
+
+<span id="count4">0</span>
+
+<button class="plus"
+onclick="popupQty(4,4)">
++
+</button>
+
+</div>
+
+</div>
+
+<button class="order-btn"
+onclick="closeItemPopup()">
+
+Done
+
+</button>
+
+</div>
+
+</div>
+
+<!-- NOTIFICATION -->
+
+<div class="cart-overlay"
+id="notificationOverlay"
+onclick="closeNotification()">
+</div>
+
+<div class="cart-popup"
+id="notificationPopup">
+
+<div class="cart-content">
+
+<div class="notif-top-bar">
+  <h2 style="margin-bottom:0;" data-i18n="notifTitle">🔔 Notifications</h2>
+  <span class="live-pill"><span class="live-dot"></span> LIVE</span>
+</div>
+
+<div class="notif-toolbar">
+  <button class="notif-tool-btn primary" id="enablePushBtn" data-i18n="notifEnable" onclick="requestBrowserAlerts()">🔔 Enable Browser Alerts</button>
+  <button class="notif-tool-btn" data-i18n="notifClear" onclick="clearAllNotifications()">🗑️ Clear All</button>
+</div>
+
+<div id="notification-items">
+
+<p style="text-align:center;color:#aaa;" data-i18n="notifEmpty">
+No notifications
+</p>
+
+</div>
+
+<button class="close-btn"
+data-i18n="close"
+onclick="closeNotification()">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
 <!-- BOTTOM NAV -->
 
 <div class="bottom-nav">
@@ -3435,11 +3570,13 @@ function updateNotification(){
   let tickerText = document.getElementById("liveTickerText");
 
   const unreadCount = notifications.filter(n => n.unread).length;
-  if(unreadCount > 0){
-    badge.style.display = "flex";
-    badge.innerText = unreadCount;
-  }else{
-    badge.style.display = "none";
+  if(badge){
+    if(unreadCount > 0){
+      badge.style.display = "flex";
+      badge.innerText = unreadCount;
+    }else{
+      badge.style.display = "none";
+    }
   }
 
   if(tickerText){
@@ -3447,6 +3584,8 @@ function updateNotification(){
       ? notifications[0].text
       : (isStoreOpen() ? "🟢 Store Open Now till 3:00 AM • Instant WhatsApp Delivery" : "🔒 Store Closed • Opens at 10:00 AM");
   }
+
+  if(!container) return;
 
   let html = "";
   if(notifications.length === 0){
@@ -3618,141 +3757,6 @@ document.addEventListener("visibilitychange", function(){
 });
 
 </script>
-
-<!-- ITEM POPUP -->
-
-<div class="cart-overlay"
-id="itemOverlay"
-onclick="closeItemPopup()">
-</div>
-
-<div class="cart-popup"
-id="itemPopup">
-
-<div class="cart-content">
-
-<h2 id="popup-title">
-Item 
-</h2>
-
-<div class="cart-item">
-
-<div>1x Pack</div>
-
-<div class="cart-controls">
-
-<button class="minus"
-onclick="popupQty(-1,1)">
--
-</button>
-
-<span id="count1">0</span>
-
-<button class="plus"
-onclick="popupQty(1,1)">
-+
-</button>
-
-</div>
-
-</div>
-
-<div class="cart-item">
-
-<div>2x Pack</div>
-
-<div class="cart-controls">
-
-<button class="minus"
-onclick="popupQty(-2,2)">
--
-</button>
-
-<span id="count2">0</span>
-
-<button class="plus"
-onclick="popupQty(2,2)">
-+
-</button>
-
-</div>
-
-</div>
-
-<div class="cart-item">
-
-<div>4x Pack</div>
-
-<div class="cart-controls">
-
-<button class="minus"
-onclick="popupQty(-4,4)">
--
-</button>
-
-<span id="count4">0</span>
-
-<button class="plus"
-onclick="popupQty(4,4)">
-+
-</button>
-
-</div>
-
-</div>
-
-<button class="order-btn"
-onclick="closeItemPopup()">
-
-Done
-
-</button>
-
-</div>
-
-</div>
-
-<!-- NOTIFICATION -->
-
-<div class="cart-overlay"
-id="notificationOverlay"
-onclick="closeNotification()">
-</div>
-
-<div class="cart-popup"
-id="notificationPopup">
-
-<div class="cart-content">
-
-<div class="notif-top-bar">
-  <h2 style="margin-bottom:0;" data-i18n="notifTitle">🔔 Notifications</h2>
-  <span class="live-pill"><span class="live-dot"></span> LIVE</span>
-</div>
-
-<div class="notif-toolbar">
-  <button class="notif-tool-btn primary" id="enablePushBtn" data-i18n="notifEnable" onclick="requestBrowserAlerts()">🔔 Enable Browser Alerts</button>
-  <button class="notif-tool-btn" data-i18n="notifClear" onclick="clearAllNotifications()">🗑️ Clear All</button>
-</div>
-
-<div id="notification-items">
-
-<p style="text-align:center;color:#aaa;" data-i18n="notifEmpty">
-No notifications
-</p>
-
-</div>
-
-<button class="close-btn"
-data-i18n="close"
-onclick="closeNotification()">
-
-Close
-
-</button>
-
-</div>
-
-</div>
 
 </body>
 
