@@ -3,7 +3,7 @@
  *
  * Optional Environment Variables (Cloudflare Pages -> Settings -> Environment variables):
  *   - GITHUB_TOKEN    : Fine-grained GitHub PAT with Contents Read & Write access
- *   - GITHUB_REPO     : Optional, defaults to "jayprakashkkk/Sadbhavna_files"
+ *   - GITHUB_REPO     : Optional, defaults to "jayprakashkkk/Sadbhavna_mart"
  *   - GITHUB_BRANCH   : Optional, defaults to "main"
  *   - ADMIN_PASSWORD  : Optional, defaults to "2026" (verified before pushing)
  *
@@ -53,7 +53,7 @@ export async function onRequest(context) {
   if (request.method === "GET") {
     return jsonResponse({
       configured: Boolean(env.GITHUB_TOKEN),
-      repo: env.GITHUB_REPO || "jayprakashkkk/Sadbhavna_files",
+      repo: env.GITHUB_REPO || "jayprakashkkk/Sadbhavna_mart",
       branch: env.GITHUB_BRANCH || "main"
     });
   }
@@ -82,7 +82,7 @@ export async function onRequest(context) {
       return jsonResponse({ ok: false, error: "No files supplied" }, 400);
     }
 
-    const repo = env.GITHUB_REPO || "jayprakashkkk/Sadbhavna_files";
+    const repo = env.GITHUB_REPO || "jayprakashkkk/Sadbhavna_mart";
     const branch = env.GITHUB_BRANCH || "main";
     const message = String(body.message || "Update Sadbhavna Mart from Admin Console").slice(0, 120);
 

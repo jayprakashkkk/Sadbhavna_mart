@@ -133,7 +133,7 @@ Late-night study sessions, exam preparation, and hostel living often bring sudde
 
 ### 8. Standalone Owner Admin & Live GitHub Sync (`admin.html`)
 - Open `/admin` directly; prompts for Admin Password immediately (`2026` default, changeable inside).
-- Every Save action + sticky **Save & Push Live** bar saves locally and commits `stock.json`, `store-config.json`, and custom product photos (`images/custom/`) straight to `jayprakashkkk/Sadbhavna_files` (`main`) via either Cloudflare Pages Function (`/api/publish` with `GITHUB_TOKEN` env var) or browser-saved fine-grained GitHub PAT (`Contents: Read & Write`), triggering Cloudflare Pages auto-deploy automatically.
+- Every Save action + sticky **Save & Push Live** bar saves locally and commits `stock.json`, `store-config.json`, and custom product photos (`images/custom/`) straight to `jayprakashkkk/Sadbhavna_mart` (`main`) via either Cloudflare Pages Function (`/api/publish` with `GITHUB_TOKEN` env var) or browser-saved fine-grained GitHub PAT (`Contents: Read & Write`), triggering Cloudflare Pages auto-deploy automatically.
 
 ---
 
@@ -171,8 +171,8 @@ Late-night study sessions, exam preparation, and hostel living often bring sudde
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/jayprakashkkk/Sadbhavna_files.git
-cd Sadbhavna_files
+git clone https://github.com/jayprakashkkk/Sadbhavna_mart.git
+cd Sadbhavna_mart
 ```
 
 ### 2. Launch in Browser

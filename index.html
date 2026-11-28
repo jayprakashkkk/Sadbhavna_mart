@@ -2325,6 +2325,14 @@ function clampCartToStock(){
 }
 
 async function loadStock(){
+  try{
+    if(!localStorage.getItem("sadbhavna_stock_schema_v2")){
+      localStorage.removeItem("sadbhavna_local_stock");
+      localStorage.removeItem("sadbhavna_stock_snapshot");
+      localStorage.removeItem("sadbhavna_stock_updated_at");
+      localStorage.setItem("sadbhavna_stock_schema_v2", "1");
+    }
+  }catch(e){}
   const prevStock = Object.assign({}, stockMap);
   try{
     const res = await fetch("/api/stock", { cache: "no-store" });

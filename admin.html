@@ -785,8 +785,8 @@ body{
         </div>
         <div class="form-row-2">
           <div>
-            <span class="label">GitHub Repository (owner/repo)</span>
-            <input type="text" id="ghRepoInput" class="input" value="jayprakashkkk/Sadbhavna_files">
+            <label class="label">GitHub Repository (owner/repo)</label>
+            <input type="text" id="ghRepoInput" class="input" value="jayprakashkkk/Sadbhavna_mart">
           </div>
           <div>
             <span class="label">Branch</span>
@@ -809,7 +809,7 @@ body{
           <button type="button" class="btn-secondary" onclick="clearGithubToken()">Clear Token</button>
         </div>
         <p style="font-size:11.5px;color:#94a3b8;margin-top:10px;line-height:1.5;">
-          GitHub Token create karne ke liye: GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Sirf <strong>Sadbhavna_files</strong> select karke <strong>Contents: Read &amp; write</strong> dein.
+          GitHub Token create karne ke liye: GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Sirf <strong>Sadbhavna_mart</strong> select karke <strong>Contents: Read &amp; write</strong> dein.
         </p>
       </div>
     </div>
@@ -873,7 +873,11 @@ function markSynced(msg) {
 }
 
 function loadGithubPrefs() {
-  const repo = localStorage.getItem("sadbhavna_gh_repo") || "jayprakashkkk/Sadbhavna_files";
+  let repo = localStorage.getItem("sadbhavna_gh_repo") || "jayprakashkkk/Sadbhavna_mart";
+  if (repo === "jayprakashkkk/Sadbhavna_files") {
+    repo = "jayprakashkkk/Sadbhavna_mart";
+    localStorage.setItem("sadbhavna_gh_repo", repo);
+  }
   const branch = localStorage.getItem("sadbhavna_gh_branch") || "main";
   const token = localStorage.getItem("sadbhavna_gh_token") || "";
   const autoPush = localStorage.getItem("sadbhavna_gh_autopush") !== "0";
@@ -916,14 +920,21 @@ async function checkServerPublishCapability() {
 }
 
 async function saveGithubPrefs(testNow) {
-  const repo = (document.getElementById("ghRepoInput").value || "").trim() || "jayprakashkkk/Sadbhavna_files";
+  let repo = (document.getElementById("ghRepoInput").value || "").trim() || "jayprakashkkk/Sadbhavna_mart";
+  if (repo === "jayprakashkkk/Sadbhavna_files") {
+    repo = "jayprakashkkk/Sadbhavna_mart";
+    document.getElementById("ghRepoInput").value = repo;
+  }
   const branch = (document.getElementById("ghBranchInput").value || "").trim() || "main";
-  const token = (document.getElementById("ghTokenInput").value || "").trim();
+  const token = (document.getElementById("ghTokenInput").value || "").replace(/\s+/g, "");
   const autoPush = Boolean(document.getElementById("ghAutoPushToggle").checked);
   localStorage.setItem("sadbhavna_gh_repo", repo);
   localStorage.setItem("sadbhavna_gh_branch", branch);
   localStorage.setItem("sadbhavna_gh_autopush", autoPush ? "1" : "0");
-  if (token) localStorage.setItem("sadbhavna_gh_token", token);
+  if (token) {
+    document.getElementById("ghTokenInput").value = token;
+    localStorage.setItem("sadbhavna_gh_token", token);
+  }
   updateGhStatusBadge();
   if (!testNow) return;
 
@@ -936,13 +947,23 @@ async function saveGithubPrefs(testNow) {
     return;
   }
   try {
-    const res = await fetch(`https://api.github.com/repos/${repo}/git/ref/heads/${branch}`, {
+    const userRes = await fetch("https://api.github.com/user", {
       headers: { "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github+json" }
     });
-    if (!res.ok) throw new Error("HTTP " + res.status);
-    showToast("🟢 GitHub connected to " + repo + "!");
+    if (!userRes.ok) throw new Error("Invalid/expired token (HTTP " + userRes.status + ")");
+
+    const repoRes = await fetch(`https://api.github.com/repos/${repo}`, {
+      headers: { "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github+json" }
+    });
+    if (!repoRes.ok) throw new Error("Repo not accessible (HTTP " + repoRes.status + ")");
+    const repoInfo = await repoRes.json();
+    if (!repoInfo.permissions || !repoInfo.permissions.push) {
+      throw new Error("Missing 'Contents: Read and write' permission on " + repo);
+    }
+    showToast("🟢 Connected with write access to " + repo + "!");
   } catch (err) {
-    showToast("❌ GitHub check failed: " + err.message);
+    showToast("❌ " + err.message);
+    markDirty("❌ GitHub test failed: " + err.message);
   }
 }
 
@@ -1005,7 +1026,12 @@ async function ghApiJson(token, path, method = "GET", payload = null) {
 async function saveAndPublishLive(commitMessage, isAutoTrigger = false) {
   const ts = saveEverythingLocally(false);
   const autoPush = localStorage.getItem("sadbhavna_gh_autopush") !== "0";
-  const token = (localStorage.getItem("sadbhavna_gh_token") || "").trim();
+  const rawInputToken = (document.getElementById("ghTokenInput")?.value || "").replace(/\s+/g, "");
+  if (rawInputToken) {
+    localStorage.setItem("sadbhavna_gh_token", rawInputToken);
+    updateGhStatusBadge();
+  }
+  const token = (rawInputToken || localStorage.getItem("sadbhavna_gh_token") || "").replace(/\s+/g, "");
 
   if (isAutoTrigger && (!autoPush || (!token && !serverPublishReady))) {
     showToast("💾 Saved locally! Add GitHub Token to push live");
@@ -1089,8 +1115,12 @@ async function saveAndPublishLive(commitMessage, isAutoTrigger = false) {
 
     // Path 2: Direct browser -> GitHub Git Data API atomic commit
     if (!usedServer) {
-      const repo = localStorage.getItem("sadbhavna_gh_repo") || "jayprakashkkk/Sadbhavna_files";
-      const branch = localStorage.getItem("sadbhavna_gh_branch") || "main";
+      let repo = (document.getElementById("ghRepoInput")?.value || localStorage.getItem("sadbhavna_gh_repo") || "jayprakashkkk/Sadbhavna_mart").trim();
+      if (repo === "jayprakashkkk/Sadbhavna_files") {
+        repo = "jayprakashkkk/Sadbhavna_mart";
+        localStorage.setItem("sadbhavna_gh_repo", repo);
+      }
+      const branch = (document.getElementById("ghBranchInput")?.value || localStorage.getItem("sadbhavna_gh_branch") || "main").trim();
       const refData = await ghApiJson(token, `/repos/${repo}/git/ref/heads/${branch}`);
       const latestCommitSha = refData.object.sha;
       const commitData = await ghApiJson(token, `/repos/${repo}/git/commits/${latestCommitSha}`);
