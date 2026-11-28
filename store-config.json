@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1795898079195,
+  "updatedAt": 1795899326828,
   "storeMode": "auto",
   "closedMessage": "🔒 Store Closed • Holiday Break",
   "deliveryEta": "Order snacks instantly on WhatsApp • 10–15 min room delivery",
@@ -9,6 +9,8 @@
   "whatsappNumber": "917209793015",
   "customProducts": [],
   "priceOverrides": {},
-  "hiddenItems": [],
+  "hiddenItems": [
+    "Chini"
+  ],
   "broadcasts": []
 }
