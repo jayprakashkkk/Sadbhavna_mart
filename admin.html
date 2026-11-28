@@ -4,14 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Owner Admin — Sadbhavna Mart</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#00ff99">
+<title>Admin Login — Sadbhavna Mart</title>
+<meta name="theme-color" content="#020617">
 <link rel="icon" type="image/png" sizes="192x192" href="images/icon-192.png">
-<link rel="apple-touch-icon" href="images/icon-192.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<script src="i18n.js" defer></script>
-<script src="pwa.js" defer></script>
 <script src="qr.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
@@ -28,65 +23,24 @@ body{
   width:100%;
   max-width:100%;
   min-height:100vh;
-  padding-bottom:105px;
 }
-.header{
-  position:sticky;
-  top:0;
-  z-index:20;
-  background:rgba(15,23,42,0.92);
-  backdrop-filter:blur(12px);
-  padding:15px 18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid rgba(255,255,255,0.08);
-}
-.header-left{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.header-left a{
-  width:38px;
-  height:38px;
-  border-radius:50%;
+.lock-screen{
+  width:100%;
+  min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:rgba(255,255,255,0.08);
-  color:#fff;
-  text-decoration:none;
-}
-.header h1{
-  font-size:20px;
-  color:#00ff99;
-}
-.lock-btn{
-  padding:8px 13px;
-  border-radius:10px;
-  border:1px solid rgba(239,68,68,0.45);
-  background:rgba(239,68,68,0.14);
-  color:#fca5a5;
-  font-size:13px;
-  font-weight:700;
-  cursor:pointer;
-}
-.main{
-  width:100%;
-  max-width:100%;
-  padding:16px;
+  padding:20px;
 }
 .pin-gate{
   width:100%;
-  max-width:440px;
-  margin:40px auto;
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(0,255,153,0.3);
+  max-width:400px;
+  background:rgba(15,23,42,0.85);
+  border:1px solid rgba(0,255,153,0.32);
   border-radius:22px;
-  padding:26px 22px;
+  padding:28px 22px;
   text-align:center;
-  box-shadow:0 18px 40px rgba(0,0,0,0.45);
+  box-shadow:0 20px 50px rgba(0,0,0,0.55);
 }
 .pin-icon{
   width:62px;
@@ -99,17 +53,63 @@ body{
   background:rgba(0,255,153,0.14);
   border:1px solid rgba(0,255,153,0.4);
   color:#00ff99;
-  font-size:26px;
+  font-size:24px;
 }
 .pin-gate h2{
-  font-size:20px;
+  font-size:21px;
   margin-bottom:6px;
 }
 .pin-gate p{
-  font-size:13.5px;
+  font-size:13px;
   color:#94a3b8;
   margin-bottom:18px;
-  line-height:1.5;
+}
+.pin-err{
+  color:#f87171;
+  font-size:13px;
+  font-weight:700;
+  min-height:18px;
+  margin-bottom:8px;
+}
+.admin-shell{
+  display:none;
+  width:100%;
+  max-width:100%;
+  padding-bottom:36px;
+}
+.header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(15,23,42,0.94);
+  backdrop-filter:blur(12px);
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.header h1{
+  font-size:19px;
+  color:#00ff99;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.lock-btn{
+  padding:8px 14px;
+  border-radius:10px;
+  border:1px solid rgba(239,68,68,0.45);
+  background:rgba(239,68,68,0.14);
+  color:#fca5a5;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+}
+.main{
+  width:100%;
+  max-width:100%;
+  padding:16px;
 }
 .input{
   width:100%;
@@ -289,7 +289,7 @@ body{
 }
 #toastMsg{
   position:fixed;
-  bottom:90px;
+  bottom:24px;
   left:50%;
   transform:translateX(-50%) translateY(16px);
   background:#00ff99;
@@ -307,42 +307,32 @@ body{
   transform:translateX(-50%) translateY(0);
   opacity:1;
 }
-.bottom-nav{
-  position:fixed;bottom:0;left:0;width:100%;height:75px;
-  background:rgba(10,15,28,0.94);backdrop-filter:blur(12px);
-  border-top:1px solid rgba(255,255,255,0.1);
-  display:flex;justify-content:space-around;align-items:center;z-index:99;
-}
-.bottom-nav a{text-decoration:none;color:#94a3b8;}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:12px;padding:8px 18px;}
-.nav-item i{font-size:20px;}
 </style>
-<link rel="stylesheet" href="nav-bar.css">
 </head>
 
 <body>
 <div id="toastMsg"></div>
 
-<div class="header">
-  <div class="header-left">
-    <a href="profile.html" aria-label="Back to Profile"><i class="fa-solid fa-arrow-left"></i></a>
-    <h1>🔑 Store Owner Admin</h1>
+<!-- STANDALONE PASSWORD GATE -->
+<div class="lock-screen" id="lockScreen">
+  <div class="pin-gate">
+    <div class="pin-icon"><i class="fa-solid fa-lock"></i></div>
+    <h2>Admin Panel</h2>
+    <p>Enter Admin Password to continue</p>
+    <input type="password" id="pinInput" class="input" placeholder="Enter Password" autofocus autocomplete="off" onkeydown="if(event.key==='Enter')unlockAdmin()">
+    <div class="pin-err" id="pinErr"></div>
+    <button class="btn-primary" onclick="unlockAdmin()">Unlock</button>
   </div>
-  <button class="lock-btn" id="lockBtn" style="display:none;" onclick="lockAdmin()">🔒 Lock</button>
 </div>
 
-<div class="main">
-  <!-- PIN GATE -->
-  <div class="pin-gate" id="pinGate">
-    <div class="pin-icon"><i class="fa-solid fa-shield-halved"></i></div>
-    <h2>Owner Verification</h2>
-    <p>Enter your Admin PIN to manage store status, UPI QR settings, offer banner, and live stock.<br><small style="color:#64748b;">Default PIN: 2026 (can be changed inside)</small></p>
-    <input type="password" id="pinInput" class="input" placeholder="Enter 4-digit Admin PIN" inputmode="numeric" onkeydown="if(event.key==='Enter')unlockAdmin()">
-    <button class="btn-primary" onclick="unlockAdmin()">Unlock Admin Panel</button>
+<!-- ADMIN DASHBOARD ONLY -->
+<div class="admin-shell" id="adminShell">
+  <div class="header">
+    <h1><i class="fa-solid fa-shield-halved"></i> Sadbhavna Admin</h1>
+    <button class="lock-btn" onclick="lockAdmin()">🔒 Lock</button>
   </div>
 
-  <!-- ADMIN PANEL -->
-  <div id="adminDashboard" style="display:none;">
+  <div class="main">
     <div class="grid">
       <!-- STORE MODE & OFFER BANNER -->
       <div class="card">
@@ -357,7 +347,7 @@ body{
         <span class="label">Closed Banner Message (shown when Force Closed)</span>
         <input type="text" id="closedMessageInput" class="input" placeholder="🔒 Store Closed • Back Soon">
 
-        <span class="label">Daily Offer Banner (shown on Home — leave empty to hide)</span>
+        <span class="label">Daily Offer Banner (shown on Storefront — leave empty to hide)</span>
         <input type="text" id="offerBannerInput" class="input" placeholder="🔥 Today Special: Instant Delivery on All Orders!">
 
         <button class="btn-primary" onclick="saveStoreSettings()">💾 Save Store Settings</button>
@@ -366,7 +356,7 @@ body{
       <!-- UPI QR & WHATSAPP CONFIG -->
       <div class="card">
         <h2><i class="fa-solid fa-qrcode"></i> UPI Payment QR &amp; Contact</h2>
-        <span class="label">Store UPI ID (for Checkout Scan &amp; 1-Tap Pay)</span>
+        <span class="label">Store UPI ID</span>
         <input type="text" id="upiIdInput" class="input" placeholder="e.g. 7209793015@ybl" oninput="renderAdminQrPreview()">
 
         <span class="label">Merchant Display Name</span>
@@ -380,26 +370,27 @@ body{
           <div style="font-size:13px;color:#cbd5e1;line-height:1.5;">
             <strong style="color:#00ff99;">Sample ₹50 Checkout QR</strong><br>
             UPI: <span id="qrPreviewId">-</span><br>
-            Scan from GPay / PhonePe / Paytm to verify before saving.
+            Scan from GPay / PhonePe / Paytm to test.
           </div>
         </div>
 
         <button class="btn-primary" onclick="savePaymentSettings()">💾 Save Payment &amp; Contact</button>
       </div>
 
-      <!-- BROADCAST LIVE ALERT & SECURITY PIN -->
+      <!-- BROADCAST LIVE ALERT -->
       <div class="card">
         <h2><i class="fa-solid fa-bullhorn"></i> Broadcast Live Alert</h2>
-        <span class="label">Push an announcement into Storefront Live Ticker &amp; Bell</span>
+        <span class="label">Publish announcement into Storefront Live Ticker &amp; Bell</span>
         <input type="text" id="broadcastInput" class="input" placeholder="e.g. Maggi &amp; Cold Coffee fresh stock arrived!">
         <button class="btn-primary" onclick="sendBroadcastAlert()">📢 Publish Live Alert</button>
       </div>
 
+      <!-- CHANGE PASSWORD / PIN -->
       <div class="card">
-        <h2><i class="fa-solid fa-key"></i> Admin PIN Security</h2>
-        <span class="label">Set New Admin PIN (4+ digits)</span>
-        <input type="password" id="newPinInput" class="input" placeholder="Enter new PIN" inputmode="numeric">
-        <button class="btn-primary" onclick="updateAdminPin()">🔐 Update PIN</button>
+        <h2><i class="fa-solid fa-key"></i> Admin Password</h2>
+        <span class="label">Set New Password (4+ characters)</span>
+        <input type="password" id="newPinInput" class="input" placeholder="Enter new password" autocomplete="new-password">
+        <button class="btn-primary" onclick="updateAdminPin()">🔐 Update Password</button>
       </div>
 
       <!-- QUICK STOCK EDITOR -->
@@ -415,12 +406,6 @@ body{
       </div>
     </div>
   </div>
-</div>
-
-<div class="bottom-nav">
-  <a href="index.html?nav=1"><div class="nav-item"><i class="fa-solid fa-house"></i><span>Home</span></div></a>
-  <a href="category.html"><div class="nav-item"><i class="fa-solid fa-layer-group"></i><span>Category</span></div></a>
-  <a href="profile.html"><div class="nav-item active"><i class="fa-solid fa-user"></i><span>Profile</span></div></a>
 </div>
 
 <script>
@@ -462,20 +447,27 @@ function saveConfig() {
 function unlockAdmin() {
   loadConfig();
   const entered = document.getElementById("pinInput").value.trim();
-  if (entered !== String(adminConfig.pin)) {
-    showToast("❌ Wrong Admin PIN");
+  const errEl = document.getElementById("pinErr");
+  if (!entered || entered !== String(adminConfig.pin)) {
+    errEl.innerText = "Wrong password! Try again.";
+    document.getElementById("pinInput").focus();
     return;
   }
-  sessionStorage.setItem("sadbhavna_admin_unlocked", "1");
-  openDashboard();
+  errEl.innerText = "";
+  document.getElementById("pinInput").value = "";
+  document.getElementById("lockScreen").style.display = "none";
+  document.getElementById("adminShell").style.display = "block";
+  document.title = "Admin Panel — Sadbhavna Mart";
+  populateDashboard();
 }
 
 function lockAdmin() {
-  sessionStorage.removeItem("sadbhavna_admin_unlocked");
-  document.getElementById("adminDashboard").style.display = "none";
-  document.getElementById("lockBtn").style.display = "none";
-  document.getElementById("pinGate").style.display = "block";
+  document.getElementById("adminShell").style.display = "none";
+  document.getElementById("lockScreen").style.display = "flex";
+  document.getElementById("pinErr").innerText = "";
   document.getElementById("pinInput").value = "";
+  document.title = "Admin Login — Sadbhavna Mart";
+  document.getElementById("pinInput").focus();
 }
 
 function setStoreMode(mode, btn) {
@@ -542,20 +534,20 @@ function sendBroadcastAlert() {
     });
     localStorage.setItem("sadbhavna_notifications", JSON.stringify(list.slice(0, 30)));
     document.getElementById("broadcastInput").value = "";
-    showToast("📢 Alert added to Live Ticker!");
+    showToast("📢 Alert published!");
   } catch (e) {}
 }
 
 function updateAdminPin() {
   const nextPin = document.getElementById("newPinInput").value.trim();
   if (nextPin.length < 4) {
-    showToast("PIN must be at least 4 characters");
+    showToast("Password must be at least 4 characters");
     return;
   }
   adminConfig.pin = nextPin;
   saveConfig();
   document.getElementById("newPinInput").value = "";
-  showToast("🔐 Admin PIN updated!");
+  showToast("🔐 Admin Password updated!");
 }
 
 async function loadStockForAdmin() {
@@ -612,7 +604,7 @@ function setAdminStock(idx, val) {
 function saveAllStock() {
   localStorage.setItem("sadbhavna_local_stock", JSON.stringify(stockData));
   localStorage.setItem("sadbhavna_stock_snapshot", JSON.stringify(stockData));
-  showToast("✅ Local device stock updated!");
+  showToast("✅ Stock updated!");
 }
 
 function exportStockJson() {
@@ -625,17 +617,7 @@ function exportStockJson() {
   showToast("⬇️ stock.json downloaded!");
 }
 
-function openDashboard() {
-  document.getElementById("pinGate").style.display = "none";
-  document.getElementById("adminDashboard").style.display = "block";
-  document.getElementById("lockBtn").style.display = "inline-block";
-  populateDashboard();
-}
-
 loadConfig();
-if (sessionStorage.getItem("sadbhavna_admin_unlocked") === "1") {
-  openDashboard();
-}
 </script>
 
 </body>

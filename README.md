@@ -58,7 +58,7 @@ Late-night study sessions, exam preparation, and hostel living often bring sudde
 - **📍 Room-Level Delivery Routing**: Native fields for hostel block and room numbers (`📍 Room 204`) ensure accurate delivery directly to the student's door.
 - **💳 Multi-Payment + Offline UPI QR & 1-Tap Pay (`qr.js`)**: Selecting `Online` checkout generates a crisp offline SVG UPI QR code (`upi://pay`), **1-Tap Pay (GPay/PhonePe/Paytm)** deep link, Copy UPI ID button, and optional UPI Ref field.
 - **🔁 Order Again ("Buy Again") & Reorder Last**: Automatically displays frequently ordered items at the top of the storefront with 1-tap `+ Add` and **Reorder Last** actions.
-- **🔑 Store Owner Mini Admin Panel (`admin.html`)**: PIN-protected portal (default PIN `2026`, accessible from Profile) to toggle Store Open/Holiday Closed mode, edit daily offer banner, update UPI QR / WhatsApp contact, publish live announcements, and edit/export `stock.json`.
+- **🔑 Store Owner Mini Admin Panel (`admin.html`)**: Standalone password/PIN-protected portal (open `/admin` directly; default password `2026`, no storefront clutter) to toggle Store Open/Holiday Closed mode, edit daily offer banner, update UPI QR / WhatsApp contact, publish live announcements, and edit/export `stock.json`.
 - **🌐 Bilingual English / हिंदी Mode (`i18n.js`)**: Instant `EN | हिं` switcher across Storefront, Categories, Profile, Checkout, Digital Receipt, Stock Alerts, and Bottom Navigation.
 - **🛒 Dynamic Cart & State Persistence**: Local storage powered cart keeps items intact even if the browser is closed or refreshed.
 - **📦 Order History Log**: Dedicated order tracking screen displays past orders, timestamp, items ordered, and total bills.
