@@ -2100,6 +2100,49 @@ const IMAGE_MAP = {
 "Practical File (Hardcover)": "images/practical-file-60.jpg"
 };
 
+let hiddenItems = [];
+function loadAdminCatalogOverrides(){
+  try{
+    const customs = JSON.parse(localStorage.getItem("sadbhavna_custom_products") || "[]") || [];
+    const overrides = JSON.parse(localStorage.getItem("sadbhavna_price_overrides") || "{}") || {};
+    hiddenItems = JSON.parse(localStorage.getItem("sadbhavna_hidden_items") || "[]") || [];
+
+    const menuEl = document.querySelector(".menu");
+    const existingNames = new Set();
+    if(menuEl){
+      menuEl.querySelectorAll(".card h2").forEach(h => existingNames.add(h.innerText.trim()));
+    }
+
+    customs.forEach(p => {
+      if(!p || !p.name) return;
+      DEFAULT_CART[p.name] = 0;
+      PRICE_MAP[p.name] = Number(p.price) || 10;
+      CATEGORY_MAP[p.name] = p.category || "Biscuits & Snacks";
+      IMAGE_MAP[p.name] = p.img || "ParleG.jpg";
+      if(cart[p.name] === undefined) cart[p.name] = savedCart[p.name] || 0;
+
+      if(menuEl && !existingNames.has(p.name)){
+        existingNames.add(p.name);
+        const card = document.createElement("div");
+        card.className = "card custom-added-card";
+        const safeName = p.name.replace(/'/g, "\\'");
+        card.innerHTML = `
+          <img class="food-img" src="${p.img || "ParleG.jpg"}" alt="${p.name}">
+          <div class="card-icons"><i class="fa-regular fa-heart fav-btn" onclick="toggleFav('${safeName}',this)"></i></div>
+          <h2>${p.name}</h2>
+        `;
+        menuEl.appendChild(card);
+      }
+    });
+
+    Object.keys(overrides).forEach(k => {
+      const pVal = Number(overrides[k]);
+      if(pVal > 0 && PRICE_MAP[k] !== undefined) PRICE_MAP[k] = pVal;
+    });
+  }catch(e){}
+}
+loadAdminCatalogOverrides();
+
 let activeHomeFilter = "All";
 let toastTimer = null;
 
@@ -2146,6 +2189,12 @@ function clearCartItems(){
 
 let stockMap = Object.assign({}, DEFAULT_CART);
 for (let k in stockMap) { stockMap[k] = 50; }
+try{
+  const customs = JSON.parse(localStorage.getItem("sadbhavna_custom_products") || "[]") || [];
+  customs.forEach(p => {
+    if(p && p.name) stockMap[p.name] = typeof p.stock === "number" ? p.stock : 15;
+  });
+}catch(e){}
 let usingLiveStockApi = false;
 
 function saveState(){
@@ -2178,6 +2227,9 @@ function renderStockUI(){
       priceSpan.className = "price-tag";
       priceSpan.innerText = "₹" + price;
       titleRow.appendChild(priceSpan);
+    }else{
+      const priceSpan = titleRow.querySelector(".price-tag");
+      if(priceSpan) priceSpan.innerText = "₹" + price;
     }
 
     // Remove any bottom action row if present
@@ -2995,6 +3047,10 @@ let cards = document.getElementsByClassName("card");
 for(let i=0;i<cards.length;i++){
 
 let title = cards[i].getElementsByTagName("h2")[0].innerText.trim();
+if(hiddenItems.includes(title)){
+  cards[i].style.display = "none";
+  continue;
+}
 let cat = CATEGORY_MAP[title] || "";
 let inStock = getStock(title) > 0;
 
@@ -3050,9 +3106,13 @@ function checkStoreStatus(){
 }
 
 function renderOfferBanner(){
+  const cfg = getAdminConfig();
+  const heroSub = document.querySelector(".hero p");
+  if(heroSub && cfg.deliveryEta && cfg.deliveryEta.trim()){
+    heroSub.innerText = cfg.deliveryEta.trim();
+  }
   const el = document.getElementById("adminOfferBanner");
   if(!el) return;
-  const cfg = getAdminConfig();
   if(cfg.offerBanner && cfg.offerBanner.trim()){
     el.innerText = cfg.offerBanner.trim();
     el.style.display = "block";

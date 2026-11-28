@@ -409,11 +409,36 @@ const PRODUCTS = [
   { name: "Practical File (Hardcover)", img: "images/practical-file-60.jpg", category: "Stationery", price: 60 }
 ];
 
+let hiddenItems = [];
+try {
+  const customList = JSON.parse(localStorage.getItem("sadbhavna_custom_products") || "[]") || [];
+  const priceOverrides = JSON.parse(localStorage.getItem("sadbhavna_price_overrides") || "{}") || {};
+  hiddenItems = JSON.parse(localStorage.getItem("sadbhavna_hidden_items") || "[]") || [];
+
+  customList.forEach(p => {
+    if (p && p.name && !PRODUCTS.some(x => x.name === p.name)) {
+      PRODUCTS.push({
+        name: p.name,
+        img: p.img || "ParleG.jpg",
+        category: p.category || "Biscuits & Snacks",
+        price: Number(p.price) || 10,
+        defaultStock: typeof p.stock === "number" ? p.stock : 15
+      });
+    }
+  });
+
+  PRODUCTS.forEach(p => {
+    if (Number(priceOverrides[p.name]) > 0) {
+      p.price = Number(priceOverrides[p.name]);
+    }
+  });
+} catch (e) {}
+
 let activeCategory = "All";
 let cart = {};
 let favs = [];
 let stockMap = {};
-PRODUCTS.forEach(p => { stockMap[p.name] = 50; });
+PRODUCTS.forEach(p => { stockMap[p.name] = typeof p.defaultStock === "number" ? p.defaultStock : 50; });
 
 try { cart = JSON.parse(localStorage.getItem("sadbhavna_cart")) || {}; } catch(e) { cart = {}; }
 try { favs = JSON.parse(localStorage.getItem("sadbhavna_favs")) || []; } catch(e) { favs = []; }
@@ -503,6 +528,7 @@ function toggleFavItem(name) {
 function renderItems() {
   const query = document.getElementById("catSearch").value.trim().toLowerCase();
   const filtered = PRODUCTS.filter(p => {
+    if (hiddenItems.includes(p.name)) return false;
     const matchCat = activeCategory === "All" || p.category === activeCategory;
     const matchSearch = !query || p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query);
     return matchCat && matchSearch;

@@ -13,7 +13,7 @@
 :root{
   --bg-0:#020617;
   --bg-1:#0b1120;
-  --card:rgba(15,23,42,0.72);
+  --card:rgba(15,23,42,0.74);
   --border:rgba(255,255,255,0.1);
   --accent:#00ff99;
   --cyan:#38bdf8;
@@ -61,9 +61,7 @@ body{
   box-shadow:0 24px 64px rgba(0,0,0,0.65), 0 0 40px rgba(0,255,153,0.08);
   animation:fadeUp 0.35s cubic-bezier(0.22,1,0.36,1);
 }
-.pin-gate.shake{
-  animation:shakeBox 0.36s ease;
-}
+.pin-gate.shake{animation:shakeBox 0.36s ease;}
 .pin-badge{
   display:inline-flex;
   align-items:center;
@@ -93,21 +91,9 @@ body{
   font-size:26px;
   box-shadow:0 10px 28px rgba(0,255,153,0.18);
 }
-.pin-gate h2{
-  font-size:23px;
-  font-weight:800;
-  margin-bottom:6px;
-  letter-spacing:-0.3px;
-}
-.pin-gate p{
-  font-size:13.5px;
-  color:var(--muted);
-  margin-bottom:20px;
-}
-.pass-wrap{
-  position:relative;
-  margin-bottom:8px;
-}
+.pin-gate h2{font-size:23px;font-weight:800;margin-bottom:6px;letter-spacing:-0.3px;}
+.pin-gate p{font-size:13.5px;color:var(--muted);margin-bottom:20px;}
+.pass-wrap{position:relative;margin-bottom:8px;}
 .pass-wrap .input{
   padding-right:46px;
   margin-bottom:0;
@@ -130,13 +116,7 @@ body{
   font-size:15px;
   cursor:pointer;
 }
-.pin-err{
-  color:var(--danger);
-  font-size:13px;
-  font-weight:700;
-  min-height:20px;
-  margin-bottom:10px;
-}
+.pin-err{color:var(--danger);font-size:13px;font-weight:700;min-height:20px;margin-bottom:10px;}
 
 /* DASHBOARD SHELL */
 .admin-shell{
@@ -160,11 +140,7 @@ body{
   gap:12px;
   border-bottom:1px solid rgba(0,255,153,0.15);
 }
-.brand-group{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
+.brand-group{display:flex;align-items:center;gap:12px;}
 .brand-logo{
   width:40px;
   height:40px;
@@ -177,22 +153,9 @@ body{
   justify-content:center;
   font-size:18px;
 }
-.header h1{
-  font-size:18px;
-  font-weight:800;
-  color:#fff;
-  line-height:1.15;
-}
-.header-sub{
-  font-size:11.5px;
-  color:var(--accent);
-  font-weight:600;
-}
-.header-actions{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
+.header h1{font-size:18px;font-weight:800;color:#fff;line-height:1.15;}
+.header-sub{font-size:11.5px;color:var(--accent);font-weight:600;}
+.header-actions{display:flex;align-items:center;gap:8px;}
 .status-chip{
   padding:6px 11px;
   border-radius:999px;
@@ -222,11 +185,7 @@ body{
 }
 .lock-btn:active{transform:scale(0.95);}
 
-.main{
-  width:100%;
-  max-width:100%;
-  padding:18px;
-}
+.main{width:100%;max-width:100%;padding:18px;}
 
 /* KPI STATS STRIP */
 .kpi-grid{
@@ -236,9 +195,7 @@ body{
   margin-bottom:18px;
 }
 @media screen and (min-width:768px){
-  .kpi-grid{
-    grid-template-columns:repeat(4, minmax(0, 1fr));
-  }
+  .kpi-grid{grid-template-columns:repeat(4, minmax(0, 1fr));}
 }
 .kpi-card{
   background:var(--card);
@@ -258,11 +215,7 @@ body{
   letter-spacing:0.5px;
   margin-bottom:4px;
 }
-.kpi-val{
-  font-size:22px;
-  font-weight:800;
-  color:#fff;
-}
+.kpi-val{font-size:22px;font-weight:800;color:#fff;}
 .kpi-icon{
   width:42px;
   height:42px;
@@ -281,20 +234,18 @@ body{
 /* INPUTS & BUTTONS */
 .input{
   width:100%;
-  padding:12px 14px;
+  padding:11px 13px;
   border-radius:12px;
   border:1px solid rgba(255,255,255,0.13);
   background:rgba(2,6,23,0.75);
   color:#fff;
-  font-size:14.5px;
+  font-size:14px;
   outline:none;
-  margin-bottom:11px;
+  margin-bottom:10px;
   transition:border-color 0.2s, box-shadow 0.2s;
 }
-.input:focus{
-  border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(0,255,153,0.14);
-}
+.input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,255,153,0.14);}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .btn-primary{
   width:100%;
   padding:13px 16px;
@@ -315,7 +266,7 @@ body{
   border:1px solid rgba(56,189,248,0.4);
   background:rgba(56,189,248,0.12);
   color:var(--cyan);
-  font-size:13px;
+  font-size:12.5px;
   font-weight:700;
   cursor:pointer;
 }
@@ -325,25 +276,26 @@ body{
   border:1px solid rgba(251,191,36,0.4);
   background:rgba(251,191,36,0.12);
   color:var(--amber);
-  font-size:13px;
+  font-size:12.5px;
+  font-weight:700;
+  cursor:pointer;
+}
+.btn-green-outline{
+  padding:9px 13px;
+  border-radius:10px;
+  border:1px solid rgba(0,255,153,0.4);
+  background:rgba(0,255,153,0.1);
+  color:var(--accent);
+  font-size:12.5px;
   font-weight:700;
   cursor:pointer;
 }
 
 /* MAIN GRID */
-.grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:16px;
-  width:100%;
-}
+.grid{display:grid;grid-template-columns:1fr;gap:16px;width:100%;}
 @media screen and (min-width:900px){
-  .grid{
-    grid-template-columns:repeat(2, minmax(0, 1fr));
-  }
-  .full-span{
-    grid-column:1 / -1;
-  }
+  .grid{grid-template-columns:repeat(2, minmax(0, 1fr));}
+  .full-span{grid-column:1 / -1;}
 }
 .card{
   background:var(--card);
@@ -353,36 +305,75 @@ body{
   padding:20px;
   box-shadow:0 12px 30px rgba(0,0,0,0.28);
 }
-.card-head{
+.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px;flex-wrap:wrap;}
+.card h2{font-size:16.5px;font-weight:800;color:#fff;display:flex;align-items:center;gap:9px;}
+.card h2 i{color:var(--accent);}
+.label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin:6px 0 5px;}
+
+/* PHOTO UPLOAD DROPBOX */
+.photo-upload-box{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 12px;
+  border-radius:14px;
+  background:rgba(2,6,23,0.65);
+  border:1px dashed rgba(0,255,153,0.4);
+  margin-bottom:10px;
+}
+.photo-preview{
+  width:56px;
+  height:56px;
+  border-radius:12px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  flex-shrink:0;
+  color:#64748b;
+  font-size:20px;
+}
+.photo-preview img{width:100%;height:100%;object-fit:contain;}
+.upload-meta{flex:1;min-width:0;}
+.upload-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:7px 12px;
+  border-radius:9px;
+  background:rgba(0,255,153,0.16);
+  border:1px solid rgba(0,255,153,0.38);
+  color:var(--accent);
+  font-size:12.5px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.custom-list{display:flex;flex-direction:column;gap:8px;margin-top:12px;max-height:240px;overflow-y:auto;}
+.custom-item{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin-bottom:14px;
   gap:10px;
+  padding:8px 10px;
+  border-radius:12px;
+  background:rgba(2,6,23,0.6);
+  border:1px solid rgba(255,255,255,0.08);
 }
-.card h2{
-  font-size:16.5px;
-  font-weight:800;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  gap:9px;
+.custom-item img{
+  width:38px;height:38px;border-radius:9px;background:#fff;object-fit:contain;padding:2px;flex-shrink:0;
 }
-.card h2 i{color:var(--accent);}
-.label{
-  display:block;
-  font-size:12px;
-  font-weight:600;
-  color:var(--muted);
-  margin:8px 0 6px;
+.custom-item-info{flex:1;min-width:0;}
+.custom-item-info strong{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.custom-item-info span{font-size:11.5px;color:var(--muted);}
+.del-custom-btn{
+  width:30px;height:30px;border:none;border-radius:8px;background:rgba(239,68,68,0.16);
+  color:var(--danger);cursor:pointer;font-size:13px;flex-shrink:0;
 }
 
-.mode-pills{
-  display:grid;
-  grid-template-columns:repeat(3, minmax(0, 1fr));
-  gap:8px;
-  margin-bottom:12px;
-}
+/* MODE PILLS */
+.mode-pills{display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:8px;margin-bottom:12px;}
 .mode-pill{
   padding:11px 8px;
   border-radius:12px;
@@ -425,182 +416,80 @@ body{
   border:1px solid rgba(0,255,153,0.2);
   margin:8px 0 14px;
 }
-.qr-wrap{
-  background:#fff;
-  padding:6px;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
-}
+.qr-wrap{background:#fff;padding:6px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 
 /* QUICK BROADCAST CHIPS */
-.quick-chips{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-bottom:12px;
-}
+.quick-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
 .q-chip{
-  padding:5px 10px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,0.14);
-  background:rgba(255,255,255,0.05);
-  color:#cbd5e1;
-  font-size:11.5px;
-  cursor:pointer;
+  padding:5px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);
+  background:rgba(255,255,255,0.05);color:#cbd5e1;font-size:11.5px;cursor:pointer;
 }
-.q-chip:hover{
-  border-color:var(--accent);
-  color:var(--accent);
-}
+.q-chip:hover{border-color:var(--accent);color:var(--accent);}
 
-/* STOCK SECTION */
-.stock-toolbar{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:12px;
+/* RECENT ORDERS VIEWER */
+.orders-mini-list{display:flex;flex-direction:column;gap:8px;max-height:220px;overflow-y:auto;}
+.order-mini-row{
+  padding:10px 12px;border-radius:12px;background:rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.08);
+  font-size:12.5px;line-height:1.45;
 }
-.stock-filters{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  align-items:center;
-  margin-bottom:14px;
-}
+.order-mini-top{display:flex;justify-content:space-between;align-items:center;font-weight:800;color:var(--accent);margin-bottom:3px;}
+
+/* STOCK & PRICE MANAGER */
+.stock-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.stock-filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px;}
 .stk-tab{
-  padding:7px 12px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,0.13);
-  background:rgba(255,255,255,0.04);
-  color:#cbd5e1;
-  font-size:12.5px;
-  font-weight:700;
-  cursor:pointer;
+  padding:7px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.13);
+  background:rgba(255,255,255,0.04);color:#cbd5e1;font-size:12.5px;font-weight:700;cursor:pointer;
 }
-.stk-tab.active{
-  background:var(--accent);
-  color:#022c22;
-  border-color:var(--accent);
-}
-.stk-search{
-  flex:1;
-  min-width:190px;
-  margin-bottom:0;
-  padding:8px 13px;
-  font-size:13.5px;
-}
-.stock-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:10px;
-}
-@media screen and (min-width:640px){
-  .stock-grid{grid-template-columns:repeat(2, minmax(0, 1fr));}
-}
-@media screen and (min-width:1100px){
-  .stock-grid{grid-template-columns:repeat(3, minmax(0, 1fr));}
-}
+.stk-tab.active{background:var(--accent);color:#022c22;border-color:var(--accent);}
+.stk-search{flex:1;min-width:190px;margin-bottom:0;padding:8px 13px;font-size:13.5px;}
+.stock-grid{display:grid;grid-template-columns:1fr;gap:10px;}
+@media screen and (min-width:680px){.stock-grid{grid-template-columns:repeat(2, minmax(0, 1fr));}}
+@media screen and (min-width:1180px){.stock-grid{grid-template-columns:repeat(3, minmax(0, 1fr));}}
 .stock-row{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:10px;
-  padding:11px 13px;
+  gap:8px;
+  padding:10px 12px;
   border-radius:14px;
-  background:rgba(2,6,23,0.55);
+  background:rgba(2,6,23,0.58);
   border:1px solid rgba(255,255,255,0.08);
-  transition:border-color 0.2s;
 }
 .stock-row.low{border-color:rgba(251,191,36,0.45);}
 .stock-row.out{border-color:rgba(248,113,113,0.5);background:rgba(248,113,113,0.06);}
-.stock-info{
-  min-width:0;
-  flex:1;
-}
-.stock-name{
-  display:block;
-  font-size:13.5px;
-  font-weight:700;
-  color:#f8fafc;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-.stock-badge{
-  font-size:11px;
-  font-weight:700;
-  color:var(--muted);
-}
+.stock-row.hidden-item{opacity:0.55;border-style:dashed;}
+.stock-info{min-width:0;flex:1;}
+.stock-name{display:block;font-size:13px;font-weight:700;color:#f8fafc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.stock-badge{font-size:11px;font-weight:700;color:var(--muted);}
 .stock-row.low .stock-badge{color:var(--amber);}
 .stock-row.out .stock-badge{color:var(--danger);}
-.stock-ctrl{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  flex-shrink:0;
+.stock-ctrl{display:flex;align-items:center;gap:5px;flex-shrink:0;}
+.price-mini-inp{
+  width:46px;padding:5px 3px;text-align:center;border-radius:8px;
+  border:1px solid rgba(56,189,248,0.35);background:#0f172a;color:#38bdf8;font-weight:800;font-size:12.5px;
 }
 .stock-ctrl button{
-  width:30px;
-  height:30px;
-  border:none;
-  border-radius:9px;
-  background:rgba(0,255,153,0.16);
-  border:1px solid rgba(0,255,153,0.35);
-  color:var(--accent);
-  font-weight:800;
-  font-size:16px;
-  cursor:pointer;
+  width:27px;height:27px;border:none;border-radius:8px;background:rgba(0,255,153,0.16);
+  border:1px solid rgba(0,255,153,0.35);color:var(--accent);font-weight:800;font-size:15px;cursor:pointer;
 }
-.stock-ctrl button:active{transform:scale(0.9);}
-.stock-ctrl input{
-  width:52px;
-  padding:6px 4px;
-  text-align:center;
-  border-radius:9px;
-  border:1px solid rgba(255,255,255,0.15);
-  background:#0f172a;
-  color:#fff;
-  font-weight:800;
-  font-size:13.5px;
+.stock-ctrl button.vis-btn{
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);color:#cbd5e1;font-size:12px;
+}
+.stock-ctrl input.qty-inp{
+  width:46px;padding:5px 3px;text-align:center;border-radius:8px;
+  border:1px solid rgba(255,255,255,0.15);background:#0f172a;color:#fff;font-weight:800;font-size:13px;
 }
 
 #toastMsg{
-  position:fixed;
-  bottom:24px;
-  left:50%;
-  transform:translateX(-50%) translateY(16px);
-  background:var(--accent);
-  color:#022c22;
-  padding:11px 20px;
-  border-radius:999px;
-  font-size:13.5px;
-  font-weight:800;
-  opacity:0;
-  pointer-events:none;
-  transition:0.25s;
-  z-index:1200;
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(16px);
+  background:var(--accent);color:#022c22;padding:11px 20px;border-radius:999px;font-size:13.5px;
+  font-weight:800;opacity:0;pointer-events:none;transition:0.25s;z-index:1200;
   box-shadow:0 10px 26px rgba(0,255,153,0.3);
 }
-#toastMsg.show{
-  transform:translateX(-50%) translateY(0);
-  opacity:1;
-}
-
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(10px);}
-  to{opacity:1;transform:translateY(0);}
-}
-@keyframes shakeBox{
-  0%,100%{transform:translateX(0);}
-  25%{transform:translateX(-8px);}
-  50%{transform:translateX(8px);}
-  75%{transform:translateX(-5px);}
-}
+#toastMsg.show{transform:translateX(-50%) translateY(0);opacity:1;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+@keyframes shakeBox{0%,100%{transform:translateX(0);}25%{transform:translateX(-8px);}50%{transform:translateX(8px);}75%{transform:translateX(-5px);}}
 </style>
 </head>
 
@@ -613,7 +502,7 @@ body{
     <div class="pin-badge"><i class="fa-solid fa-shield-halved"></i> Owner Console</div>
     <div class="pin-icon"><i class="fa-solid fa-lock"></i></div>
     <h2>Sadbhavna Admin</h2>
-    <p>Enter Admin Password to manage store &amp; inventory</p>
+    <p>Enter Admin Password to manage store &amp; products</p>
     <div class="pass-wrap">
       <input type="password" id="pinInput" class="input" placeholder="••••" autofocus autocomplete="off" onkeydown="if(event.key==='Enter')unlockAdmin()">
       <button type="button" class="eye-btn" aria-label="Show password" onclick="togglePassVisibility('pinInput', this)">
@@ -646,14 +535,14 @@ body{
     <div class="kpi-grid">
       <div class="kpi-card">
         <div>
-          <div class="kpi-label">Catalog Items</div>
+          <div class="kpi-label">Total Products</div>
           <div class="kpi-val" id="kpiTotal">0</div>
         </div>
         <div class="kpi-icon cyan"><i class="fa-solid fa-layer-group"></i></div>
       </div>
       <div class="kpi-card">
         <div>
-          <div class="kpi-label">Total Stock Units</div>
+          <div class="kpi-label">Stock Units</div>
           <div class="kpi-val" id="kpiUnits">0</div>
         </div>
         <div class="kpi-icon green"><i class="fa-solid fa-boxes-stacked"></i></div>
@@ -675,10 +564,56 @@ body{
     </div>
 
     <div class="grid">
+      <!-- ADD NEW EXTRA PRODUCT WITH PHOTO -->
+      <div class="card">
+        <div class="card-head">
+          <h2><i class="fa-solid fa-circle-plus"></i> Add Extra Product + Photo</h2>
+        </div>
+        <span class="label">Product Name</span>
+        <input type="text" id="newProdName" class="input" placeholder="e.g. Haldiram Aloo Bhujia">
+
+        <div class="form-row-2">
+          <div>
+            <span class="label">Price (₹)</span>
+            <input type="number" min="1" id="newProdPrice" class="input" placeholder="20">
+          </div>
+          <div>
+            <span class="label">Stock Qty</span>
+            <input type="number" min="0" id="newProdStock" class="input" placeholder="25">
+          </div>
+        </div>
+
+        <span class="label">Category</span>
+        <select id="newProdCategory" class="input">
+          <option value="Biscuits & Snacks">🍪 Biscuits &amp; Snacks</option>
+          <option value="Instant Meals">🍜 Instant Meals</option>
+          <option value="Beverages & Dairy">☕ Beverages &amp; Dairy</option>
+          <option value="Daily Pantry">🧂 Daily Pantry</option>
+          <option value="Stationery">📚 Stationery</option>
+        </select>
+
+        <span class="label">Product Photo (Upload from phone/PC or paste URL)</span>
+        <div class="photo-upload-box">
+          <div class="photo-preview" id="newProdPreview"><i class="fa-regular fa-image"></i></div>
+          <div class="upload-meta">
+            <label class="upload-btn">
+              <i class="fa-solid fa-camera"></i> Choose Photo
+              <input type="file" id="newProdFile" accept="image/*" style="display:none;" onchange="handleProductPhotoUpload(this)">
+            </label>
+            <div style="font-size:11px;color:#94a3b8;margin-top:5px;" id="photoStatusText">Auto-compressed to fit fast</div>
+          </div>
+        </div>
+        <input type="url" id="newProdImgUrl" class="input" placeholder="Or paste image path / URL (optional)" oninput="previewPhotoUrl(this.value)">
+
+        <button type="button" class="btn-primary" onclick="addCustomProduct()">➕ Add Product to Store</button>
+
+        <div class="custom-list" id="customProductsList"></div>
+      </div>
+
       <!-- STORE MODE & OFFER BANNER -->
       <div class="card">
         <div class="card-head">
-          <h2><i class="fa-solid fa-store"></i> Store Mode &amp; Offer Banner</h2>
+          <h2><i class="fa-solid fa-store"></i> Store Mode, Delivery &amp; Offer</h2>
         </div>
         <span class="label">Store Open / Holiday Status</span>
         <div class="mode-pills" id="modePills">
@@ -687,10 +622,13 @@ body{
           <button type="button" class="mode-pill" data-mode="closed" onclick="setStoreMode('closed', this)">🔒 Closed<br><small>Holiday Mode</small></button>
         </div>
 
-        <span class="label">Holiday / Closed Banner Message</span>
+        <span class="label">Closed Banner Message</span>
         <input type="text" id="closedMessageInput" class="input" placeholder="🔒 Store Closed • Back Soon">
 
-        <span class="label">Storefront Offer Banner (live preview below)</span>
+        <span class="label">Delivery Promise Subtitle</span>
+        <input type="text" id="deliveryEtaInput" class="input" placeholder="Order snacks instantly on WhatsApp • 10–15 min room delivery">
+
+        <span class="label">Daily Offer Banner (live preview below)</span>
         <input type="text" id="offerBannerInput" class="input" placeholder="🔥 Today Special: Instant Delivery on All Orders!" oninput="updateOfferPreview()">
         <div class="offer-preview-box" id="offerPreviewBox"></div>
 
@@ -705,37 +643,60 @@ body{
         <span class="label">Store UPI ID</span>
         <input type="text" id="upiIdInput" class="input" placeholder="e.g. 7209793015@ybl" oninput="renderAdminQrPreview()">
 
-        <span class="label">Payee / Merchant Name</span>
-        <input type="text" id="upiNameInput" class="input" placeholder="Sadbhavna Mart" oninput="renderAdminQrPreview()">
-
-        <span class="label">WhatsApp Order Number (country code, no +)</span>
-        <input type="text" id="waNumberInput" class="input" placeholder="917209793015">
+        <div class="form-row-2">
+          <div>
+            <span class="label">Merchant Name</span>
+            <input type="text" id="upiNameInput" class="input" placeholder="Sadbhavna Mart" oninput="renderAdminQrPreview()">
+          </div>
+          <div>
+            <span class="label">WhatsApp Number</span>
+            <input type="text" id="waNumberInput" class="input" placeholder="917209793015">
+          </div>
+        </div>
 
         <div class="upi-preview">
           <div class="qr-wrap" id="adminQrPreview"></div>
           <div style="font-size:12.5px;color:#cbd5e1;line-height:1.55;">
             <strong style="color:#00ff99;">Sample ₹50 Checkout QR</strong><br>
             UPI: <span id="qrPreviewId">-</span><br>
-            Scan from GPay / PhonePe / Paytm to test before saving.
+            Scan from GPay / PhonePe / Paytm to test.
           </div>
         </div>
 
         <button type="button" class="btn-primary" onclick="savePaymentSettings()">💾 Save Payment &amp; Contact</button>
       </div>
 
-      <!-- BROADCAST LIVE ALERT -->
+      <!-- BROADCAST & BACKUP -->
       <div class="card">
         <div class="card-head">
-          <h2><i class="fa-solid fa-bullhorn"></i> Broadcast Live Alert</h2>
+          <h2><i class="fa-solid fa-bullhorn"></i> Live Alerts &amp; Store Backup</h2>
         </div>
-        <span class="label">Quick Templates (1-tap fill)</span>
+        <span class="label">Quick Templates</span>
         <div class="quick-chips">
-          <button type="button" class="q-chip" onclick="fillBroadcast('Fresh Maggi & Cold Coffee stock restocked!')">🍜 Maggi Restocked</button>
-          <button type="button" class="q-chip" onclick="fillBroadcast('Exam Night Special: Pens & Practical Files available!')">📚 Stationery Ready</button>
+          <button type="button" class="q-chip" onclick="fillBroadcast('Fresh Maggi & Cold Coffee restocked!')">🍜 Restocked</button>
+          <button type="button" class="q-chip" onclick="fillBroadcast('Exam Night Special: Pens & Practical Files ready!')">📚 Stationery</button>
           <button type="button" class="q-chip" onclick="fillBroadcast('Counter closing in 30 mins — order fast!')">⏰ Closing Soon</button>
         </div>
         <input type="text" id="broadcastInput" class="input" placeholder="Type alert for Live Ticker & Bell...">
-        <button type="button" class="btn-primary" onclick="sendBroadcastAlert()">📢 Publish Live Alert</button>
+        <button type="button" class="btn-primary" style="margin-bottom:14px;" onclick="sendBroadcastAlert()">📢 Publish Live Alert</button>
+
+        <span class="label">Full Store Backup / Restore (includes custom products &amp; photos)</span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button type="button" class="btn-secondary" style="flex:1;" onclick="exportFullBackup()">⬇️ Export Full Backup</button>
+          <label class="btn-green-outline" style="flex:1;text-align:center;">
+            ⬆️ Restore Backup
+            <input type="file" accept="application/json" style="display:none;" onchange="restoreFullBackup(this)">
+          </label>
+        </div>
+      </div>
+
+      <!-- RECENT ORDERS & REVENUE -->
+      <div class="card">
+        <div class="card-head">
+          <h2><i class="fa-solid fa-receipt"></i> Recent Orders (<span id="ordersCountTag">0</span>)</h2>
+          <button type="button" class="btn-secondary" onclick="exportOrdersCsv()">⬇️ Export CSV</button>
+        </div>
+        <div class="orders-mini-list" id="ordersMiniList"></div>
       </div>
 
       <!-- ADMIN PASSWORD SECURITY -->
@@ -751,19 +712,20 @@ body{
           </button>
         </div>
         <p style="font-size:12px;color:#94a3b8;margin-bottom:14px;line-height:1.5;">
-          Password is saved on this browser/device. Locking or refreshing `/admin` always asks for this password.
+          Refreshing or locking `/admin` always prompts for this password.
         </p>
         <button type="button" class="btn-primary" onclick="updateAdminPin()">🔐 Update Admin Password</button>
       </div>
 
-      <!-- QUICK STOCK EDITOR -->
+      <!-- LIVE INVENTORY, PRICE & VISIBILITY MANAGER -->
       <div class="card full-span">
         <div class="stock-toolbar">
-          <h2 style="margin-bottom:0;"><i class="fa-solid fa-boxes-stacked"></i> Live Inventory Manager</h2>
+          <h2 style="margin-bottom:0;"><i class="fa-solid fa-boxes-stacked"></i> Price, Stock &amp; Visibility Manager</h2>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button type="button" class="btn-green-outline" onclick="restockOutItems()">⚡ Restock Empty (+10)</button>
             <button type="button" class="btn-amber" onclick="copyStockSummary()">📋 Copy Report</button>
-            <button type="button" class="btn-secondary" onclick="exportStockJson()">⬇️ Export stock.json</button>
-            <button type="button" class="btn-primary" style="width:auto;padding:9px 16px;" onclick="saveAllStock()">💾 Save Stock</button>
+            <button type="button" class="btn-secondary" onclick="exportStockJson()">⬇️ stock.json</button>
+            <button type="button" class="btn-primary" style="width:auto;padding:9px 16px;" onclick="saveAllInventoryChanges()">💾 Save Changes</button>
           </div>
         </div>
 
@@ -771,7 +733,8 @@ body{
           <button type="button" class="stk-tab active" onclick="setStockFilter('all', this)">All</button>
           <button type="button" class="stk-tab" onclick="setStockFilter('low', this)">⚠️ Low (&le;5)</button>
           <button type="button" class="stk-tab" onclick="setStockFilter('out', this)">❌ Out of Stock</button>
-          <input type="text" id="stockSearch" class="input stk-search" placeholder="Search item in stock..." oninput="renderStockEditor()">
+          <button type="button" class="stk-tab" onclick="setStockFilter('custom', this)">✨ Custom</button>
+          <input type="text" id="stockSearch" class="input stk-search" placeholder="Search item... (edit ₹ price, qty, or 👁️ hide)" oninput="renderStockEditor()">
         </div>
 
         <div class="stock-grid" id="stockGrid"></div>
@@ -785,14 +748,28 @@ const DEFAULT_ADMIN_CONFIG = {
   pin: "2026",
   storeMode: "auto",
   closedMessage: "🔒 Store Closed • Holiday Break",
+  deliveryEta: "",
   offerBanner: "",
   upiId: "7209793015@ybl",
   upiName: "Sadbhavna Mart",
   whatsappNumber: "917209793015"
 };
 
+const BASE_PRICES = {
+  "Parle G": 10, "Tedhe Medhe": 20, "Kurkure": 20, "Cup Maggi": 50, "Bourbon": 30,
+  "Maggi Double Masala": 28, "Milk": 30, "Nescafe Coffee": 20, "BRU Coffee": 20, "Chini": 45,
+  "Tata Tea": 60, "Red Label": 65, "Lays Classic": 20, "Oreo": 30, "Good Day": 25,
+  "Dairy Milk": 40, "Frooti": 20, "Coca-Cola": 40, "Yippee Noodles": 25, "Bread": 40,
+  "Linc Glycer Blue": 10, "Linc Glycer Black": 10, "Pentonic Blue": 10, "Pentonic Black": 10,
+  "Pentonic B-RT": 20, "Practical File (100p)": 40, "Practical File (140p)": 50, "Practical File (Hardcover)": 60
+};
+
 let adminConfig = Object.assign({}, DEFAULT_ADMIN_CONFIG);
 let stockData = {};
+let customProducts = [];
+let priceOverrides = {};
+let hiddenItems = [];
+let uploadedPhotoDataUrl = "";
 let activeStockFilter = "all";
 let toastTimer = null;
 
@@ -815,10 +792,11 @@ function togglePassVisibility(inputId, btn) {
 function loadConfig() {
   try {
     const saved = JSON.parse(localStorage.getItem("sadbhavna_admin_config") || "null");
-    if (saved && typeof saved === "object") {
-      adminConfig = Object.assign({}, DEFAULT_ADMIN_CONFIG, saved);
-    }
+    if (saved && typeof saved === "object") adminConfig = Object.assign({}, DEFAULT_ADMIN_CONFIG, saved);
   } catch (e) {}
+  try { customProducts = JSON.parse(localStorage.getItem("sadbhavna_custom_products") || "[]") || []; } catch (e) { customProducts = []; }
+  try { priceOverrides = JSON.parse(localStorage.getItem("sadbhavna_price_overrides") || "{}") || {}; } catch (e) { priceOverrides = {}; }
+  try { hiddenItems = JSON.parse(localStorage.getItem("sadbhavna_hidden_items") || "[]") || []; } catch (e) { hiddenItems = []; }
 }
 
 function saveConfig() {
@@ -897,13 +875,135 @@ function populateDashboard() {
   });
   syncHeaderChip();
   document.getElementById("closedMessageInput").value = adminConfig.closedMessage || "";
+  document.getElementById("deliveryEtaInput").value = adminConfig.deliveryEta || "";
   document.getElementById("offerBannerInput").value = adminConfig.offerBanner || "";
   updateOfferPreview();
   document.getElementById("upiIdInput").value = adminConfig.upiId || "";
   document.getElementById("upiNameInput").value = adminConfig.upiName || "Sadbhavna Mart";
   document.getElementById("waNumberInput").value = adminConfig.whatsappNumber || "917209793015";
   renderAdminQrPreview();
+  renderCustomProductsList();
+  renderRecentOrders();
   loadStockForAdmin();
+}
+
+function handleProductPhotoUpload(input) {
+  const file = input.files && input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function (ev) {
+    const img = new Image();
+    img.onload = function () {
+      const maxDim = 420;
+      let w = img.width, h = img.height;
+      if (w > maxDim || h > maxDim) {
+        if (w > h) { h = Math.round(h * (maxDim / w)); w = maxDim; }
+        else { w = Math.round(w * (maxDim / h)); h = maxDim; }
+      }
+      const canvas = document.createElement("canvas");
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, w, h);
+      ctx.drawImage(img, 0, 0, w, h);
+      uploadedPhotoDataUrl = canvas.toDataURL("image/jpeg", 0.8);
+      document.getElementById("newProdPreview").innerHTML = `<img src="${uploadedPhotoDataUrl}" alt="Preview">`;
+      document.getElementById("photoStatusText").innerText = `Ready (${Math.round(uploadedPhotoDataUrl.length / 1024)} KB compressed)`;
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function previewPhotoUrl(url) {
+  const clean = url.trim();
+  if (!clean) {
+    if (!uploadedPhotoDataUrl) {
+      document.getElementById("newProdPreview").innerHTML = '<i class="fa-regular fa-image"></i>';
+    }
+    return;
+  }
+  uploadedPhotoDataUrl = "";
+  document.getElementById("newProdPreview").innerHTML = `<img src="${clean}" alt="Preview">`;
+  document.getElementById("photoStatusText").innerText = "Using image URL";
+}
+
+function addCustomProduct() {
+  const name = document.getElementById("newProdName").value.trim();
+  const price = parseInt(document.getElementById("newProdPrice").value, 10);
+  const stock = parseInt(document.getElementById("newProdStock").value, 10);
+  const category = document.getElementById("newProdCategory").value;
+  const imgUrl = document.getElementById("newProdImgUrl").value.trim();
+  const img = uploadedPhotoDataUrl || imgUrl || "ParleG.jpg";
+
+  if (!name || isNaN(price) || price <= 0) {
+    showToast("Enter valid product name & price");
+    return;
+  }
+  if (BASE_PRICES[name] !== undefined || customProducts.some(p => p.name.toLowerCase() === name.toLowerCase())) {
+    showToast("Product with this name already exists");
+    return;
+  }
+
+  const qty = isNaN(stock) || stock < 0 ? 15 : stock;
+  customProducts.push({ name, price, category, img, stock: qty });
+  localStorage.setItem("sadbhavna_custom_products", JSON.stringify(customProducts));
+
+  stockData[name] = qty;
+  localStorage.setItem("sadbhavna_local_stock", JSON.stringify(stockData));
+
+  document.getElementById("newProdName").value = "";
+  document.getElementById("newProdPrice").value = "";
+  document.getElementById("newProdStock").value = "";
+  document.getElementById("newProdImgUrl").value = "";
+  document.getElementById("newProdFile").value = "";
+  uploadedPhotoDataUrl = "";
+  document.getElementById("newProdPreview").innerHTML = '<i class="fa-regular fa-image"></i>';
+  document.getElementById("photoStatusText").innerText = "Auto-compressed to fit fast";
+
+  renderCustomProductsList();
+  updateKpis();
+  renderStockEditor();
+  showToast("✅ Added " + name + " to Storefront!");
+}
+
+function deleteCustomProduct(index) {
+  const target = customProducts[index];
+  if (!target) return;
+  if (!confirm("Delete custom product '" + target.name + "'?")) return;
+  customProducts.splice(index, 1);
+  delete stockData[target.name];
+  delete priceOverrides[target.name];
+  hiddenItems = hiddenItems.filter(x => x !== target.name);
+
+  localStorage.setItem("sadbhavna_custom_products", JSON.stringify(customProducts));
+  localStorage.setItem("sadbhavna_local_stock", JSON.stringify(stockData));
+  localStorage.setItem("sadbhavna_price_overrides", JSON.stringify(priceOverrides));
+  localStorage.setItem("sadbhavna_hidden_items", JSON.stringify(hiddenItems));
+
+  renderCustomProductsList();
+  updateKpis();
+  renderStockEditor();
+  showToast("🗑️ Removed " + target.name);
+}
+
+function renderCustomProductsList() {
+  const box = document.getElementById("customProductsList");
+  if (!customProducts.length) {
+    box.innerHTML = '<div style="font-size:12px;color:#64748b;text-align:center;padding:8px;">No extra products added yet.</div>';
+    return;
+  }
+  box.innerHTML = customProducts.map((p, idx) => `
+    <div class="custom-item">
+      <img src="${p.img}" alt="${p.name}">
+      <div class="custom-item-info">
+        <strong>${p.name}</strong>
+        <span>₹${priceOverrides[p.name] || p.price} • ${p.category} • Stock: ${stockData[p.name] ?? 0}</span>
+      </div>
+      <button type="button" class="del-custom-btn" onclick="deleteCustomProduct(${idx})" aria-label="Delete"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  `).join("");
 }
 
 function renderAdminQrPreview() {
@@ -918,6 +1018,7 @@ function renderAdminQrPreview() {
 
 function saveStoreSettings() {
   adminConfig.closedMessage = document.getElementById("closedMessageInput").value.trim() || DEFAULT_ADMIN_CONFIG.closedMessage;
+  adminConfig.deliveryEta = document.getElementById("deliveryEtaInput").value.trim();
   adminConfig.offerBanner = document.getElementById("offerBannerInput").value.trim();
   saveConfig();
   syncHeaderChip();
@@ -959,6 +1060,47 @@ function sendBroadcastAlert() {
   } catch (e) {}
 }
 
+function renderRecentOrders() {
+  let orders = [];
+  try { orders = JSON.parse(localStorage.getItem("orders") || "[]") || []; } catch (e) {}
+  document.getElementById("ordersCountTag").innerText = orders.length;
+  const box = document.getElementById("ordersMiniList");
+  if (!orders.length) {
+    box.innerHTML = '<div style="font-size:12.5px;color:#64748b;text-align:center;padding:18px 0;">No orders recorded on this device yet.</div>';
+    return;
+  }
+  box.innerHTML = orders.slice().reverse().slice(0, 12).map(o => `
+    <div class="order-mini-row">
+      <div class="order-mini-top">
+        <span>${o.id || "ORD"} • ${o.name || "Student"}</span>
+        <span>${o.payment || ""}</span>
+      </div>
+      <div style="color:#cbd5e1;">${o.items || ""}</div>
+      <div style="font-size:11px;color:#94a3b8;margin-top:2px;">🏠 ${o.hostel || ""} Room ${o.room || ""} • ${o.date || ""}</div>
+    </div>
+  `).join("");
+}
+
+function exportOrdersCsv() {
+  let orders = [];
+  try { orders = JSON.parse(localStorage.getItem("orders") || "[]") || []; } catch (e) {}
+  if (!orders.length) {
+    showToast("No orders to export");
+    return;
+  }
+  const esc = v => '"' + String(v || "").replace(/"/g, '""') + '"';
+  const rows = ["OrderID,Name,Room,Hostel,Phone,Payment,Items,Date"].concat(
+    orders.map(o => [o.id, o.name, o.room, o.hostel, o.phone, o.payment, o.items, o.date].map(esc).join(","))
+  );
+  const blob = new Blob([rows.join("\n")], { type: "text/csv" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "sadbhavna-orders.csv";
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast("⬇️ Orders CSV downloaded!");
+}
+
 function updateAdminPin() {
   const nextPin = document.getElementById("newPinInput").value.trim();
   if (nextPin.length < 4) {
@@ -971,6 +1113,21 @@ function updateAdminPin() {
   showToast("🔐 Admin Password updated!");
 }
 
+function getAllItemNames() {
+  const names = Object.keys(stockData).slice();
+  customProducts.forEach(p => {
+    if (!names.includes(p.name)) names.push(p.name);
+  });
+  return names;
+}
+
+function getItemPrice(name) {
+  if (priceOverrides[name] !== undefined) return Number(priceOverrides[name]) || 0;
+  const cp = customProducts.find(p => p.name === name);
+  if (cp) return Number(cp.price) || 0;
+  return BASE_PRICES[name] || 0;
+}
+
 async function loadStockForAdmin() {
   try {
     const res = await fetch("stock.json?t=" + Date.now(), { cache: "no-store" });
@@ -980,21 +1137,21 @@ async function loadStockForAdmin() {
     const local = JSON.parse(localStorage.getItem("sadbhavna_local_stock") || "{}");
     stockData = Object.assign({}, stockData, local);
   } catch (e) {}
+  customProducts.forEach(p => {
+    if (stockData[p.name] === undefined) stockData[p.name] = 15;
+  });
   updateKpis();
   renderStockEditor();
+  renderCustomProductsList();
 }
 
 function updateKpis() {
-  const vals = Object.values(stockData).map(v => Number(v) || 0);
-  const totalItems = vals.length;
-  const totalUnits = vals.reduce((a, b) => a + b, 0);
-  const lowCount = vals.filter(q => q > 0 && q <= 5).length;
-  const outCount = vals.filter(q => q <= 0).length;
-
-  document.getElementById("kpiTotal").innerText = totalItems;
-  document.getElementById("kpiUnits").innerText = totalUnits;
-  document.getElementById("kpiLow").innerText = lowCount;
-  document.getElementById("kpiOut").innerText = outCount;
+  const names = getAllItemNames();
+  const vals = names.map(n => Number(stockData[n]) || 0);
+  document.getElementById("kpiTotal").innerText = names.length;
+  document.getElementById("kpiUnits").innerText = vals.reduce((a, b) => a + b, 0);
+  document.getElementById("kpiLow").innerText = vals.filter(q => q > 0 && q <= 5).length;
+  document.getElementById("kpiOut").innerText = vals.filter(q => q <= 0).length;
 }
 
 function setStockFilter(filter, btn) {
@@ -1007,13 +1164,16 @@ function setStockFilter(filter, btn) {
 function renderStockEditor() {
   const grid = document.getElementById("stockGrid");
   const query = (document.getElementById("stockSearch")?.value || "").trim().toLowerCase();
-  const keys = Object.keys(stockData);
+  const keys = getAllItemNames();
+  const customSet = new Set(customProducts.map(p => p.name));
+
   const filtered = keys.filter(name => {
     const qty = Number(stockData[name]) || 0;
     const matchSearch = !query || name.toLowerCase().includes(query);
     if (!matchSearch) return false;
     if (activeStockFilter === "low") return qty > 0 && qty <= 5;
     if (activeStockFilter === "out") return qty <= 0;
+    if (activeStockFilter === "custom") return customSet.has(name);
     return true;
   });
 
@@ -1025,55 +1185,102 @@ function renderStockEditor() {
   grid.innerHTML = filtered.map(name => {
     const idx = keys.indexOf(name);
     const qty = Number(stockData[name]) || 0;
-    const stateCls = qty <= 0 ? "out" : (qty <= 5 ? "low" : "");
-    const statusText = qty <= 0 ? "Out of Stock" : (qty <= 5 ? "Low Stock" : "In Stock");
+    const price = getItemPrice(name);
+    const isHidden = hiddenItems.includes(name);
+    const stateCls = `${qty <= 0 ? "out" : (qty <= 5 ? "low" : "")} ${isHidden ? "hidden-item" : ""}`.trim();
+    const tag = isHidden ? "Hidden on Store" : (qty <= 0 ? "Out of Stock" : (qty <= 5 ? "Low Stock" : (customSet.has(name) ? "✨ Custom Item" : "In Stock")));
     return `
       <div class="stock-row ${stateCls}">
         <div class="stock-info">
           <span class="stock-name">${name}</span>
-          <span class="stock-badge">${statusText}</span>
+          <span class="stock-badge">${tag}</span>
         </div>
         <div class="stock-ctrl">
+          <input type="number" min="1" title="Price ₹" class="price-mini-inp" value="${price}" onchange="setItemPrice(${idx}, this.value)">
           <button type="button" onclick="stepAdminStock(${idx}, -1)">-</button>
-          <input type="number" min="0" id="stk_${idx}" value="${qty}" onchange="setAdminStock(${idx}, this.value)">
+          <input type="number" min="0" title="Stock Qty" class="qty-inp" value="${qty}" onchange="setAdminStock(${idx}, this.value)">
           <button type="button" onclick="stepAdminStock(${idx}, 1)">+</button>
+          <button type="button" class="vis-btn" title="${isHidden ? 'Show on store' : 'Hide from store'}" onclick="toggleItemVisibility(${idx})">
+            <i class="fa-solid ${isHidden ? 'fa-eye-slash' : 'fa-eye'}"></i>
+          </button>
         </div>
       </div>
     `;
   }).join("");
 }
 
+function setItemPrice(idx, val) {
+  const keys = getAllItemNames();
+  const name = keys[idx];
+  if (!name) return;
+  const p = Math.max(1, parseInt(val, 10) || 1);
+  priceOverrides[name] = p;
+  const cp = customProducts.find(x => x.name === name);
+  if (cp) cp.price = p;
+  renderCustomProductsList();
+}
+
 function stepAdminStock(idx, delta) {
-  const keys = Object.keys(stockData);
+  const keys = getAllItemNames();
   const key = keys[idx];
   if (!key) return;
-  const next = Math.max(0, (Number(stockData[key]) || 0) + delta);
-  stockData[key] = next;
+  stockData[key] = Math.max(0, (Number(stockData[key]) || 0) + delta);
   updateKpis();
   renderStockEditor();
+  renderCustomProductsList();
 }
 
 function setAdminStock(idx, val) {
-  const keys = Object.keys(stockData);
+  const keys = getAllItemNames();
   const key = keys[idx];
   if (!key) return;
   stockData[key] = Math.max(0, parseInt(val, 10) || 0);
   updateKpis();
   renderStockEditor();
+  renderCustomProductsList();
 }
 
-function saveAllStock() {
+function toggleItemVisibility(idx) {
+  const keys = getAllItemNames();
+  const name = keys[idx];
+  if (!name) return;
+  if (hiddenItems.includes(name)) {
+    hiddenItems = hiddenItems.filter(x => x !== name);
+  } else {
+    hiddenItems.push(name);
+  }
+  renderStockEditor();
+}
+
+function restockOutItems() {
+  let count = 0;
+  getAllItemNames().forEach(name => {
+    if ((Number(stockData[name]) || 0) <= 0) {
+      stockData[name] = 10;
+      count++;
+    }
+  });
+  updateKpis();
+  renderStockEditor();
+  renderCustomProductsList();
+  showToast(count ? `⚡ Restocked ${count} empty item(s) to 10!` : "No out-of-stock items!");
+}
+
+function saveAllInventoryChanges() {
   localStorage.setItem("sadbhavna_local_stock", JSON.stringify(stockData));
   localStorage.setItem("sadbhavna_stock_snapshot", JSON.stringify(stockData));
+  localStorage.setItem("sadbhavna_price_overrides", JSON.stringify(priceOverrides));
+  localStorage.setItem("sadbhavna_hidden_items", JSON.stringify(hiddenItems));
+  localStorage.setItem("sadbhavna_custom_products", JSON.stringify(customProducts));
   updateKpis();
-  showToast("✅ Inventory saved!");
+  showToast("✅ Prices, Stock & Visibility saved!");
 }
 
 function copyStockSummary() {
-  const lines = Object.keys(stockData).map(k => `• ${k}: ${stockData[k]}`);
+  const lines = getAllItemNames().map(k => `• ${k} (₹${getItemPrice(k)}): ${stockData[k] ?? 0}`);
   const txt = "📦 *Sadbhavna Mart Stock Report*\n" + lines.join("\n");
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(txt).then(() => showToast("📋 Stock report copied!")).catch(() => showToast("Copy not permitted"));
+    navigator.clipboard.writeText(txt).then(() => showToast("📋 Stock report copied!")).catch(() => showToast("Copy failed"));
   }
 }
 
@@ -1085,6 +1292,45 @@ function exportStockJson() {
   a.click();
   URL.revokeObjectURL(a.href);
   showToast("⬇️ stock.json downloaded!");
+}
+
+function exportFullBackup() {
+  const bundle = {
+    adminConfig,
+    customProducts,
+    priceOverrides,
+    hiddenItems,
+    stockData
+  };
+  const blob = new Blob([JSON.stringify(bundle, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "sadbhavna-store-backup.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast("⬇️ Full Store Backup downloaded!");
+}
+
+function restoreFullBackup(input) {
+  const file = input.files && input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function (ev) {
+    try {
+      const b = JSON.parse(ev.target.result);
+      if (b.adminConfig) { adminConfig = Object.assign({}, DEFAULT_ADMIN_CONFIG, b.adminConfig); saveConfig(); }
+      if (Array.isArray(b.customProducts)) { customProducts = b.customProducts; localStorage.setItem("sadbhavna_custom_products", JSON.stringify(customProducts)); }
+      if (b.priceOverrides) { priceOverrides = b.priceOverrides; localStorage.setItem("sadbhavna_price_overrides", JSON.stringify(priceOverrides)); }
+      if (Array.isArray(b.hiddenItems)) { hiddenItems = b.hiddenItems; localStorage.setItem("sadbhavna_hidden_items", JSON.stringify(hiddenItems)); }
+      if (b.stockData) { stockData = b.stockData; localStorage.setItem("sadbhavna_local_stock", JSON.stringify(stockData)); }
+      populateDashboard();
+      showToast("✅ Backup restored!");
+    } catch (e) {
+      showToast("❌ Invalid backup JSON file");
+    }
+  };
+  reader.readAsText(file);
+  input.value = "";
 }
 
 loadConfig();
