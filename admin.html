@@ -1225,6 +1225,7 @@ function stepAdminStock(idx, delta) {
   const key = keys[idx];
   if (!key) return;
   stockData[key] = Math.max(0, (Number(stockData[key]) || 0) + delta);
+  localStorage.setItem("sadbhavna_local_stock", JSON.stringify(stockData));
   updateKpis();
   renderStockEditor();
   renderCustomProductsList();
@@ -1235,6 +1236,7 @@ function setAdminStock(idx, val) {
   const key = keys[idx];
   if (!key) return;
   stockData[key] = Math.max(0, parseInt(val, 10) || 0);
+  localStorage.setItem("sadbhavna_local_stock", JSON.stringify(stockData));
   updateKpis();
   renderStockEditor();
   renderCustomProductsList();
@@ -1268,7 +1270,6 @@ function restockOutItems() {
 
 function saveAllInventoryChanges() {
   localStorage.setItem("sadbhavna_local_stock", JSON.stringify(stockData));
-  localStorage.setItem("sadbhavna_stock_snapshot", JSON.stringify(stockData));
   localStorage.setItem("sadbhavna_price_overrides", JSON.stringify(priceOverrides));
   localStorage.setItem("sadbhavna_hidden_items", JSON.stringify(hiddenItems));
   localStorage.setItem("sadbhavna_custom_products", JSON.stringify(customProducts));

@@ -260,11 +260,27 @@ body{
 }
 .stock-msg{
   font-size:11.5px;
-  font-weight:700;
-  margin-top:3px;
+  font-weight:800;
+  margin-top:6px;
+  text-align:center;
+  padding:4px 7px;
+  border-radius:8px;
 }
-.stock-msg.low{ color:#ff3b3b; }
-.stock-msg.out{ color:#ff4d4d; }
+.stock-msg.low{
+  color:#ff4d4d;
+  background:rgba(239,68,68,0.16);
+  border:1px solid rgba(239,68,68,0.48);
+  animation:lowPulse 1.3s ease-in-out infinite;
+}
+.stock-msg.out{
+  color:#fca5a5;
+  background:rgba(220,38,38,0.22);
+  border:1px solid rgba(220,38,38,0.55);
+}
+@keyframes lowPulse{
+  0%,100%{opacity:1;}
+  50%{opacity:0.55;}
+}
 @media screen and (min-width:768px){
   .grid{ padding:18px; gap:16px; grid-template-columns:repeat(3,1fr); }
   .card{ padding:12px; border-radius:16px; }
@@ -493,6 +509,11 @@ async function loadStock() {
       stockMap = Object.assign({}, baseStock, localOverrides);
     }
   } catch (e) {}
+  PRODUCTS.forEach(p => {
+    if (stockMap[p.name] === undefined) {
+      stockMap[p.name] = typeof p.defaultStock === "number" ? p.defaultStock : 15;
+    }
+  });
   renderItems();
 }
 
@@ -552,8 +573,8 @@ function renderItems() {
       stockHtml = `<div class="stock-msg out">${outTxt}</div>`;
     } else if (available <= 5) {
       const leftTxt = window.SadbhavnaI18n
-        ? (window.SadbhavnaI18n.t("onlyLeftPrefix") + available + window.SadbhavnaI18n.t("onlyLeftSuffix"))
-        : `Only ${available} left`;
+        ? ("⚠️ " + window.SadbhavnaI18n.t("onlyLeftPrefix") + available + window.SadbhavnaI18n.t("onlyLeftSuffix"))
+        : `⚠️ Only ${available} left`;
       stockHtml = `<div class="stock-msg low">${leftTxt}</div>`;
     }
 
