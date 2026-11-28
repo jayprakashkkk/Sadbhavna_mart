@@ -611,7 +611,48 @@ window.onSadbhavnaLangChange = function () {
   renderItems();
 };
 
+async function loadRemoteStoreConfigCat() {
+  try {
+    const res = await fetch("store-config.json?t=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) return;
+    const remote = await res.json();
+    if (!remote || typeof remote !== "object") return;
+    const remoteTs = Number(remote.updatedAt) || 0;
+    const localTs = Number(localStorage.getItem("sadbhavna_local_updated_at") || 0);
+    if (remoteTs > 0 && remoteTs >= localTs) {
+      if (Array.isArray(remote.customProducts)) {
+        localStorage.setItem("sadbhavna_custom_products", JSON.stringify(remote.customProducts));
+        remote.customProducts.forEach(p => {
+          if (p && p.name && !PRODUCTS.some(x => x.name === p.name)) {
+            PRODUCTS.push({
+              name: p.name,
+              img: p.img || "ParleG.jpg",
+              category: p.category || "Biscuits & Snacks",
+              price: Number(p.price) || 10,
+              defaultStock: typeof p.stock === "number" ? p.stock : 15
+            });
+          }
+        });
+      }
+      if (remote.priceOverrides) {
+        localStorage.setItem("sadbhavna_price_overrides", JSON.stringify(remote.priceOverrides));
+        PRODUCTS.forEach(p => {
+          if (Number(remote.priceOverrides[p.name]) > 0) p.price = Number(remote.priceOverrides[p.name]);
+        });
+      }
+      if (Array.isArray(remote.hiddenItems)) {
+        hiddenItems = remote.hiddenItems;
+        localStorage.setItem("sadbhavna_hidden_items", JSON.stringify(hiddenItems));
+      }
+      localStorage.setItem("sadbhavna_local_updated_at", String(remoteTs));
+      renderItems();
+      updateBadge();
+    }
+  } catch (e) {}
+}
+
 updateBadge();
+loadRemoteStoreConfigCat();
 loadStock();
 </script>
 

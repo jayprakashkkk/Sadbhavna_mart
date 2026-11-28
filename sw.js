@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sadbhavna-mart-pwa-v5';
+const CACHE_NAME = 'sadbhavna-mart-pwa-v6';
 const APP_SHELL = [
   './',
   './index.html',
@@ -7,6 +7,7 @@ const APP_SHELL = [
   './pwa.js',
   './i18n.js',
   './qr.js',
+  './store-config.json',
   './category.html',
   './orders.html',
   './profile.html',
@@ -51,8 +52,12 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  // Never serve stale stock API data
-  if (url.pathname.startsWith('/api/') || url.pathname.endsWith('/stock.json')) {
+  // Never serve stale stock or live store config data
+  if (
+    url.pathname.startsWith('/api/') ||
+    url.pathname.endsWith('/stock.json') ||
+    url.pathname.endsWith('/store-config.json')
+  ) {
     event.respondWith(
       fetch(request).catch(() => caches.match(request))
     );

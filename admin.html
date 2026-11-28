@@ -482,12 +482,49 @@ body{
 }
 
 #toastMsg{
-  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(16px);
+  position:fixed;bottom:92px;left:50%;transform:translateX(-50%) translateY(16px);
   background:var(--accent);color:#022c22;padding:11px 20px;border-radius:999px;font-size:13.5px;
   font-weight:800;opacity:0;pointer-events:none;transition:0.25s;z-index:1200;
   box-shadow:0 10px 26px rgba(0,255,153,0.3);
 }
 #toastMsg.show{transform:translateX(-50%) translateY(0);opacity:1;}
+.admin-shell{padding-bottom:112px;}
+
+/* GITHUB SYNC & STICKY MASTER SAVE BAR */
+.gh-status-pill{
+  padding:5px 11px;border-radius:999px;font-size:11.5px;font-weight:800;
+  border:1px solid rgba(251,191,36,0.4);background:rgba(251,191,36,0.14);color:var(--amber);
+}
+.gh-status-pill.connected{
+  border-color:rgba(0,255,153,0.4);background:rgba(0,255,153,0.14);color:var(--accent);
+}
+.switch-row{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:10px 12px;border-radius:12px;background:rgba(2,6,23,0.62);
+  border:1px solid rgba(255,255,255,0.08);margin-bottom:12px;font-size:13px;color:#e2e8f0;
+}
+.switch-row input[type="checkbox"]{width:18px;height:18px;accent-color:#00ff99;cursor:pointer;}
+.master-save-bar{
+  position:fixed;left:0;right:0;bottom:0;width:100%;z-index:60;
+  background:rgba(2,6,23,0.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-top:1px solid rgba(0,255,153,0.28);padding:11px 16px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  box-shadow:0 -12px 32px rgba(0,0,0,0.55);
+}
+.sync-state-label{font-size:12.5px;font-weight:700;color:#cbd5e1;flex:1;min-width:170px;}
+.sync-state-label.dirty{color:var(--amber);}
+.sync-state-label.ok{color:var(--accent);}
+.master-save-actions{display:flex;gap:8px;align-items:center;}
+.master-btn-save{
+  padding:10px 15px;border-radius:11px;border:1px solid rgba(56,189,248,0.45);
+  background:rgba(56,189,248,0.15);color:#38bdf8;font-size:13px;font-weight:800;cursor:pointer;
+}
+.master-btn-push{
+  padding:10px 16px;border-radius:11px;border:none;
+  background:linear-gradient(90deg,#00ff99,#10b981);color:#022c22;
+  font-size:13.5px;font-weight:800;cursor:pointer;box-shadow:0 6px 18px rgba(0,255,153,0.25);
+}
+.master-btn-push:disabled{opacity:0.6;cursor:wait;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 @keyframes shakeBox{0%,100%{transform:translateX(0);}25%{transform:translateX(-8px);}50%{transform:translateX(8px);}75%{transform:translateX(-5px);}}
 </style>
@@ -725,7 +762,7 @@ body{
             <button type="button" class="btn-green-outline" onclick="restockOutItems()">⚡ Restock Empty (+10)</button>
             <button type="button" class="btn-amber" onclick="copyStockSummary()">📋 Copy Report</button>
             <button type="button" class="btn-secondary" onclick="exportStockJson()">⬇️ stock.json</button>
-            <button type="button" class="btn-primary" style="width:auto;padding:9px 16px;" onclick="saveAllInventoryChanges()">💾 Save Changes</button>
+            <button type="button" class="btn-primary" style="width:auto;padding:9px 16px;" onclick="saveAllInventoryChanges()">💾 Save &amp; Update Store</button>
           </div>
         </div>
 
@@ -739,8 +776,53 @@ body{
 
         <div class="stock-grid" id="stockGrid"></div>
       </div>
+
+      <!-- GITHUB -> CLOUDFLARE AUTO PUBLISH SETUP -->
+      <div class="card full-span" id="githubSyncCard">
+        <div class="card-head">
+          <h2><i class="fa-brands fa-github"></i> GitHub → Cloudflare Auto-Deploy</h2>
+          <span class="gh-status-pill" id="ghStatusPill">⚠️ Token Needed</span>
+        </div>
+        <div class="form-row-2">
+          <div>
+            <span class="label">GitHub Repository (owner/repo)</span>
+            <input type="text" id="ghRepoInput" class="input" value="jayprakashkkk/Sadbhavna_files">
+          </div>
+          <div>
+            <span class="label">Branch</span>
+            <input type="text" id="ghBranchInput" class="input" value="main">
+          </div>
+        </div>
+        <span class="label">GitHub Personal Access Token (stored only on your phone/PC, never committed)</span>
+        <div class="pass-wrap" style="margin-bottom:10px;">
+          <input type="password" id="ghTokenInput" class="input" style="text-align:left;letter-spacing:normal;font-size:14px;font-weight:400;" placeholder="github_pat_... (Contents: Read &amp; Write)">
+          <button type="button" class="eye-btn" aria-label="Show token" onclick="togglePassVisibility('ghTokenInput', this)">
+            <i class="fa-regular fa-eye"></i>
+          </button>
+        </div>
+        <label class="switch-row">
+          <span><strong>Auto-Push on every Admin Save</strong> (updates GitHub &amp; Cloudflare automatically)</span>
+          <input type="checkbox" id="ghAutoPushToggle" checked onchange="saveGithubPrefs()">
+        </label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button type="button" class="btn-primary" style="flex:1;" onclick="saveGithubPrefs(true)">🔗 Save &amp; Test GitHub Connection</button>
+          <button type="button" class="btn-secondary" onclick="clearGithubToken()">Clear Token</button>
+        </div>
+        <p style="font-size:11.5px;color:#94a3b8;margin-top:10px;line-height:1.5;">
+          GitHub Token create karne ke liye: GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Sirf <strong>Sadbhavna_files</strong> select karke <strong>Contents: Read &amp; write</strong> dein.
+        </p>
+      </div>
     </div>
   </main>
+
+  <!-- STICKY MASTER SAVE & PUBLISH BAR -->
+  <div class="master-save-bar">
+    <div class="sync-state-label ok" id="syncStateLabel">✅ Store ready</div>
+    <div class="master-save-actions">
+      <button type="button" class="master-btn-save" onclick="saveEverythingLocally(true)">💾 Save</button>
+      <button type="button" class="master-btn-push" id="masterPushBtn" onclick="saveAndPublishLive('Update Sadbhavna Mart store from Admin')">🚀 Save &amp; Push Live</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -769,9 +851,291 @@ let stockData = {};
 let customProducts = [];
 let priceOverrides = {};
 let hiddenItems = [];
+let broadcasts = [];
+let unlockedAdminPass = "";
+let serverPublishReady = false;
 let uploadedPhotoDataUrl = "";
 let activeStockFilter = "all";
 let toastTimer = null;
+
+function markDirty(msg) {
+  const lbl = document.getElementById("syncStateLabel");
+  if (!lbl) return;
+  lbl.className = "sync-state-label dirty";
+  lbl.innerText = msg || "🟡 Changes made — tap Save & Push Live";
+}
+
+function markSynced(msg) {
+  const lbl = document.getElementById("syncStateLabel");
+  if (!lbl) return;
+  lbl.className = "sync-state-label ok";
+  lbl.innerText = msg || "✅ Synced with live store";
+}
+
+function loadGithubPrefs() {
+  const repo = localStorage.getItem("sadbhavna_gh_repo") || "jayprakashkkk/Sadbhavna_files";
+  const branch = localStorage.getItem("sadbhavna_gh_branch") || "main";
+  const token = localStorage.getItem("sadbhavna_gh_token") || "";
+  const autoPush = localStorage.getItem("sadbhavna_gh_autopush") !== "0";
+  const rEl = document.getElementById("ghRepoInput");
+  const bEl = document.getElementById("ghBranchInput");
+  const tEl = document.getElementById("ghTokenInput");
+  const aEl = document.getElementById("ghAutoPushToggle");
+  if (rEl) rEl.value = repo;
+  if (bEl) bEl.value = branch;
+  if (tEl) tEl.value = token;
+  if (aEl) aEl.checked = autoPush;
+  updateGhStatusBadge();
+}
+
+function updateGhStatusBadge() {
+  const pill = document.getElementById("ghStatusPill");
+  if (!pill) return;
+  const token = (localStorage.getItem("sadbhavna_gh_token") || "").trim();
+  if (serverPublishReady) {
+    pill.className = "gh-status-pill connected";
+    pill.innerText = "🟢 Cloudflare Auto-Push Ready";
+  } else if (token) {
+    pill.className = "gh-status-pill connected";
+    pill.innerText = "🟢 GitHub Token Connected";
+  } else {
+    pill.className = "gh-status-pill";
+    pill.innerText = "⚠️ Token Needed";
+  }
+}
+
+async function checkServerPublishCapability() {
+  try {
+    const res = await fetch("/api/publish", { cache: "no-store" });
+    if (res.ok) {
+      const data = await res.json();
+      serverPublishReady = Boolean(data && data.configured);
+      updateGhStatusBadge();
+    }
+  } catch (e) {}
+}
+
+async function saveGithubPrefs(testNow) {
+  const repo = (document.getElementById("ghRepoInput").value || "").trim() || "jayprakashkkk/Sadbhavna_files";
+  const branch = (document.getElementById("ghBranchInput").value || "").trim() || "main";
+  const token = (document.getElementById("ghTokenInput").value || "").trim();
+  const autoPush = Boolean(document.getElementById("ghAutoPushToggle").checked);
+  localStorage.setItem("sadbhavna_gh_repo", repo);
+  localStorage.setItem("sadbhavna_gh_branch", branch);
+  localStorage.setItem("sadbhavna_gh_autopush", autoPush ? "1" : "0");
+  if (token) localStorage.setItem("sadbhavna_gh_token", token);
+  updateGhStatusBadge();
+  if (!testNow) return;
+
+  if (!token && !serverPublishReady) {
+    showToast("Paste your GitHub token first");
+    return;
+  }
+  if (serverPublishReady) {
+    showToast("🟢 Cloudflare /api/publish is active!");
+    return;
+  }
+  try {
+    const res = await fetch(`https://api.github.com/repos/${repo}/git/ref/heads/${branch}`, {
+      headers: { "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github+json" }
+    });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    showToast("🟢 GitHub connected to " + repo + "!");
+  } catch (err) {
+    showToast("❌ GitHub check failed: " + err.message);
+  }
+}
+
+function clearGithubToken() {
+  localStorage.removeItem("sadbhavna_gh_token");
+  const tEl = document.getElementById("ghTokenInput");
+  if (tEl) tEl.value = "";
+  updateGhStatusBadge();
+  showToast("🗑️ GitHub token removed");
+}
+
+function collectCurrentFormInputs() {
+  const closedInp = document.getElementById("closedMessageInput");
+  const etaInp = document.getElementById("deliveryEtaInput");
+  const offerInp = document.getElementById("offerBannerInput");
+  const upiInp = document.getElementById("upiIdInput");
+  const nameInp = document.getElementById("upiNameInput");
+  const waInp = document.getElementById("waNumberInput");
+  if (closedInp) adminConfig.closedMessage = closedInp.value.trim() || DEFAULT_ADMIN_CONFIG.closedMessage;
+  if (etaInp) adminConfig.deliveryEta = etaInp.value.trim();
+  if (offerInp) adminConfig.offerBanner = offerInp.value.trim();
+  if (upiInp) adminConfig.upiId = upiInp.value.trim() || DEFAULT_ADMIN_CONFIG.upiId;
+  if (nameInp) adminConfig.upiName = nameInp.value.trim() || DEFAULT_ADMIN_CONFIG.upiName;
+  if (waInp) adminConfig.whatsappNumber = waInp.value.replace(/\D/g, "") || DEFAULT_ADMIN_CONFIG.whatsappNumber;
+}
+
+function saveEverythingLocally(notify) {
+  collectCurrentFormInputs();
+  const ts = Date.now();
+  localStorage.setItem("sadbhavna_local_updated_at", String(ts));
+  saveConfig();
+  localStorage.setItem("sadbhavna_local_stock", JSON.stringify(stockData));
+  localStorage.setItem("sadbhavna_price_overrides", JSON.stringify(priceOverrides));
+  localStorage.setItem("sadbhavna_hidden_items", JSON.stringify(hiddenItems));
+  localStorage.setItem("sadbhavna_custom_products", JSON.stringify(customProducts));
+  syncHeaderChip();
+  renderAdminQrPreview();
+  updateKpis();
+  markDirty("💾 Saved locally — push to update all customers");
+  if (notify) showToast("💾 Saved on this device!");
+  return ts;
+}
+
+async function ghApiJson(token, path, method = "GET", payload = null) {
+  const res = await fetch(`https://api.github.com${path}`, {
+    method,
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Accept": "application/vnd.github+json",
+      "Content-Type": "application/json"
+    },
+    body: payload ? JSON.stringify(payload) : undefined
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.message || ("GitHub HTTP " + res.status));
+  return data;
+}
+
+async function saveAndPublishLive(commitMessage, isAutoTrigger = false) {
+  const ts = saveEverythingLocally(false);
+  const autoPush = localStorage.getItem("sadbhavna_gh_autopush") !== "0";
+  const token = (localStorage.getItem("sadbhavna_gh_token") || "").trim();
+
+  if (isAutoTrigger && (!autoPush || (!token && !serverPublishReady))) {
+    showToast("💾 Saved locally! Add GitHub Token to push live");
+    return;
+  }
+
+  if (!token && !serverPublishReady) {
+    document.getElementById("githubSyncCard")?.scrollIntoView({ behavior: "smooth" });
+    showToast("⚠️ Paste GitHub Token below to push live!");
+    return;
+  }
+
+  const pushBtn = document.getElementById("masterPushBtn");
+  const lbl = document.getElementById("syncStateLabel");
+  if (pushBtn) { pushBtn.disabled = true; pushBtn.innerText = "⏳ Pushing..."; }
+  if (lbl) { lbl.className = "sync-state-label dirty"; lbl.innerText = "🚀 Pushing update to GitHub → Cloudflare..."; }
+
+  try {
+    const filesToCommit = [];
+    const publishProducts = customProducts.map(p => Object.assign({}, p));
+
+    // Upload any base64 photos as real repository image files under images/custom/
+    for (const prod of publishProducts) {
+      if (prod.img && prod.img.startsWith("data:image/")) {
+        const commaIdx = prod.img.indexOf(",");
+        const base64Body = commaIdx >= 0 ? prod.img.slice(commaIdx + 1) : "";
+        if (base64Body) {
+          const slug = prod.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || ("item-" + Date.now());
+          const imgPath = `images/custom/${slug}.jpg`;
+          filesToCommit.push({ path: imgPath, content: base64Body, encoding: "base64" });
+          prod.img = imgPath;
+        }
+      }
+    }
+
+    const storeConfigPayload = {
+      updatedAt: ts,
+      storeMode: adminConfig.storeMode || "auto",
+      closedMessage: adminConfig.closedMessage || DEFAULT_ADMIN_CONFIG.closedMessage,
+      deliveryEta: adminConfig.deliveryEta || "",
+      offerBanner: adminConfig.offerBanner || "",
+      upiId: adminConfig.upiId || DEFAULT_ADMIN_CONFIG.upiId,
+      upiName: adminConfig.upiName || DEFAULT_ADMIN_CONFIG.upiName,
+      whatsappNumber: adminConfig.whatsappNumber || DEFAULT_ADMIN_CONFIG.whatsappNumber,
+      customProducts: publishProducts,
+      priceOverrides,
+      hiddenItems,
+      broadcasts: broadcasts.slice(0, 5)
+    };
+
+    filesToCommit.push({
+      path: "stock.json",
+      content: JSON.stringify(stockData, null, 2) + "\n",
+      encoding: "utf-8"
+    });
+    filesToCommit.push({
+      path: "store-config.json",
+      content: JSON.stringify(storeConfigPayload, null, 2) + "\n",
+      encoding: "utf-8"
+    });
+
+    const msg = commitMessage || "Update Sadbhavna Mart from Admin Console";
+    let commitSha = "";
+
+    // Path 1: Try Cloudflare /api/publish first if available
+    let usedServer = false;
+    if (serverPublishReady) {
+      const apiRes = await fetch("/api/publish", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: unlockedAdminPass, message: msg, files: filesToCommit })
+      });
+      const apiData = await apiRes.json().catch(() => ({}));
+      if (apiRes.ok && apiData.ok) {
+        usedServer = true;
+        commitSha = apiData.commitSha || "";
+      } else if (!apiData.fallback) {
+        throw new Error(apiData.error || "Server publish error");
+      }
+    }
+
+    // Path 2: Direct browser -> GitHub Git Data API atomic commit
+    if (!usedServer) {
+      const repo = localStorage.getItem("sadbhavna_gh_repo") || "jayprakashkkk/Sadbhavna_files";
+      const branch = localStorage.getItem("sadbhavna_gh_branch") || "main";
+      const refData = await ghApiJson(token, `/repos/${repo}/git/ref/heads/${branch}`);
+      const latestCommitSha = refData.object.sha;
+      const commitData = await ghApiJson(token, `/repos/${repo}/git/commits/${latestCommitSha}`);
+      const baseTreeSha = commitData.tree.sha;
+
+      const treeItems = [];
+      for (const f of filesToCommit) {
+        const blob = await ghApiJson(token, `/repos/${repo}/git/blobs`, "POST", {
+          content: f.content,
+          encoding: f.encoding
+        });
+        treeItems.push({ path: f.path, mode: "100644", type: "blob", sha: blob.sha });
+      }
+      const newTree = await ghApiJson(token, `/repos/${repo}/git/trees`, "POST", {
+        base_tree: baseTreeSha,
+        tree: treeItems
+      });
+      const newCommit = await ghApiJson(token, `/repos/${repo}/git/commits`, "POST", {
+        message: msg,
+        tree: newTree.sha,
+        parents: [latestCommitSha]
+      });
+      await ghApiJson(token, `/repos/${repo}/git/refs/heads/${branch}`, "PATCH", {
+        sha: newCommit.sha,
+        force: false
+      });
+      commitSha = newCommit.sha || "";
+    }
+
+    // Update local custom product URLs cleanly once committed
+    customProducts = publishProducts;
+    localStorage.setItem("sadbhavna_custom_products", JSON.stringify(customProducts));
+    localStorage.setItem("sadbhavna_stock_snapshot", JSON.stringify(stockData));
+    renderCustomProductsList();
+    renderStockEditor();
+
+    const shortSha = commitSha ? ` (${commitSha.slice(0, 7)})` : "";
+    markSynced(`✅ Pushed to GitHub${shortSha} • Cloudflare updating live!`);
+    showToast("🚀 Published live to GitHub & Cloudflare!");
+  } catch (err) {
+    markDirty("❌ Push failed: " + err.message);
+    showToast("❌ GitHub push failed: " + err.message);
+  } finally {
+    if (pushBtn) { pushBtn.disabled = false; pushBtn.innerText = "🚀 Save & Push Live"; }
+  }
+}
 
 function showToast(msg) {
   const el = document.getElementById("toastMsg");
@@ -820,6 +1184,7 @@ function unlockAdmin() {
   }
 
   errEl.innerText = "";
+  unlockedAdminPass = entered;
   inp.value = "";
   document.getElementById("lockScreen").style.display = "none";
   document.getElementById("adminShell").style.display = "block";
@@ -828,6 +1193,7 @@ function unlockAdmin() {
 }
 
 function lockAdmin() {
+  unlockedAdminPass = "";
   document.getElementById("adminShell").style.display = "none";
   document.getElementById("lockScreen").style.display = "flex";
   document.getElementById("pinErr").innerText = "";
@@ -855,6 +1221,7 @@ function setStoreMode(mode, btn) {
   document.querySelectorAll(".mode-pill").forEach(b => b.classList.remove("active"));
   if (btn) btn.classList.add("active");
   syncHeaderChip();
+  markDirty("🟡 Store mode changed — tap Save & Push Live");
 }
 
 function updateOfferPreview() {
@@ -868,8 +1235,30 @@ function updateOfferPreview() {
   }
 }
 
-function populateDashboard() {
+async function populateDashboard() {
   loadConfig();
+  loadGithubPrefs();
+  checkServerPublishCapability();
+  try {
+    const res = await fetch("store-config.json?t=" + Date.now(), { cache: "no-store" });
+    if (res.ok) {
+      const remote = await res.json();
+      const localTs = Number(localStorage.getItem("sadbhavna_local_updated_at") || 0);
+      if (remote && (Number(remote.updatedAt) || 0) >= localTs) {
+        adminConfig.storeMode = remote.storeMode || adminConfig.storeMode;
+        adminConfig.closedMessage = remote.closedMessage || adminConfig.closedMessage;
+        adminConfig.deliveryEta = remote.deliveryEta !== undefined ? remote.deliveryEta : adminConfig.deliveryEta;
+        adminConfig.offerBanner = remote.offerBanner !== undefined ? remote.offerBanner : adminConfig.offerBanner;
+        adminConfig.upiId = remote.upiId || adminConfig.upiId;
+        adminConfig.upiName = remote.upiName || adminConfig.upiName;
+        adminConfig.whatsappNumber = remote.whatsappNumber || adminConfig.whatsappNumber;
+        if (Array.isArray(remote.customProducts)) customProducts = remote.customProducts;
+        if (remote.priceOverrides) priceOverrides = remote.priceOverrides;
+        if (Array.isArray(remote.hiddenItems)) hiddenItems = remote.hiddenItems;
+        if (Array.isArray(remote.broadcasts)) broadcasts = remote.broadcasts;
+      }
+    }
+  } catch (e) {}
   document.querySelectorAll(".mode-pill").forEach(b => {
     b.classList.toggle("active", b.dataset.mode === adminConfig.storeMode);
   });
@@ -965,7 +1354,7 @@ function addCustomProduct() {
   renderCustomProductsList();
   updateKpis();
   renderStockEditor();
-  showToast("✅ Added " + name + " to Storefront!");
+  saveAndPublishLive("Add product: " + name, true);
 }
 
 function deleteCustomProduct(index) {
@@ -985,7 +1374,7 @@ function deleteCustomProduct(index) {
   renderCustomProductsList();
   updateKpis();
   renderStockEditor();
-  showToast("🗑️ Removed " + target.name);
+  saveAndPublishLive("Remove product: " + target.name, true);
 }
 
 function renderCustomProductsList() {
@@ -1017,21 +1406,11 @@ function renderAdminQrPreview() {
 }
 
 function saveStoreSettings() {
-  adminConfig.closedMessage = document.getElementById("closedMessageInput").value.trim() || DEFAULT_ADMIN_CONFIG.closedMessage;
-  adminConfig.deliveryEta = document.getElementById("deliveryEtaInput").value.trim();
-  adminConfig.offerBanner = document.getElementById("offerBannerInput").value.trim();
-  saveConfig();
-  syncHeaderChip();
-  showToast("✅ Store settings saved!");
+  saveAndPublishLive("Update store settings & offer banner", true);
 }
 
 function savePaymentSettings() {
-  adminConfig.upiId = document.getElementById("upiIdInput").value.trim() || DEFAULT_ADMIN_CONFIG.upiId;
-  adminConfig.upiName = document.getElementById("upiNameInput").value.trim() || DEFAULT_ADMIN_CONFIG.upiName;
-  adminConfig.whatsappNumber = document.getElementById("waNumberInput").value.replace(/\D/g, "") || DEFAULT_ADMIN_CONFIG.whatsappNumber;
-  saveConfig();
-  renderAdminQrPreview();
-  showToast("✅ UPI QR & WhatsApp updated!");
+  saveAndPublishLive("Update UPI QR & WhatsApp contact", true);
 }
 
 function fillBroadcast(text) {
@@ -1045,18 +1424,22 @@ function sendBroadcastAlert() {
     return;
   }
   try {
-    const list = JSON.parse(localStorage.getItem("sadbhavna_notifications") || "[]");
-    list.unshift({
+    const timeStr = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    const alertObj = {
       id: Date.now() + "-" + Math.random().toString(36).slice(2, 6),
       text: "📢 " + msg,
       type: "info",
-      time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      time: timeStr,
       unread: true,
-      key: ""
-    });
+      key: "broadcast-" + Date.now()
+    };
+    broadcasts.unshift(alertObj);
+    broadcasts = broadcasts.slice(0, 5);
+    const list = JSON.parse(localStorage.getItem("sadbhavna_notifications") || "[]");
+    list.unshift(alertObj);
     localStorage.setItem("sadbhavna_notifications", JSON.stringify(list.slice(0, 30)));
     document.getElementById("broadcastInput").value = "";
-    showToast("📢 Alert published!");
+    saveAndPublishLive("Broadcast live alert", true);
   } catch (e) {}
 }
 
@@ -1218,6 +1601,7 @@ function setItemPrice(idx, val) {
   const cp = customProducts.find(x => x.name === name);
   if (cp) cp.price = p;
   renderCustomProductsList();
+  markDirty("🟡 Price updated — tap Save & Push Live");
 }
 
 function stepAdminStock(idx, delta) {
@@ -1229,6 +1613,7 @@ function stepAdminStock(idx, delta) {
   updateKpis();
   renderStockEditor();
   renderCustomProductsList();
+  markDirty("🟡 Stock changed — tap Save & Push Live");
 }
 
 function setAdminStock(idx, val) {
@@ -1240,6 +1625,7 @@ function setAdminStock(idx, val) {
   updateKpis();
   renderStockEditor();
   renderCustomProductsList();
+  markDirty("🟡 Stock changed — tap Save & Push Live");
 }
 
 function toggleItemVisibility(idx) {
@@ -1252,6 +1638,7 @@ function toggleItemVisibility(idx) {
     hiddenItems.push(name);
   }
   renderStockEditor();
+  markDirty("🟡 Visibility changed — tap Save & Push Live");
 }
 
 function restockOutItems() {
@@ -1265,16 +1652,15 @@ function restockOutItems() {
   updateKpis();
   renderStockEditor();
   renderCustomProductsList();
-  showToast(count ? `⚡ Restocked ${count} empty item(s) to 10!` : "No out-of-stock items!");
+  if (count) {
+    saveAndPublishLive("Restock empty items (+10)", true);
+  } else {
+    showToast("No out-of-stock items!");
+  }
 }
 
 function saveAllInventoryChanges() {
-  localStorage.setItem("sadbhavna_local_stock", JSON.stringify(stockData));
-  localStorage.setItem("sadbhavna_price_overrides", JSON.stringify(priceOverrides));
-  localStorage.setItem("sadbhavna_hidden_items", JSON.stringify(hiddenItems));
-  localStorage.setItem("sadbhavna_custom_products", JSON.stringify(customProducts));
-  updateKpis();
-  showToast("✅ Prices, Stock & Visibility saved!");
+  saveAndPublishLive("Update stock, prices & visibility", true);
 }
 
 function copyStockSummary() {

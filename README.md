@@ -58,7 +58,7 @@ Late-night study sessions, exam preparation, and hostel living often bring sudde
 - **📍 Room-Level Delivery Routing**: Native fields for hostel block and room numbers (`📍 Room 204`) ensure accurate delivery directly to the student's door.
 - **💳 Multi-Payment + Offline UPI QR & 1-Tap Pay (`qr.js`)**: Selecting `Online` checkout generates a crisp offline SVG UPI QR code (`upi://pay`), **1-Tap Pay (GPay/PhonePe/Paytm)** deep link, Copy UPI ID button, and optional UPI Ref field.
 - **🔁 Order Again ("Buy Again") & Reorder Last**: Automatically displays frequently ordered items at the top of the storefront with 1-tap `+ Add` and **Reorder Last** actions.
-- **🔑 Store Owner Mini Admin Panel (`admin.html`)**: Standalone password/PIN-protected console (open `/admin` directly; default password `2026`) featuring live KPIs, **Add Extra Products with auto-compressed photo upload**, live **Price / Stock / Hide-Show** manager, Bulk Restock, Store Open/Holiday mode, Delivery ETA, UPI QR & WhatsApp config, Live Broadcast Alerts, Recent Orders CSV export, and Full Store JSON Backup/Restore.
+- **🔑 Store Owner Admin & GitHub → Cloudflare Auto-Deploy (`admin.html` + `store-config.json` + `/api/publish`)**: Standalone password-protected console (`/admin`, default password `2026`) with sticky **Save & Push Live** bar that commits `stock.json`, `store-config.json`, and uploaded product photos (`images/custom/`) directly to GitHub `main` so Cloudflare Pages auto-updates for all students.
 - **🌐 Bilingual English / हिंदी Mode (`i18n.js`)**: Instant `EN | हिं` switcher across Storefront, Categories, Profile, Checkout, Digital Receipt, Stock Alerts, and Bottom Navigation.
 - **🛒 Dynamic Cart & State Persistence**: Local storage powered cart keeps items intact even if the browser is closed or refreshed.
 - **📦 Order History Log**: Dedicated order tracking screen displays past orders, timestamp, items ordered, and total bills.
@@ -130,6 +130,10 @@ Late-night study sessions, exam preparation, and hostel living often bring sudde
 - **`about.html`**: The story, mission, and operating hours of Sadbhavna Mart.
 - **`policy.html`**: Store policies covering returns, damaged goods, and delivery rules.
 - **`terms.html`**: Terms and conditions of service.
+
+### 8. Standalone Owner Admin & Live GitHub Sync (`admin.html`)
+- Open `/admin` directly; prompts for Admin Password immediately (`2026` default, changeable inside).
+- Every Save action + sticky **Save & Push Live** bar saves locally and commits `stock.json`, `store-config.json`, and custom product photos (`images/custom/`) straight to `jayprakashkkk/Sadbhavna_files` (`main`) via either Cloudflare Pages Function (`/api/publish` with `GITHUB_TOKEN` env var) or browser-saved fine-grained GitHub PAT (`Contents: Read & Write`), triggering Cloudflare Pages auto-deploy automatically.
 
 ---
 

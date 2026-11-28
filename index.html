@@ -3526,15 +3526,58 @@ function syncFavIcons(){
   });
 }
 
+async function loadRemoteStoreConfig(){
+  try{
+    const res = await fetch("store-config.json?t=" + Date.now(), { cache: "no-store" });
+    if(!res.ok) return;
+    const remote = await res.json();
+    if(!remote || typeof remote !== "object") return;
+    const remoteTs = Number(remote.updatedAt) || 0;
+    const localTs = Number(localStorage.getItem("sadbhavna_local_updated_at") || 0);
+    if(remoteTs > 0 && remoteTs >= localTs){
+      let existingAdmin = {};
+      try{ existingAdmin = JSON.parse(localStorage.getItem("sadbhavna_admin_config") || "{}") || {}; }catch(e){}
+      const mergedAdmin = Object.assign({}, existingAdmin, {
+        storeMode: remote.storeMode || "auto",
+        closedMessage: remote.closedMessage || "🔒 Store Closed • Holiday Break",
+        deliveryEta: remote.deliveryEta || "",
+        offerBanner: remote.offerBanner || "",
+        upiId: remote.upiId || "7209793015@ybl",
+        upiName: remote.upiName || "Sadbhavna Mart",
+        whatsappNumber: remote.whatsappNumber || "917209793015"
+      });
+      localStorage.setItem("sadbhavna_admin_config", JSON.stringify(mergedAdmin));
+      if(Array.isArray(remote.customProducts)) localStorage.setItem("sadbhavna_custom_products", JSON.stringify(remote.customProducts));
+      if(remote.priceOverrides) localStorage.setItem("sadbhavna_price_overrides", JSON.stringify(remote.priceOverrides));
+      if(Array.isArray(remote.hiddenItems)) localStorage.setItem("sadbhavna_hidden_items", JSON.stringify(remote.hiddenItems));
+      localStorage.setItem("sadbhavna_local_updated_at", String(remoteTs));
+
+      loadAdminCatalogOverrides();
+      checkStoreStatus();
+      renderOfferBanner();
+      syncFavIcons();
+      updateCart();
+
+      if(Array.isArray(remote.broadcasts) && typeof addNotification === "function"){
+        remote.broadcasts.forEach(b => {
+          if(b && b.text) addNotification(b.text, "info", b.key || b.id || b.text);
+        });
+      }
+    }
+  }catch(e){}
+}
+
 updateCart();
 updateFav();
 syncFavIcons();
 seedInitialNotifications();
+loadRemoteStoreConfig();
 loadStock();
 
-// Live background stock polling every 30s while tab is visible
+// Live background stock + store-config polling every 30s while tab is visible
 setInterval(function(){
   if(!document.hidden){
+    loadRemoteStoreConfig();
     loadStock();
   }
 }, 30000);
