@@ -3518,17 +3518,16 @@ function syncStockNotifications(prevMap, nextMap){
     const prevQty = Number(prevMap[item]) || 0;
     if(stockInitialized && prevQty <= 0 && nextQty > 0){
       addNotification("🎉 Back in Stock: " + item + " (" + nextQty + " available)", "success", "restock-" + item + "-" + nextQty);
-    }else if(nextQty <= 0){
-      addNotification("🚫 Out of Stock: " + item + " is sold out", "warn", "oos-" + item);
-    }else if(nextQty <= 5){
-      addNotification("⚠️ Low Stock: " + item + " — Only " + nextQty + " left!", "warn", "low-" + item + "-" + nextQty);
     }
   }
   stockInitialized = true;
 }
 
 function seedInitialNotifications(){
-  notifications = notifications.map(normalizeNotif);
+  notifications = notifications
+    .map(normalizeNotif)
+    .filter(n => !String(n.key || "").startsWith("low-") && !String(n.key || "").startsWith("oos-") && !String(n.text || "").includes("Low Stock:") && !String(n.text || "").includes("Out of Stock:"));
+  saveState();
   if(notifications.length === 0){
     addNotification("📚 Stationery Live: Linc Glycer, Pentonic ₹10/₹20 & Practical Files ₹40–₹60", "info", "seed-stationery");
     const openMsg = isStoreOpen()
