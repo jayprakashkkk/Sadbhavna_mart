@@ -973,6 +973,7 @@ function saveEverythingLocally(notify) {
   collectCurrentFormInputs();
   const ts = Date.now();
   localStorage.setItem("sadbhavna_local_updated_at", String(ts));
+  localStorage.setItem("sadbhavna_stock_updated_at", String(ts));
   saveConfig();
   localStorage.setItem("sadbhavna_local_stock", JSON.stringify(stockData));
   localStorage.setItem("sadbhavna_price_overrides", JSON.stringify(priceOverrides));
@@ -1122,7 +1123,7 @@ async function saveAndPublishLive(commitMessage, isAutoTrigger = false) {
     // Update local custom product URLs cleanly once committed
     customProducts = publishProducts;
     localStorage.setItem("sadbhavna_custom_products", JSON.stringify(customProducts));
-    localStorage.setItem("sadbhavna_stock_snapshot", JSON.stringify(stockData));
+    localStorage.setItem("sadbhavna_local_stock", JSON.stringify(stockData));
     renderCustomProductsList();
     renderStockEditor();
 
@@ -1610,6 +1611,7 @@ function stepAdminStock(idx, delta) {
   if (!key) return;
   stockData[key] = Math.max(0, (Number(stockData[key]) || 0) + delta);
   localStorage.setItem("sadbhavna_local_stock", JSON.stringify(stockData));
+  localStorage.setItem("sadbhavna_stock_updated_at", String(Date.now()));
   updateKpis();
   renderStockEditor();
   renderCustomProductsList();
@@ -1622,6 +1624,7 @@ function setAdminStock(idx, val) {
   if (!key) return;
   stockData[key] = Math.max(0, parseInt(val, 10) || 0);
   localStorage.setItem("sadbhavna_local_stock", JSON.stringify(stockData));
+  localStorage.setItem("sadbhavna_stock_updated_at", String(Date.now()));
   updateKpis();
   renderStockEditor();
   renderCustomProductsList();

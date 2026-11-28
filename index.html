@@ -2347,9 +2347,13 @@ async function loadStock(){
       const baseStock = await res.json();
       const rawSnapshot = JSON.stringify(baseStock);
       const prevSnapshot = localStorage.getItem("sadbhavna_stock_snapshot");
+      const remoteCfgTs = Number(localStorage.getItem("sadbhavna_remote_updated_at") || 0);
+      const localStockTs = Number(localStorage.getItem("sadbhavna_stock_updated_at") || 0);
       if(prevSnapshot !== rawSnapshot){
         localStorage.setItem("sadbhavna_stock_snapshot", rawSnapshot);
-        localStorage.setItem("sadbhavna_local_stock", rawSnapshot);
+        if(remoteCfgTs >= localStockTs || !localStockTs){
+          localStorage.setItem("sadbhavna_local_stock", rawSnapshot);
+        }
       }
       const localOverrides = JSON.parse(localStorage.getItem("sadbhavna_local_stock") || rawSnapshot);
       stockMap = Object.assign({}, baseStock, localOverrides);
@@ -3550,6 +3554,7 @@ async function loadRemoteStoreConfig(){
       if(Array.isArray(remote.customProducts)) localStorage.setItem("sadbhavna_custom_products", JSON.stringify(remote.customProducts));
       if(remote.priceOverrides) localStorage.setItem("sadbhavna_price_overrides", JSON.stringify(remote.priceOverrides));
       if(Array.isArray(remote.hiddenItems)) localStorage.setItem("sadbhavna_hidden_items", JSON.stringify(remote.hiddenItems));
+      localStorage.setItem("sadbhavna_remote_updated_at", String(remoteTs));
       localStorage.setItem("sadbhavna_local_updated_at", String(remoteTs));
 
       loadAdminCatalogOverrides();
@@ -3581,6 +3586,28 @@ setInterval(function(){
     loadStock();
   }
 }, 30000);
+
+// Instant cross-tab & focus sync (when editing in Admin Console tab)
+window.addEventListener("storage", function(ev){
+  if(!ev.key || ev.key.startsWith("sadbhavna_")){
+    loadAdminCatalogOverrides();
+    try{
+      const localOverrides = JSON.parse(localStorage.getItem("sadbhavna_local_stock") || "{}");
+      stockMap = Object.assign({}, stockMap, localOverrides);
+    }catch(e){}
+    checkStoreStatus();
+    renderOfferBanner();
+    clampCartToStock();
+    updateCart();
+  }
+});
+
+document.addEventListener("visibilitychange", function(){
+  if(!document.hidden){
+    loadRemoteStoreConfig();
+    loadStock();
+  }
+});
 
 </script>
 

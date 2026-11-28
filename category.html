@@ -501,9 +501,13 @@ async function loadStock() {
       const baseStock = await res.json();
       const rawSnapshot = JSON.stringify(baseStock);
       const prevSnapshot = localStorage.getItem("sadbhavna_stock_snapshot");
+      const remoteCfgTs = Number(localStorage.getItem("sadbhavna_remote_updated_at") || 0);
+      const localStockTs = Number(localStorage.getItem("sadbhavna_stock_updated_at") || 0);
       if (prevSnapshot !== rawSnapshot) {
         localStorage.setItem("sadbhavna_stock_snapshot", rawSnapshot);
-        localStorage.setItem("sadbhavna_local_stock", rawSnapshot);
+        if (remoteCfgTs >= localStockTs || !localStockTs) {
+          localStorage.setItem("sadbhavna_local_stock", rawSnapshot);
+        }
       }
       const localOverrides = JSON.parse(localStorage.getItem("sadbhavna_local_stock") || rawSnapshot);
       stockMap = Object.assign({}, baseStock, localOverrides);
@@ -644,6 +648,7 @@ async function loadRemoteStoreConfigCat() {
         hiddenItems = remote.hiddenItems;
         localStorage.setItem("sadbhavna_hidden_items", JSON.stringify(hiddenItems));
       }
+      localStorage.setItem("sadbhavna_remote_updated_at", String(remoteTs));
       localStorage.setItem("sadbhavna_local_updated_at", String(remoteTs));
       renderItems();
       updateBadge();
@@ -654,6 +659,17 @@ async function loadRemoteStoreConfigCat() {
 updateBadge();
 loadRemoteStoreConfigCat();
 loadStock();
+
+window.addEventListener("storage", function (ev) {
+  if (!ev.key || ev.key.startsWith("sadbhavna_")) {
+    try {
+      const localOverrides = JSON.parse(localStorage.getItem("sadbhavna_local_stock") || "{}");
+      stockMap = Object.assign({}, stockMap, localOverrides);
+    } catch (e) {}
+    renderItems();
+    updateBadge();
+  }
+});
 </script>
 
 </body>
