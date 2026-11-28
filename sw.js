@@ -1,14 +1,17 @@
-const CACHE_NAME = 'sadbhavna-mart-pwa-v3';
+const CACHE_NAME = 'sadbhavna-mart-pwa-v4';
 const APP_SHELL = [
   './',
   './index.html',
   './manifest.json',
   './nav-bar.css',
   './pwa.js',
+  './i18n.js',
+  './qr.js',
   './category.html',
   './orders.html',
   './profile.html',
   './wishlist.html',
+  './admin.html',
   './about.html',
   './policy.html',
   './terms.html',

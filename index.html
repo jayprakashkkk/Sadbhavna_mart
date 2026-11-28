@@ -18,6 +18,8 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Sadbhavna Mart">
+<script src="qr.js"></script>
+<script src="i18n.js" defer></script>
 <script src="pwa.js" defer></script>
 
 <link rel="stylesheet"
@@ -585,6 +587,187 @@ font-size:12px;
 font-weight:bold;
 cursor:pointer;
 flex-shrink:0;
+}
+
+/* LANGUAGE PILL & ADMIN OFFER BANNER */
+.lang-toggle-btn{
+padding:5px 10px;
+border-radius:999px;
+border:1px solid rgba(0,255,153,0.4);
+background:rgba(0,255,153,0.1);
+color:#00ff99;
+font-size:11.5px;
+font-weight:800;
+cursor:pointer;
+letter-spacing:0.3px;
+white-space:nowrap;
+}
+#adminOfferBanner{
+display:none;
+margin:4px 12px 6px;
+padding:10px 14px;
+border-radius:12px;
+background:linear-gradient(90deg,rgba(245,158,11,0.18),rgba(0,255,153,0.16));
+border:1px solid rgba(251,191,36,0.45);
+color:#fef3c7;
+font-size:13px;
+font-weight:700;
+text-align:center;
+}
+
+/* ORDER AGAIN STRIP */
+.order-again-section{
+display:none;
+padding:4px 12px 10px;
+}
+.order-again-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:8px;
+gap:8px;
+}
+.order-again-title{
+font-size:13.5px;
+font-weight:800;
+color:#38bdf8;
+letter-spacing:0.2px;
+}
+.reorder-last-btn{
+border:1px solid rgba(56,189,248,0.45);
+background:rgba(56,189,248,0.12);
+color:#38bdf8;
+padding:5px 11px;
+border-radius:999px;
+font-size:11.5px;
+font-weight:800;
+cursor:pointer;
+}
+.order-again-row{
+display:flex;
+gap:10px;
+overflow-x:auto;
+scrollbar-width:none;
+padding-bottom:4px;
+}
+.order-again-row::-webkit-scrollbar{display:none;}
+.reorder-card{
+flex-shrink:0;
+display:flex;
+align-items:center;
+gap:10px;
+padding:8px 10px;
+border-radius:14px;
+background:rgba(56,189,248,0.08);
+border:1px solid rgba(56,189,248,0.25);
+min-width:215px;
+}
+.reorder-card img{
+width:42px;
+height:42px;
+border-radius:10px;
+object-fit:contain;
+background:#fff;
+padding:3px;
+flex-shrink:0;
+}
+.reorder-meta{
+flex:1;
+min-width:0;
+}
+.reorder-meta h4{
+font-size:13px;
+color:#f8fafc;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+.reorder-meta span{
+font-size:11.5px;
+color:#94a3b8;
+}
+.reorder-add{
+border:none;
+background:#00ff99;
+color:#000;
+padding:6px 11px;
+border-radius:9px;
+font-size:12px;
+font-weight:800;
+cursor:pointer;
+flex-shrink:0;
+}
+
+/* UPI QR CHECKOUT BOX */
+.upi-pay-box{
+margin:6px 0 14px;
+padding:14px;
+border-radius:16px;
+background:rgba(0,255,153,0.07);
+border:1px solid rgba(0,255,153,0.32);
+text-align:center;
+}
+.upi-box-title{
+font-size:13.5px;
+font-weight:800;
+color:#00ff99;
+margin-bottom:8px;
+}
+.upi-amount-pill{
+display:inline-block;
+background:#020617;
+border:1px solid rgba(0,255,153,0.4);
+color:#fff;
+padding:4px 12px;
+border-radius:999px;
+font-size:13px;
+font-weight:800;
+margin-bottom:10px;
+}
+.upi-qr-frame{
+display:inline-flex;
+padding:8px;
+border-radius:12px;
+background:#ffffff;
+box-shadow:0 8px 20px rgba(0,0,0,0.35);
+margin-bottom:10px;
+}
+.upi-id-text{
+font-size:12px;
+color:#cbd5e1;
+margin-bottom:10px;
+word-break:break-all;
+}
+.upi-actions{
+display:flex;
+flex-direction:column;
+gap:8px;
+margin-bottom:10px;
+}
+.upi-pay-btn{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+width:100%;
+padding:11px 14px;
+border-radius:11px;
+background:#00ff99;
+color:#000;
+font-size:14px;
+font-weight:800;
+text-decoration:none;
+}
+.upi-copy-btn{
+width:100%;
+padding:9px 12px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,0.18);
+background:rgba(255,255,255,0.08);
+color:#fff;
+font-size:13px;
+font-weight:700;
+cursor:pointer;
 }
 
 /* MENU */
@@ -1203,9 +1386,11 @@ window.addEventListener("DOMContentLoaded", function () {
 
 <div class="top-bar">
 
-<h1>🍟 Sadbhavna Mart</h1>
+<h1 data-i18n="brandTitle">🍟 Sadbhavna Mart</h1>
 
 <div class="top-icons">
+
+<button class="lang-toggle-btn" data-lang-toggle onclick="toggleStoreLang()">EN | हिं</button>
 
 <div class="notification-icon"
 onclick="openNotification()">
@@ -1239,6 +1424,7 @@ onclick="openCart()">
 
 <input type="text"
 id="searchInput"
+data-i18n-placeholder="searchPlaceholder"
 placeholder="Search snacks..."
 onkeyup="searchItems()">
 
@@ -1248,9 +1434,9 @@ onkeyup="searchItems()">
 
 <section class="hero">
 
-<h2>Hostel Snacks Corner 😎</h2>
+<h2 data-i18n="heroTitle">Hostel Snacks Corner 😎</h2>
 
-<p>Order snacks instantly on WhatsApp • 10–15 min room delivery</p>
+<p data-i18n="heroSub">Order snacks instantly on WhatsApp • 10–15 min room delivery</p>
 
 </section>
 
@@ -1263,90 +1449,102 @@ onkeyup="searchItems()">
   </div>
 </div>
 
+<!-- ADMIN DAILY OFFER BANNER -->
+<div id="adminOfferBanner"></div>
+
 <!-- QUICK CATEGORY FILTER PILLS -->
 <div class="filter-strip" id="homeFilterStrip">
-  <button class="filter-pill active" onclick="setHomeFilter('All', this)">All</button>
-  <button class="filter-pill" onclick="setHomeFilter('Biscuits & Snacks', this)">🍪 Snacks</button>
-  <button class="filter-pill" onclick="setHomeFilter('Instant Meals', this)">🍜 Meals</button>
-  <button class="filter-pill" onclick="setHomeFilter('Beverages & Dairy', this)">☕ Drinks</button>
-  <button class="filter-pill" onclick="setHomeFilter('Daily Pantry', this)">🧂 Pantry</button>
-  <button class="filter-pill" onclick="setHomeFilter('Stationery', this)">📚 Stationery</button>
-  <button class="filter-pill" onclick="setHomeFilter('In Stock', this)">✅ In Stock</button>
+  <button class="filter-pill active" data-i18n="filterAll" onclick="setHomeFilter('All', this)">All</button>
+  <button class="filter-pill" data-i18n="filterSnacks" onclick="setHomeFilter('Biscuits & Snacks', this)">🍪 Snacks</button>
+  <button class="filter-pill" data-i18n="filterMeals" onclick="setHomeFilter('Instant Meals', this)">🍜 Meals</button>
+  <button class="filter-pill" data-i18n="filterDrinks" onclick="setHomeFilter('Beverages & Dairy', this)">☕ Drinks</button>
+  <button class="filter-pill" data-i18n="filterPantry" onclick="setHomeFilter('Daily Pantry', this)">🧂 Pantry</button>
+  <button class="filter-pill" data-i18n="filterStationery" onclick="setHomeFilter('Stationery', this)">📚 Stationery</button>
+  <button class="filter-pill" data-i18n="filterInStock" onclick="setHomeFilter('In Stock', this)">✅ In Stock</button>
+</div>
+
+<!-- ORDER AGAIN / BUY AGAIN -->
+<div class="order-again-section" id="orderAgainSection">
+  <div class="order-again-head">
+    <div class="order-again-title" data-i18n="orderAgainTitle">🔁 Order Again</div>
+    <button class="reorder-last-btn" data-i18n="reorderLastBtn" onclick="reorderLastOrder()">🔁 Reorder Last</button>
+  </div>
+  <div class="order-again-row" id="orderAgainRow"></div>
 </div>
 
 <!-- MIDNIGHT COMBOS -->
 <div class="combos-section">
-  <div class="combos-title">⚡ Quick Hostel Combos (1-Tap Add)</div>
+  <div class="combos-title" data-i18n="combosTitle">⚡ Quick Hostel Combos (1-Tap Add)</div>
   <div class="combos-row">
     <div class="combo-card">
       <div class="combo-info">
         <h3>🍜 Study Fuel</h3>
         <p>Maggi + Nescafe • ₹48</p>
       </div>
-      <button class="combo-btn" onclick="addCombo(['Maggi Double Masala','Nescafe Coffee'], 'Study Fuel')">+ Add</button>
+      <button class="combo-btn" data-i18n="comboAdd" onclick="addCombo(['Maggi Double Masala','Nescafe Coffee'], 'Study Fuel')">+ Add</button>
     </div>
     <div class="combo-card">
       <div class="combo-info">
         <h3>☕ Chai Break</h3>
         <p>Tata Tea + Parle G • ₹70</p>
       </div>
-      <button class="combo-btn" onclick="addCombo(['Tata Tea','Parle G'], 'Chai Break')">+ Add</button>
+      <button class="combo-btn" data-i18n="comboAdd" onclick="addCombo(['Tata Tea','Parle G'], 'Chai Break')">+ Add</button>
     </div>
     <div class="combo-card">
       <div class="combo-info">
         <h3>🍿 Movie Munch</h3>
         <p>Kurkure + Tedhe + Bourbon • ₹70</p>
       </div>
-      <button class="combo-btn" onclick="addCombo(['Kurkure','Tedhe Medhe','Bourbon'], 'Movie Munch')">+ Add</button>
+      <button class="combo-btn" data-i18n="comboAdd" onclick="addCombo(['Kurkure','Tedhe Medhe','Bourbon'], 'Movie Munch')">+ Add</button>
     </div>
     <div class="combo-card">
       <div class="combo-info">
         <h3>🥤 Chill &amp; Crunch</h3>
         <p>Coca-Cola + Lays Classic • ₹60</p>
       </div>
-      <button class="combo-btn" onclick="addCombo(['Coca-Cola','Lays Classic'], 'Chill & Crunch')">+ Add</button>
+      <button class="combo-btn" data-i18n="comboAdd" onclick="addCombo(['Coca-Cola','Lays Classic'], 'Chill & Crunch')">+ Add</button>
     </div>
     <div class="combo-card">
       <div class="combo-info">
         <h3>🍫 Sweet Craving</h3>
         <p>Dairy Milk + Oreo • ₹70</p>
       </div>
-      <button class="combo-btn" onclick="addCombo(['Dairy Milk','Oreo'], 'Sweet Craving')">+ Add</button>
+      <button class="combo-btn" data-i18n="comboAdd" onclick="addCombo(['Dairy Milk','Oreo'], 'Sweet Craving')">+ Add</button>
     </div>
     <div class="combo-card">
       <div class="combo-info">
         <h3>🥭 Cup &amp; Sip</h3>
         <p>Cup Maggi + Frooti • ₹70</p>
       </div>
-      <button class="combo-btn" onclick="addCombo(['Cup Maggi','Frooti'], 'Cup & Sip')">+ Add</button>
+      <button class="combo-btn" data-i18n="comboAdd" onclick="addCombo(['Cup Maggi','Frooti'], 'Cup & Sip')">+ Add</button>
     </div>
     <div class="combo-card">
       <div class="combo-info">
         <h3>🍞 Morning Toast</h3>
         <p>Bread + Milk + Good Day • ₹95</p>
       </div>
-      <button class="combo-btn" onclick="addCombo(['Bread','Milk','Good Day'], 'Morning Toast')">+ Add</button>
+      <button class="combo-btn" data-i18n="comboAdd" onclick="addCombo(['Bread','Milk','Good Day'], 'Morning Toast')">+ Add</button>
     </div>
     <div class="combo-card">
       <div class="combo-info">
         <h3>🌙 Exam Night Pack</h3>
         <p>YiPPee + BRU + Good Day • ₹70</p>
       </div>
-      <button class="combo-btn" onclick="addCombo(['Yippee Noodles','BRU Coffee','Good Day'], 'Exam Night Pack')">+ Add</button>
+      <button class="combo-btn" data-i18n="comboAdd" onclick="addCombo(['Yippee Noodles','BRU Coffee','Good Day'], 'Exam Night Pack')">+ Add</button>
     </div>
     <div class="combo-card">
       <div class="combo-info">
         <h3>📝 Exam Ready Pack</h3>
         <p>Pentonic Blue &amp; Black + File • ₹60</p>
       </div>
-      <button class="combo-btn" onclick="addCombo(['Pentonic Blue','Pentonic Black','Practical File (100p)'], 'Exam Ready Pack')">+ Add</button>
+      <button class="combo-btn" data-i18n="comboAdd" onclick="addCombo(['Pentonic Blue','Pentonic Black','Practical File (100p)'], 'Exam Ready Pack')">+ Add</button>
     </div>
     <div class="combo-card">
       <div class="combo-info">
         <h3>✒️ Assignment Duo</h3>
         <p>Linc Glycer Blue + File (140p) • ₹60</p>
       </div>
-      <button class="combo-btn" onclick="addCombo(['Linc Glycer Blue','Practical File (140p)'], 'Assignment Duo')">+ Add</button>
+      <button class="combo-btn" data-i18n="comboAdd" onclick="addCombo(['Linc Glycer Blue','Practical File (140p)'], 'Assignment Duo')">+ Add</button>
     </div>
   </div>
 </div>
@@ -1544,7 +1742,7 @@ id="cartPopup">
 
 <div class="cart-content">
 
-<h2>🛒 Your Cart</h2>
+<h2 data-i18n="cartTitle">🛒 Your Cart</h2>
 
 <div id="popup-cart-items">
 Cart Empty
@@ -1552,16 +1750,17 @@ Cart Empty
 
 <!-- SMART CART UPSELL -->
 <div class="upsell-section" id="cartUpsellBox" style="display:none;">
-  <div class="upsell-title">✨ Add with this</div>
+  <div class="upsell-title" data-i18n="upsellTitle">✨ Add with this</div>
   <div class="upsell-row" id="cartUpsellRow"></div>
 </div>
 
 <div class="cart-summary-box" id="cartSummaryBox" style="display:none;">
-  <span>Total Payable</span>
+  <span data-i18n="totalLabel">Total Payable</span>
   <span id="cartTotalValue">₹0</span>
 </div>
 
 <button class="order-btn"
+data-i18n="placeOrder"
 onclick="placeOrder()">
 
 Place Order on WhatsApp
@@ -1570,6 +1769,7 @@ Place Order on WhatsApp
 
 <button class="close-btn"
 style="background:rgba(255,255,255,0.12);"
+data-i18n="clearCart"
 onclick="clearCartItems()">
 
 Clear Cart
@@ -1577,6 +1777,7 @@ Clear Cart
 </button>
 
 <button class="close-btn"
+data-i18n="close"
 onclick="closeCart()">
 
 Close
@@ -1598,51 +1799,70 @@ id="orderPopup">
 
 <div class="cart-content">
 
-<h2>🧾 Order Details</h2>
+<h2 data-i18n="orderDetailsTitle">🧾 Order Details</h2>
 
 <input type="text"
 id="customerName"
+data-i18n-placeholder="namePlaceholder"
 placeholder="Enter Your Name"
 class="order-input">
 
 <input type="text"
 id="roomNumber"
+data-i18n-placeholder="roomPlaceholder"
 placeholder="Enter Room Number"
 class="order-input">
 
 <input type="text"
 id="hostelName"
+data-i18n-placeholder="hostelPlaceholder"
 placeholder="Enter Hostel Name"
 class="order-input">
 
 <input type="number"
 id="phoneNumber"
+data-i18n-placeholder="phonePlaceholder"
 placeholder="Enter Phone Number"
 class="order-input">
 
 <input type="text"
 id="orderNote"
+data-i18n-placeholder="notePlaceholder"
 placeholder="Delivery Note (Optional: e.g. Call at gate)"
 class="order-input">
 
 <select id="paymentMode"
-class="order-input">
+class="order-input"
+onchange="toggleUpiBox()">
 
-<option value="">
+<option value="" data-i18n="paymentChoose">
 Choose Payment Mode
 </option>
 
-<option>
+<option value="Cash" data-i18n="paymentCash">
 Cash
 </option>
 
-<option>
+<option value="Online" data-i18n="paymentOnline">
 Online
 </option>
 
 </select>
 
+<div id="upiPayBox" class="upi-pay-box" style="display:none;">
+  <div class="upi-box-title" data-i18n="upiTitle">⚡ Instant UPI Scan &amp; Pay</div>
+  <div class="upi-amount-pill" id="upiAmountPill">Pay ₹0</div>
+  <div class="upi-qr-frame" id="upiQrBox"></div>
+  <div class="upi-id-text">UPI ID: <strong id="upiIdDisplay">7209793015@ybl</strong></div>
+  <div class="upi-actions">
+    <a href="#" id="upiPayLink" class="upi-pay-btn" data-i18n="upiPayNow">📲 Pay with GPay / PhonePe / Paytm</a>
+    <button type="button" class="upi-copy-btn" data-i18n="upiCopy" onclick="copyUpiId()">📋 Copy UPI ID</button>
+  </div>
+  <input type="text" id="upiTxnId" data-i18n-placeholder="upiRefPlaceholder" placeholder="UPI Ref / Last 4 digits (Optional)" class="order-input" style="margin-bottom:0;">
+</div>
+
 <button class="order-btn"
+data-i18n="confirmOrder"
 onclick="finalPlaceOrder()">
 
 Confirm Order
@@ -1650,6 +1870,7 @@ Confirm Order
 </button>
 
 <button class="close-btn"
+data-i18n="close"
 onclick="closeOrderForm()">
 
 Close
@@ -1665,7 +1886,7 @@ Close
 <div id="receiptModal" role="dialog" aria-label="Digital Order Receipt">
   <div class="receipt-head">
     <div class="receipt-check"><i class="fa-solid fa-check"></i></div>
-    <h2>Order Ready on WhatsApp!</h2>
+    <h2 data-i18n="receiptDone">Order Ready on WhatsApp!</h2>
     <span class="receipt-id" id="receiptOrderId">ORD-00000</span>
   </div>
   <hr class="receipt-divider">
@@ -1674,14 +1895,14 @@ Close
   <div class="receipt-items" id="receiptItems"></div>
   <hr class="receipt-divider">
   <div class="receipt-total">
-    <span>Total Payable</span>
+    <span data-i18n="receiptTotal">Total Payable</span>
     <span id="receiptTotal">₹0</span>
   </div>
   <div class="receipt-actions">
-    <a href="#" target="_blank" id="receiptWaBtn" class="wa-reopen-btn">
+    <a href="#" target="_blank" id="receiptWaBtn" class="wa-reopen-btn" data-i18n="receiptWaBtn">
       <i class="fa-brands fa-whatsapp"></i> Open WhatsApp Order
     </a>
-    <button class="close-btn" style="margin-top:0;background:rgba(255,255,255,0.12);" onclick="closeReceipt()">Done</button>
+    <button class="close-btn" style="margin-top:0;background:rgba(255,255,255,0.12);" data-i18n="receiptCloseBtn" onclick="closeReceipt()">Done</button>
   </div>
 </div>
 
@@ -1696,7 +1917,7 @@ id="favPopup">
 
 <div class="cart-content">
 
-<h2>❤️ Favourite</h2>
+<h2 data-i18n="favTitle">❤️ Favourite</h2>
 
 <div id="fav-items">
 
@@ -1707,6 +1928,7 @@ No favourite items yet
 </div>
 
 <button class="close-btn"
+data-i18n="close"
 onclick="closeFav()">
 Close
 </button>
@@ -1985,13 +2207,13 @@ function renderStockUI(){
     if(qty <= 0){
       card.classList.add("out-of-stock");
       msgEl.className = "stock-msg out";
-      msgEl.innerText = "Out of Stock";
+      msgEl.innerText = window.SadbhavnaI18n ? window.SadbhavnaI18n.t("outOfStockText") : "Out of Stock";
       if(!badgeEl){
         badgeEl = document.createElement("div");
         badgeEl.className = "out-badge";
-        badgeEl.innerText = "OUT OF STOCK";
         card.appendChild(badgeEl);
       }
+      badgeEl.innerText = window.SadbhavnaI18n ? window.SadbhavnaI18n.t("outOfStockBadge") : "OUT OF STOCK";
       if(topCtrl) topCtrl.innerHTML = `<button class="add-btn" disabled>+</button>`;
     }else{
       card.classList.remove("out-of-stock");
@@ -2000,7 +2222,11 @@ function renderStockUI(){
       // Only show stock message when <= 5 left
       if(qty <= 5){
         msgEl.className = "stock-msg low";
-        msgEl.innerText = "Only " + qty + " left";
+        if(window.SadbhavnaI18n){
+          msgEl.innerText = window.SadbhavnaI18n.t("onlyLeftPrefix") + qty + window.SadbhavnaI18n.t("onlyLeftSuffix");
+        }else{
+          msgEl.innerText = "Only " + qty + " left";
+        }
       }else{
         msgEl.className = "stock-msg";
         msgEl.innerText = "";
@@ -2022,6 +2248,7 @@ function renderStockUI(){
     }
   });
   searchItems();
+  if(typeof renderOrderAgain === "function") renderOrderAgain();
 }
 
 function clampCartToStock(){
@@ -2193,7 +2420,8 @@ Remove
 }
 
 if(html===""){
-html = `<p style="text-align:center;color:#94a3b8;padding:18px 0;">Your cart is empty 🛒</p>`;
+  const emptyText = window.SadbhavnaI18n ? window.SadbhavnaI18n.t("cartEmpty") : "Your cart is empty";
+  html = `<p style="text-align:center;color:#94a3b8;padding:18px 0;">${emptyText} 🛒</p>`;
 }
 
 document.getElementById(
@@ -2309,6 +2537,68 @@ openOrderForm();
 
 }
 
+function getAdminConfig(){
+  const defaults = {
+    storeMode: "auto",
+    closedMessage: "🔒 Store Closed • Holiday Break",
+    offerBanner: "",
+    upiId: "7209793015@ybl",
+    upiName: "Sadbhavna Mart",
+    whatsappNumber: "917209793015"
+  };
+  try{
+    const saved = JSON.parse(localStorage.getItem("sadbhavna_admin_config") || "null");
+    if(saved && typeof saved === "object") return Object.assign({}, defaults, saved);
+  }catch(e){}
+  return defaults;
+}
+
+function getCartTotalAmount(){
+  let sum = 0;
+  for(let item in cart){
+    if(cart[item] > 0) sum += cart[item] * getPrice(item);
+  }
+  return sum;
+}
+
+function toggleUpiBox(){
+  const mode = document.getElementById("paymentMode").value;
+  const box = document.getElementById("upiPayBox");
+  if(!box) return;
+  if(mode !== "Online"){
+    box.style.display = "none";
+    return;
+  }
+  const cfg = getAdminConfig();
+  const total = getCartTotalAmount();
+  const upiId = cfg.upiId || "7209793015@ybl";
+  const upiName = cfg.upiName || "Sadbhavna Mart";
+  const upiUri = "upi://pay?pa=" + encodeURIComponent(upiId) +
+    "&pn=" + encodeURIComponent(upiName) +
+    "&am=" + encodeURIComponent(total) +
+    "&cu=INR&tn=" + encodeURIComponent("Sadbhavna Mart Order");
+
+  document.getElementById("upiAmountPill").innerText = (window.SadbhavnaI18n && window.SadbhavnaI18n.getLang() === "Hindi" ? "भुगतान राशि: ₹" : "Pay ₹") + total;
+  document.getElementById("upiIdDisplay").innerText = upiId;
+  document.getElementById("upiPayLink").href = upiUri;
+
+  const qrBox = document.getElementById("upiQrBox");
+  if(qrBox && window.SadbhavnaQR){
+    qrBox.innerHTML = window.SadbhavnaQR.renderSVG(upiUri, 168);
+  }
+  box.style.display = "block";
+}
+
+function copyUpiId(){
+  const cfg = getAdminConfig();
+  const upiId = cfg.upiId || "7209793015@ybl";
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(upiId).then(() => showToast("📋 UPI ID copied: " + upiId)).catch(() => showToast(upiId));
+  }else{
+    showToast("UPI ID: " + upiId);
+  }
+}
+
 function openOrderForm(){
 
 try{
@@ -2318,6 +2608,8 @@ try{
   if(savedProfile.hostel && !document.getElementById("hostelName").value) document.getElementById("hostelName").value = savedProfile.hostel;
   if(savedProfile.phone && !document.getElementById("phoneNumber").value) document.getElementById("phoneNumber").value = savedProfile.phone;
 }catch(e){}
+
+toggleUpiBox();
 
 document.getElementById(
 "orderPopup"
@@ -2371,6 +2663,9 @@ document.getElementById(
 let noteEl = document.getElementById("orderNote");
 let note = noteEl ? noteEl.value.trim() : "";
 
+let upiRefEl = document.getElementById("upiTxnId");
+let upiRef = (payment === "Online" && upiRefEl) ? upiRefEl.value.trim() : "";
+
 if(
 !name ||
 !room ||
@@ -2401,6 +2696,10 @@ order +=
 
 order +=
 "💳 Payment: " + encodeURIComponent(payment) + "%0A";
+
+if(upiRef){
+order += "🔖 UPI Ref: " + encodeURIComponent(upiRef) + "%0A";
+}
 
 if(note){
 order += "📝 Note: " + encodeURIComponent(note) + "%0A";
@@ -2454,9 +2753,11 @@ if(usingLiveStockApi){
   localStorage.setItem("sadbhavna_local_stock", JSON.stringify(stockMap));
 }
 
+const cfg = getAdminConfig();
+const waNumber = (cfg.whatsappNumber || "917209793015").replace(/\D/g, "") || "917209793015";
 const orderId = "ORD-" + Date.now().toString().slice(-5);
 const orderDate = new Date().toLocaleString();
-const waUrl = "https://wa.me/917209793015?text=" + order;
+const waUrl = "https://wa.me/" + waNumber + "?text=" + order;
 const receiptLines = [];
 for(let item in orderedMap){
   receiptLines.push({ name: item, qty: orderedMap[item], total: orderedMap[item] * getPrice(item) });
@@ -2470,7 +2771,7 @@ try{
     room: room,
     hostel: hostel,
     phone: phone,
-    payment: payment,
+    payment: payment + (upiRef ? " (" + upiRef + ")" : ""),
     items: orderedItems.join(", "),
     date: orderDate
   });
@@ -2481,10 +2782,12 @@ try{
 window.open(waUrl, "_blank");
 
 for(let item in cart){ cart[item] = 0; }
+if(upiRefEl) upiRefEl.value = "";
 addNotification("Order " + orderId + " placed on WhatsApp (₹" + orderSubtotal + ")");
 saveState();
 updateCart();
 renderStockUI();
+renderOrderAgain();
 closeOrderForm();
 closeCart();
 
@@ -2712,52 +3015,167 @@ cards[i].style.display = (matchSearch && matchFilter) ? "flex" : "none";
 /* STORE TIMING */
 
 function isStoreOpen(){
+  const cfg = getAdminConfig();
+  if(cfg.storeMode === "open") return true;
+  if(cfg.storeMode === "closed") return false;
 
-let hour = new Date().getHours();
-
-/*
-
-Store Closed:
-3 AM to 10 AM
-
-*/
-
-if(hour >= 3 && hour < 10){
-
-return false;
-
-}
-
-return true;
-
+  let hour = new Date().getHours();
+  /* Store Closed: 3 AM to 10 AM */
+  if(hour >= 3 && hour < 10){
+    return false;
+  }
+  return true;
 }
 
 function checkStoreStatus(){
+  let oldStatus = document.getElementById("store-status");
+  if(oldStatus) oldStatus.remove();
 
-let oldStatus =
-document.getElementById("store-status");
+  const hero = document.querySelector(".hero");
+  if(!hero) return;
 
-if(oldStatus){
-oldStatus.remove();
+  const cfg = getAdminConfig();
+  let status = document.createElement("div");
+  status.id = "store-status";
+  if(!isStoreOpen()){
+    status.className = "store-closed-banner";
+    status.innerHTML = (cfg.storeMode === "closed" && cfg.closedMessage)
+      ? cfg.closedMessage
+      : (window.SadbhavnaI18n ? window.SadbhavnaI18n.t("closedNow") : "🔒 Store Closed • Opens at 10 AM");
+  }else{
+    status.className = "store-open-pill";
+    status.innerHTML = window.SadbhavnaI18n ? window.SadbhavnaI18n.t("openNow") : "🟢 Open Now • Till 3 AM";
+  }
+  hero.appendChild(status);
 }
 
-const hero = document.querySelector(".hero");
-if(!hero) return;
-
-let status = document.createElement("div");
-status.id = "store-status";
-if(!isStoreOpen()){
-  status.className = "store-closed-banner";
-  status.innerHTML = "🔒 Store Closed • Opens at 10 AM";
-}else{
-  status.className = "store-open-pill";
-  status.innerHTML = "🟢 Open Now • Till 3 AM";
+function renderOfferBanner(){
+  const el = document.getElementById("adminOfferBanner");
+  if(!el) return;
+  const cfg = getAdminConfig();
+  if(cfg.offerBanner && cfg.offerBanner.trim()){
+    el.innerText = cfg.offerBanner.trim();
+    el.style.display = "block";
+  }else{
+    el.style.display = "none";
+  }
 }
-hero.appendChild(status);
 
+function parseOrderItems(itemsStr){
+  const list = [];
+  String(itemsStr || "").split(",").forEach(part => {
+    const m = part.trim().match(/^(.+?)\s+x\s+(\d+)/i);
+    if(m){
+      const name = m[1].trim();
+      const qty = parseInt(m[2], 10) || 1;
+      if(PRICE_MAP[name] !== undefined) list.push({ name, qty });
+    }
+  });
+  return list;
 }
+
+function renderOrderAgain(){
+  const sec = document.getElementById("orderAgainSection");
+  const row = document.getElementById("orderAgainRow");
+  if(!sec || !row) return;
+
+  let orders = [];
+  try{ orders = JSON.parse(localStorage.getItem("orders") || "[]"); }catch(e){}
+  if(!Array.isArray(orders) || !orders.length){
+    sec.style.display = "none";
+    return;
+  }
+
+  const freq = {};
+  const recencyOrder = [];
+  for(let i = orders.length - 1; i >= 0; i--){
+    const parsed = parseOrderItems(orders[i].items);
+    parsed.forEach(entry => {
+      if(!freq[entry.name]){
+        freq[entry.name] = 0;
+        recencyOrder.push(entry.name);
+      }
+      freq[entry.name] += entry.qty;
+    });
+  }
+
+  const topItems = recencyOrder
+    .sort((a, b) => freq[b] - freq[a])
+    .slice(0, 6);
+
+  if(!topItems.length){
+    sec.style.display = "none";
+    return;
+  }
+
+  sec.style.display = "block";
+  row.innerHTML = topItems.map(name => {
+    const img = IMAGE_MAP[name] || "ParleG.jpg";
+    const price = getPrice(name);
+    const inStock = getStock(name) > 0;
+    const safe = name.replace(/'/g, "\\'");
+    const inCart = Number(cart[name]) || 0;
+    const addLabel = inStock
+      ? (inCart > 0 ? `+ (${inCart})` : "+ Add")
+      : "Out";
+    return `
+      <div class="reorder-card">
+        <img src="${img}" alt="${name}">
+        <div class="reorder-meta">
+          <h4>${name}</h4>
+          <span>₹${price} • Ordered ${freq[name]}x</span>
+        </div>
+        <button class="reorder-add" ${!inStock ? "disabled style='opacity:0.45;cursor:not-allowed;'" : ""} onclick="changeQty('${safe}', 1)">${addLabel}</button>
+      </div>
+    `;
+  }).join("");
+}
+
+function reorderLastOrder(){
+  let orders = [];
+  try{ orders = JSON.parse(localStorage.getItem("orders") || "[]"); }catch(e){}
+  if(!orders.length) return;
+  const last = orders[orders.length - 1];
+  const parsed = parseOrderItems(last.items);
+  let added = 0;
+  parsed.forEach(entry => {
+    const avail = getStock(entry.name);
+    const current = Number(cart[entry.name]) || 0;
+    const roomLeft = Math.max(0, avail - current);
+    const addQty = Math.min(entry.qty, roomLeft);
+    if(addQty > 0){
+      cart[entry.name] = current + addQty;
+      added += addQty;
+    }
+  });
+  if(added > 0){
+    saveState();
+    updateCart();
+    renderStockUI();
+    renderOrderAgain();
+    showToast("🔁 Added " + added + " item(s) from your last order!");
+  }else{
+    showToast("Items from your last order are currently out of stock");
+  }
+}
+
+function toggleStoreLang(){
+  if(!window.SadbhavnaI18n) return;
+  const next = window.SadbhavnaI18n.toggleLang();
+  showToast(next === "Hindi" ? "🌐 भाषा हिंदी में बदल गई" : "🌐 Language set to English");
+}
+
+window.onSadbhavnaLangChange = function(){
+  checkStoreStatus();
+  renderStockUI();
+  updateCart();
+  updateFav();
+  updateNotification(true);
+};
 
 checkStoreStatus();
+renderOfferBanner();
+renderOrderAgain();
 
 let currentItem = "";
 
@@ -3154,24 +3572,25 @@ id="notificationPopup">
 <div class="cart-content">
 
 <div class="notif-top-bar">
-  <h2 style="margin-bottom:0;">🔔 Notifications</h2>
+  <h2 style="margin-bottom:0;" data-i18n="notifTitle">🔔 Notifications</h2>
   <span class="live-pill"><span class="live-dot"></span> LIVE</span>
 </div>
 
 <div class="notif-toolbar">
-  <button class="notif-tool-btn primary" id="enablePushBtn" onclick="requestBrowserAlerts()">🔔 Enable Browser Alerts</button>
-  <button class="notif-tool-btn" onclick="clearAllNotifications()">🗑️ Clear All</button>
+  <button class="notif-tool-btn primary" id="enablePushBtn" data-i18n="notifEnable" onclick="requestBrowserAlerts()">🔔 Enable Browser Alerts</button>
+  <button class="notif-tool-btn" data-i18n="notifClear" onclick="clearAllNotifications()">🗑️ Clear All</button>
 </div>
 
 <div id="notification-items">
 
-<p style="text-align:center;color:#aaa;">
+<p style="text-align:center;color:#aaa;" data-i18n="notifEmpty">
 No notifications
 </p>
 
 </div>
 
 <button class="close-btn"
+data-i18n="close"
 onclick="closeNotification()">
 
 Close

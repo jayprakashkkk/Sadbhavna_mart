@@ -50,7 +50,8 @@
       slug === 'wishlist' ||
       slug === 'about' ||
       slug === 'policy' ||
-      slug === 'terms'
+      slug === 'terms' ||
+      slug === 'admin'
     ) {
       return 2;
     }

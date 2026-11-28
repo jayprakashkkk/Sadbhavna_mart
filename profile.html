@@ -10,6 +10,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="images/icon-192.png">
 <link rel="apple-touch-icon" href="images/icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script src="i18n.js" defer></script>
 <script src="pwa.js" defer></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
@@ -548,6 +549,19 @@ body{
         <div class="option-right" style="color:#00ff99;font-weight:bold;">Online</div>
       </div>
     </a>
+
+    <a href="admin.html" class="link">
+      <div class="option-box">
+        <div class="option-left">
+          <i class="fa-solid fa-key"></i>
+          <div>
+            <div class="option-title i18n" data-en="Store Owner Admin" data-hi="स्टोर ओनर एडमिन">Store Owner Admin</div>
+            <div class="option-desc i18n" data-en="PIN-protected store mode, UPI QR &amp; stock editor" data-hi="पिन-सुरक्षित स्टोर मोड, UPI QR और स्टॉक कंट्रोल">PIN-protected store mode, UPI QR &amp; stock editor</div>
+          </div>
+        </div>
+        <div class="option-right"><span class="count-pill">PIN</span><i class="fa-solid fa-angle-right"></i></div>
+      </div>
+    </a>
   </div>
 
   <div class="action-buttons">
@@ -614,7 +628,11 @@ function applyLanguage(lang) {
 
 languageSelect.addEventListener("change", function () {
   localStorage.setItem("sadbhavna_lang", this.value);
-  applyLanguage(this.value);
+  if (window.SadbhavnaI18n) {
+    window.SadbhavnaI18n.setLang(this.value);
+  } else {
+    applyLanguage(this.value);
+  }
   showToast(this.value === "Hindi" ? "भाषा हिंदी में बदल गई" : "Language set to English");
 });
 

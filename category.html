@@ -10,6 +10,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="images/icon-192.png">
 <link rel="apple-touch-icon" href="images/icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script src="i18n.js" defer></script>
 <script src="pwa.js" defer></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
@@ -315,6 +316,12 @@ body{
 }
 </style>
 <link rel="stylesheet" href="nav-bar.css">
+<style>
+.lang-toggle-btn{
+  padding:5px 10px;border-radius:999px;border:1px solid rgba(0,255,153,0.4);
+  background:rgba(0,255,153,0.1);color:#00ff99;font-size:11.5px;font-weight:800;cursor:pointer;
+}
+</style>
 </head>
 
 <body>
@@ -323,25 +330,28 @@ body{
   <div class="top-bar">
     <div class="top-left">
       <a href="index.html?nav=1" aria-label="Back to Home"><i class="fa-solid fa-arrow-left"></i></a>
-      <h1>🗂️ Categories</h1>
+      <h1 data-i18n="catHeading">🗂️ Categories</h1>
     </div>
-    <a href="index.html?nav=1" class="cart-pill" id="cart-pill">
-      <i class="fa-solid fa-cart-shopping"></i>
-      <span id="cart-count">0</span> Items • ₹<span id="cart-total">0</span>
-    </a>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <button class="lang-toggle-btn" data-lang-toggle onclick="toggleCatLang()">EN | हिं</button>
+      <a href="index.html?nav=1" class="cart-pill" id="cart-pill">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span id="cart-count">0</span> • ₹<span id="cart-total">0</span>
+      </a>
+    </div>
   </div>
   <div class="search-box">
-    <input type="text" id="catSearch" placeholder="Search in categories..." oninput="renderItems()">
+    <input type="text" id="catSearch" data-i18n-placeholder="catSearchPlaceholder" placeholder="Search in categories..." oninput="renderItems()">
   </div>
 </header>
 
 <div class="tabs" id="categoryTabs">
-  <button class="tab-btn active" onclick="selectCategory('All', this)">All</button>
-  <button class="tab-btn" onclick="selectCategory('Biscuits & Snacks', this)">🍪 Biscuits &amp; Snacks</button>
-  <button class="tab-btn" onclick="selectCategory('Instant Meals', this)">🍜 Instant Meals</button>
-  <button class="tab-btn" onclick="selectCategory('Beverages & Dairy', this)">☕ Beverages &amp; Dairy</button>
-  <button class="tab-btn" onclick="selectCategory('Daily Pantry', this)">🧂 Daily Pantry</button>
-  <button class="tab-btn" onclick="selectCategory('Stationery', this)">📚 Stationery</button>
+  <button class="tab-btn active" data-i18n="catTabAll" onclick="selectCategory('All', this)">All</button>
+  <button class="tab-btn" data-i18n="catTabSnacks" onclick="selectCategory('Biscuits & Snacks', this)">🍪 Biscuits &amp; Snacks</button>
+  <button class="tab-btn" data-i18n="catTabMeals" onclick="selectCategory('Instant Meals', this)">🍜 Instant Meals</button>
+  <button class="tab-btn" data-i18n="catTabDrinks" onclick="selectCategory('Beverages & Dairy', this)">☕ Beverages &amp; Dairy</button>
+  <button class="tab-btn" data-i18n="catTabPantry" onclick="selectCategory('Daily Pantry', this)">🧂 Daily Pantry</button>
+  <button class="tab-btn" data-i18n="catTabStationery" onclick="selectCategory('Stationery', this)">📚 Stationery</button>
 </div>
 
 <div class="grid" id="productGrid"></div>
@@ -512,11 +522,16 @@ function renderItems() {
 
     let stockHtml = "";
     if (available <= 0) {
-      stockHtml = `<div class="stock-msg out">Out of Stock</div>`;
+      const outTxt = window.SadbhavnaI18n ? window.SadbhavnaI18n.t("outOfStockText") : "Out of Stock";
+      stockHtml = `<div class="stock-msg out">${outTxt}</div>`;
     } else if (available <= 5) {
-      stockHtml = `<div class="stock-msg low">Only ${available} left</div>`;
+      const leftTxt = window.SadbhavnaI18n
+        ? (window.SadbhavnaI18n.t("onlyLeftPrefix") + available + window.SadbhavnaI18n.t("onlyLeftSuffix"))
+        : `Only ${available} left`;
+      stockHtml = `<div class="stock-msg low">${leftTxt}</div>`;
     }
 
+    const outBadgeTxt = window.SadbhavnaI18n ? window.SadbhavnaI18n.t("outOfStockBadge") : "OUT OF STOCK";
     const ctrlHtml = qty > 0
       ? `<div class="top-stepper"><button onclick="changeItemQty('${safeName}', -1)">-</button><span>${qty}</span><button onclick="changeItemQty('${safeName}', 1)">+</button></div>`
       : `<button class="top-add-btn" ${available <= 0 ? 'disabled' : ''} onclick="changeItemQty('${safeName}', 1)">+</button>`;
@@ -527,7 +542,7 @@ function renderItems() {
           <i class="${isLiked ? 'fa-solid' : 'fa-regular'} fa-heart fav-icon ${isLiked ? 'liked' : ''}" onclick="toggleFavItem('${safeName}')"></i>
           <div class="qty-wrap">${ctrlHtml}</div>
         </div>
-        ${available <= 0 ? '<div class="out-badge">OUT OF STOCK</div>' : ''}
+        ${available <= 0 ? `<div class="out-badge">${outBadgeTxt}</div>` : ''}
         <div>
           <img src="${p.img}" alt="${p.name}">
           <span class="cat-tag">${p.category}</span>
@@ -541,6 +556,13 @@ function renderItems() {
     `;
   }).join("");
 }
+
+function toggleCatLang() {
+  if (window.SadbhavnaI18n) window.SadbhavnaI18n.toggleLang();
+}
+window.onSadbhavnaLangChange = function () {
+  renderItems();
+};
 
 updateBadge();
 loadStock();
