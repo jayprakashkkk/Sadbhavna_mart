@@ -10,20 +10,36 @@
 <script src="qr.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
+:root{
+  --bg-0:#020617;
+  --bg-1:#0b1120;
+  --card:rgba(15,23,42,0.72);
+  --border:rgba(255,255,255,0.1);
+  --accent:#00ff99;
+  --cyan:#38bdf8;
+  --amber:#fbbf24;
+  --danger:#f87171;
+  --muted:#94a3b8;
+}
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Arial,sans-serif;
+  font-family:'Segoe UI',Arial,sans-serif;
   -webkit-tap-highlight-color:transparent;
 }
 body{
-  background:linear-gradient(135deg,#000,#0f172a,#111827);
-  color:#fff;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(0,255,153,0.14), transparent 38%),
+    radial-gradient(circle at 88% 18%, rgba(56,189,248,0.12), transparent 40%),
+    linear-gradient(155deg,#000000 0%,var(--bg-0) 45%,var(--bg-1) 100%);
+  color:#f8fafc;
   width:100%;
   max-width:100%;
   min-height:100vh;
 }
+
+/* LOCK SCREEN */
 .lock-screen{
   width:100%;
   min-height:100vh;
@@ -34,118 +50,287 @@ body{
 }
 .pin-gate{
   width:100%;
-  max-width:400px;
-  background:rgba(15,23,42,0.85);
-  border:1px solid rgba(0,255,153,0.32);
-  border-radius:22px;
-  padding:28px 22px;
+  max-width:410px;
+  background:rgba(15,23,42,0.84);
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+  border:1px solid rgba(0,255,153,0.28);
+  border-radius:26px;
+  padding:32px 24px;
   text-align:center;
-  box-shadow:0 20px 50px rgba(0,0,0,0.55);
+  box-shadow:0 24px 64px rgba(0,0,0,0.65), 0 0 40px rgba(0,255,153,0.08);
+  animation:fadeUp 0.35s cubic-bezier(0.22,1,0.36,1);
+}
+.pin-gate.shake{
+  animation:shakeBox 0.36s ease;
+}
+.pin-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:5px 12px;
+  border-radius:999px;
+  background:rgba(0,255,153,0.1);
+  border:1px solid rgba(0,255,153,0.3);
+  color:var(--accent);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:0.6px;
+  text-transform:uppercase;
+  margin-bottom:16px;
 }
 .pin-icon{
-  width:62px;
-  height:62px;
-  border-radius:50%;
-  margin:0 auto 14px;
+  width:68px;
+  height:68px;
+  border-radius:22px;
+  margin:0 auto 16px;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:rgba(0,255,153,0.14);
-  border:1px solid rgba(0,255,153,0.4);
-  color:#00ff99;
-  font-size:24px;
+  background:linear-gradient(135deg,rgba(0,255,153,0.22),rgba(56,189,248,0.14));
+  border:1px solid rgba(0,255,153,0.45);
+  color:var(--accent);
+  font-size:26px;
+  box-shadow:0 10px 28px rgba(0,255,153,0.18);
 }
 .pin-gate h2{
-  font-size:21px;
+  font-size:23px;
+  font-weight:800;
   margin-bottom:6px;
+  letter-spacing:-0.3px;
 }
 .pin-gate p{
-  font-size:13px;
-  color:#94a3b8;
-  margin-bottom:18px;
+  font-size:13.5px;
+  color:var(--muted);
+  margin-bottom:20px;
 }
-.pin-err{
-  color:#f87171;
-  font-size:13px;
-  font-weight:700;
-  min-height:18px;
+.pass-wrap{
+  position:relative;
   margin-bottom:8px;
 }
+.pass-wrap .input{
+  padding-right:46px;
+  margin-bottom:0;
+  text-align:center;
+  letter-spacing:2px;
+  font-size:17px;
+  font-weight:700;
+}
+.eye-btn{
+  position:absolute;
+  right:10px;
+  top:50%;
+  transform:translateY(-50%);
+  width:32px;
+  height:32px;
+  border:none;
+  border-radius:8px;
+  background:transparent;
+  color:var(--muted);
+  font-size:15px;
+  cursor:pointer;
+}
+.pin-err{
+  color:var(--danger);
+  font-size:13px;
+  font-weight:700;
+  min-height:20px;
+  margin-bottom:10px;
+}
+
+/* DASHBOARD SHELL */
 .admin-shell{
   display:none;
   width:100%;
   max-width:100%;
-  padding-bottom:36px;
+  padding-bottom:44px;
+  animation:fadeUp 0.3s ease;
 }
 .header{
   position:sticky;
   top:0;
-  z-index:20;
-  background:rgba(15,23,42,0.94);
-  backdrop-filter:blur(12px);
+  z-index:30;
+  background:rgba(2,6,23,0.88);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
   padding:14px 18px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  border-bottom:1px solid rgba(255,255,255,0.08);
+  gap:12px;
+  border-bottom:1px solid rgba(0,255,153,0.15);
+}
+.brand-group{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.brand-logo{
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  background:linear-gradient(135deg,rgba(0,255,153,0.25),rgba(56,189,248,0.15));
+  border:1px solid rgba(0,255,153,0.45);
+  color:var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
 }
 .header h1{
-  font-size:19px;
-  color:#00ff99;
+  font-size:18px;
+  font-weight:800;
+  color:#fff;
+  line-height:1.15;
+}
+.header-sub{
+  font-size:11.5px;
+  color:var(--accent);
+  font-weight:600;
+}
+.header-actions{
   display:flex;
   align-items:center;
   gap:8px;
 }
+.status-chip{
+  padding:6px 11px;
+  border-radius:999px;
+  font-size:11.5px;
+  font-weight:800;
+  border:1px solid rgba(0,255,153,0.35);
+  background:rgba(0,255,153,0.12);
+  color:var(--accent);
+}
+.status-chip.closed{
+  border-color:rgba(248,113,113,0.45);
+  background:rgba(248,113,113,0.14);
+  color:#fca5a5;
+}
 .lock-btn{
   padding:8px 14px;
-  border-radius:10px;
+  border-radius:11px;
   border:1px solid rgba(239,68,68,0.45);
   background:rgba(239,68,68,0.14);
   color:#fca5a5;
   font-size:13px;
   font-weight:700;
   cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:6px;
 }
+.lock-btn:active{transform:scale(0.95);}
+
 .main{
   width:100%;
   max-width:100%;
-  padding:16px;
+  padding:18px;
 }
+
+/* KPI STATS STRIP */
+.kpi-grid{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:12px;
+  margin-bottom:18px;
+}
+@media screen and (min-width:768px){
+  .kpi-grid{
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+  }
+}
+.kpi-card{
+  background:var(--card);
+  backdrop-filter:blur(12px);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:14px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.kpi-label{
+  font-size:11.5px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  margin-bottom:4px;
+}
+.kpi-val{
+  font-size:22px;
+  font-weight:800;
+  color:#fff;
+}
+.kpi-icon{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:17px;
+  flex-shrink:0;
+}
+.kpi-icon.green{background:rgba(0,255,153,0.14);color:var(--accent);}
+.kpi-icon.cyan{background:rgba(56,189,248,0.14);color:var(--cyan);}
+.kpi-icon.amber{background:rgba(251,191,36,0.14);color:var(--amber);}
+.kpi-icon.red{background:rgba(248,113,113,0.14);color:var(--danger);}
+
+/* INPUTS & BUTTONS */
 .input{
   width:100%;
   padding:12px 14px;
   border-radius:12px;
-  border:1px solid rgba(255,255,255,0.14);
-  background:#0f172a;
+  border:1px solid rgba(255,255,255,0.13);
+  background:rgba(2,6,23,0.75);
   color:#fff;
-  font-size:15px;
+  font-size:14.5px;
   outline:none;
-  margin-bottom:10px;
+  margin-bottom:11px;
+  transition:border-color 0.2s, box-shadow 0.2s;
 }
 .input:focus{
-  border-color:#00ff99;
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(0,255,153,0.14);
 }
 .btn-primary{
   width:100%;
   padding:13px 16px;
   border:none;
   border-radius:12px;
-  background:#00ff99;
-  color:#000;
-  font-size:15px;
+  background:linear-gradient(90deg,#00ff99,#10b981);
+  color:#022c22;
+  font-size:14.5px;
   font-weight:800;
   cursor:pointer;
+  transition:transform 0.16s, box-shadow 0.2s;
+  box-shadow:0 8px 20px rgba(0,255,153,0.2);
 }
+.btn-primary:active{transform:scale(0.98);}
 .btn-secondary{
-  padding:10px 14px;
+  padding:9px 13px;
   border-radius:10px;
   border:1px solid rgba(56,189,248,0.4);
   background:rgba(56,189,248,0.12);
-  color:#38bdf8;
-  font-size:13.5px;
+  color:var(--cyan);
+  font-size:13px;
   font-weight:700;
   cursor:pointer;
 }
+.btn-amber{
+  padding:9px 13px;
+  border-radius:10px;
+  border:1px solid rgba(251,191,36,0.4);
+  background:rgba(251,191,36,0.12);
+  color:var(--amber);
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* MAIN GRID */
 .grid{
   display:grid;
   grid-template-columns:1fr;
@@ -161,58 +346,84 @@ body{
   }
 }
 .card{
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.09);
-  border-radius:18px;
-  padding:18px;
+  background:var(--card);
+  backdrop-filter:blur(14px);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.28);
 }
-.card h2{
-  font-size:17px;
-  color:#00ff99;
-  margin-bottom:12px;
+.card-head{
   display:flex;
   align-items:center;
-  gap:8px;
+  justify-content:space-between;
+  margin-bottom:14px;
+  gap:10px;
 }
+.card h2{
+  font-size:16.5px;
+  font-weight:800;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+.card h2 i{color:var(--accent);}
 .label{
   display:block;
-  font-size:12.5px;
-  color:#94a3b8;
-  margin:8px 0 5px;
+  font-size:12px;
+  font-weight:600;
+  color:var(--muted);
+  margin:8px 0 6px;
 }
+
 .mode-pills{
-  display:flex;
-  flex-wrap:wrap;
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
   gap:8px;
   margin-bottom:12px;
 }
 .mode-pill{
-  flex:1;
-  min-width:110px;
-  padding:10px 12px;
+  padding:11px 8px;
   border-radius:12px;
-  border:1px solid rgba(255,255,255,0.14);
-  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.03);
   color:#cbd5e1;
-  font-size:13px;
+  font-size:12.5px;
   font-weight:700;
   cursor:pointer;
   text-align:center;
+  transition:0.2s;
 }
 .mode-pill.active{
-  background:rgba(0,255,153,0.18);
-  border-color:#00ff99;
-  color:#00ff99;
+  background:rgba(0,255,153,0.16);
+  border-color:var(--accent);
+  color:var(--accent);
+  box-shadow:0 4px 14px rgba(0,255,153,0.15);
 }
+
+.offer-preview-box{
+  display:none;
+  margin:-4px 0 12px;
+  padding:9px 12px;
+  border-radius:10px;
+  background:linear-gradient(90deg,rgba(245,158,11,0.18),rgba(0,255,153,0.14));
+  border:1px solid rgba(251,191,36,0.4);
+  color:#fef3c7;
+  font-size:12.5px;
+  font-weight:700;
+  text-align:center;
+}
+
 .upi-preview{
   display:flex;
   align-items:center;
   gap:14px;
   padding:12px;
   border-radius:14px;
-  background:rgba(2,6,23,0.7);
-  border:1px solid rgba(255,255,255,0.08);
-  margin:10px 0 12px;
+  background:rgba(2,6,23,0.72);
+  border:1px solid rgba(0,255,153,0.2);
+  margin:8px 0 14px;
 }
 .qr-wrap{
   background:#fff;
@@ -223,6 +434,29 @@ body{
   justify-content:center;
   flex-shrink:0;
 }
+
+/* QUICK BROADCAST CHIPS */
+.quick-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:12px;
+}
+.q-chip{
+  padding:5px 10px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.14);
+  background:rgba(255,255,255,0.05);
+  color:#cbd5e1;
+  font-size:11.5px;
+  cursor:pointer;
+}
+.q-chip:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+/* STOCK SECTION */
 .stock-toolbar{
   display:flex;
   flex-wrap:wrap;
@@ -231,70 +465,118 @@ body{
   justify-content:space-between;
   margin-bottom:12px;
 }
+.stock-filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+  margin-bottom:14px;
+}
+.stk-tab{
+  padding:7px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.13);
+  background:rgba(255,255,255,0.04);
+  color:#cbd5e1;
+  font-size:12.5px;
+  font-weight:700;
+  cursor:pointer;
+}
+.stk-tab.active{
+  background:var(--accent);
+  color:#022c22;
+  border-color:var(--accent);
+}
+.stk-search{
+  flex:1;
+  min-width:190px;
+  margin-bottom:0;
+  padding:8px 13px;
+  font-size:13.5px;
+}
 .stock-grid{
   display:grid;
   grid-template-columns:1fr;
   gap:10px;
 }
 @media screen and (min-width:640px){
-  .stock-grid{
-    grid-template-columns:repeat(2, minmax(0, 1fr));
-  }
+  .stock-grid{grid-template-columns:repeat(2, minmax(0, 1fr));}
 }
 @media screen and (min-width:1100px){
-  .stock-grid{
-    grid-template-columns:repeat(3, minmax(0, 1fr));
-  }
+  .stock-grid{grid-template-columns:repeat(3, minmax(0, 1fr));}
 }
 .stock-row{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
-  padding:10px 12px;
-  border-radius:12px;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.07);
+  padding:11px 13px;
+  border-radius:14px;
+  background:rgba(2,6,23,0.55);
+  border:1px solid rgba(255,255,255,0.08);
+  transition:border-color 0.2s;
+}
+.stock-row.low{border-color:rgba(251,191,36,0.45);}
+.stock-row.out{border-color:rgba(248,113,113,0.5);background:rgba(248,113,113,0.06);}
+.stock-info{
+  min-width:0;
+  flex:1;
 }
 .stock-name{
-  font-size:14px;
-  font-weight:600;
-  color:#f1f5f9;
+  display:block;
+  font-size:13.5px;
+  font-weight:700;
+  color:#f8fafc;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
+.stock-badge{
+  font-size:11px;
+  font-weight:700;
+  color:var(--muted);
+}
+.stock-row.low .stock-badge{color:var(--amber);}
+.stock-row.out .stock-badge{color:var(--danger);}
 .stock-ctrl{
   display:flex;
   align-items:center;
   gap:6px;
+  flex-shrink:0;
 }
 .stock-ctrl button{
-  width:28px;
-  height:28px;
+  width:30px;
+  height:30px;
   border:none;
-  border-radius:8px;
-  background:#00ff99;
-  color:#000;
+  border-radius:9px;
+  background:rgba(0,255,153,0.16);
+  border:1px solid rgba(0,255,153,0.35);
+  color:var(--accent);
   font-weight:800;
   font-size:16px;
   cursor:pointer;
 }
+.stock-ctrl button:active{transform:scale(0.9);}
 .stock-ctrl input{
-  width:54px;
-  padding:5px;
+  width:52px;
+  padding:6px 4px;
   text-align:center;
-  border-radius:8px;
-  border:1px solid rgba(255,255,255,0.16);
+  border-radius:9px;
+  border:1px solid rgba(255,255,255,0.15);
   background:#0f172a;
   color:#fff;
-  font-weight:700;
+  font-weight:800;
+  font-size:13.5px;
 }
+
 #toastMsg{
   position:fixed;
   bottom:24px;
   left:50%;
   transform:translateX(-50%) translateY(16px);
-  background:#00ff99;
-  color:#000;
-  padding:10px 18px;
+  background:var(--accent);
+  color:#022c22;
+  padding:11px 20px;
   border-radius:999px;
   font-size:13.5px;
   font-weight:800;
@@ -302,10 +584,22 @@ body{
   pointer-events:none;
   transition:0.25s;
   z-index:1200;
+  box-shadow:0 10px 26px rgba(0,255,153,0.3);
 }
 #toastMsg.show{
   transform:translateX(-50%) translateY(0);
   opacity:1;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(10px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes shakeBox{
+  0%,100%{transform:translateX(0);}
+  25%{transform:translateX(-8px);}
+  50%{transform:translateX(8px);}
+  75%{transform:translateX(-5px);}
 }
 </style>
 </head>
@@ -315,97 +609,175 @@ body{
 
 <!-- STANDALONE PASSWORD GATE -->
 <div class="lock-screen" id="lockScreen">
-  <div class="pin-gate">
+  <div class="pin-gate" id="pinGateCard">
+    <div class="pin-badge"><i class="fa-solid fa-shield-halved"></i> Owner Console</div>
     <div class="pin-icon"><i class="fa-solid fa-lock"></i></div>
-    <h2>Admin Panel</h2>
-    <p>Enter Admin Password to continue</p>
-    <input type="password" id="pinInput" class="input" placeholder="Enter Password" autofocus autocomplete="off" onkeydown="if(event.key==='Enter')unlockAdmin()">
+    <h2>Sadbhavna Admin</h2>
+    <p>Enter Admin Password to manage store &amp; inventory</p>
+    <div class="pass-wrap">
+      <input type="password" id="pinInput" class="input" placeholder="••••" autofocus autocomplete="off" onkeydown="if(event.key==='Enter')unlockAdmin()">
+      <button type="button" class="eye-btn" aria-label="Show password" onclick="togglePassVisibility('pinInput', this)">
+        <i class="fa-regular fa-eye"></i>
+      </button>
+    </div>
     <div class="pin-err" id="pinErr"></div>
-    <button class="btn-primary" onclick="unlockAdmin()">Unlock</button>
+    <button class="btn-primary" onclick="unlockAdmin()">Unlock Admin Panel</button>
   </div>
 </div>
 
-<!-- ADMIN DASHBOARD ONLY -->
+<!-- STANDALONE ADMIN CONSOLE -->
 <div class="admin-shell" id="adminShell">
-  <div class="header">
-    <h1><i class="fa-solid fa-shield-halved"></i> Sadbhavna Admin</h1>
-    <button class="lock-btn" onclick="lockAdmin()">🔒 Lock</button>
-  </div>
+  <header class="header">
+    <div class="brand-group">
+      <div class="brand-logo"><i class="fa-solid fa-bolt"></i></div>
+      <div>
+        <h1>Sadbhavna Admin</h1>
+        <div class="header-sub">Owner Control Console</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <span class="status-chip" id="headerStatusChip">🕒 AUTO</span>
+      <button class="lock-btn" onclick="lockAdmin()"><i class="fa-solid fa-lock"></i> Lock</button>
+    </div>
+  </header>
 
-  <div class="main">
+  <main class="main">
+    <!-- KPI OVERVIEW -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div>
+          <div class="kpi-label">Catalog Items</div>
+          <div class="kpi-val" id="kpiTotal">0</div>
+        </div>
+        <div class="kpi-icon cyan"><i class="fa-solid fa-layer-group"></i></div>
+      </div>
+      <div class="kpi-card">
+        <div>
+          <div class="kpi-label">Total Stock Units</div>
+          <div class="kpi-val" id="kpiUnits">0</div>
+        </div>
+        <div class="kpi-icon green"><i class="fa-solid fa-boxes-stacked"></i></div>
+      </div>
+      <div class="kpi-card">
+        <div>
+          <div class="kpi-label">Low Stock (&le;5)</div>
+          <div class="kpi-val" id="kpiLow">0</div>
+        </div>
+        <div class="kpi-icon amber"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      </div>
+      <div class="kpi-card">
+        <div>
+          <div class="kpi-label">Out of Stock</div>
+          <div class="kpi-val" id="kpiOut">0</div>
+        </div>
+        <div class="kpi-icon red"><i class="fa-solid fa-circle-xmark"></i></div>
+      </div>
+    </div>
+
     <div class="grid">
       <!-- STORE MODE & OFFER BANNER -->
       <div class="card">
-        <h2><i class="fa-solid fa-store"></i> Store Control &amp; Offer Banner</h2>
-        <span class="label">Store Open / Holiday Mode</span>
+        <div class="card-head">
+          <h2><i class="fa-solid fa-store"></i> Store Mode &amp; Offer Banner</h2>
+        </div>
+        <span class="label">Store Open / Holiday Status</span>
         <div class="mode-pills" id="modePills">
-          <button class="mode-pill" data-mode="auto" onclick="setStoreMode('auto', this)">🕒 Auto (10AM–3AM)</button>
-          <button class="mode-pill" data-mode="open" onclick="setStoreMode('open', this)">🟢 Force Open</button>
-          <button class="mode-pill" data-mode="closed" onclick="setStoreMode('closed', this)">🔒 Holiday Closed</button>
+          <button type="button" class="mode-pill" data-mode="auto" onclick="setStoreMode('auto', this)">🕒 Auto<br><small>10AM–3AM</small></button>
+          <button type="button" class="mode-pill" data-mode="open" onclick="setStoreMode('open', this)">🟢 Force Open<br><small>24x7 Override</small></button>
+          <button type="button" class="mode-pill" data-mode="closed" onclick="setStoreMode('closed', this)">🔒 Closed<br><small>Holiday Mode</small></button>
         </div>
 
-        <span class="label">Closed Banner Message (shown when Force Closed)</span>
+        <span class="label">Holiday / Closed Banner Message</span>
         <input type="text" id="closedMessageInput" class="input" placeholder="🔒 Store Closed • Back Soon">
 
-        <span class="label">Daily Offer Banner (shown on Storefront — leave empty to hide)</span>
-        <input type="text" id="offerBannerInput" class="input" placeholder="🔥 Today Special: Instant Delivery on All Orders!">
+        <span class="label">Storefront Offer Banner (live preview below)</span>
+        <input type="text" id="offerBannerInput" class="input" placeholder="🔥 Today Special: Instant Delivery on All Orders!" oninput="updateOfferPreview()">
+        <div class="offer-preview-box" id="offerPreviewBox"></div>
 
-        <button class="btn-primary" onclick="saveStoreSettings()">💾 Save Store Settings</button>
+        <button type="button" class="btn-primary" onclick="saveStoreSettings()">💾 Save Store Settings</button>
       </div>
 
       <!-- UPI QR & WHATSAPP CONFIG -->
       <div class="card">
-        <h2><i class="fa-solid fa-qrcode"></i> UPI Payment QR &amp; Contact</h2>
+        <div class="card-head">
+          <h2><i class="fa-solid fa-qrcode"></i> UPI QR &amp; WhatsApp Dispatch</h2>
+        </div>
         <span class="label">Store UPI ID</span>
         <input type="text" id="upiIdInput" class="input" placeholder="e.g. 7209793015@ybl" oninput="renderAdminQrPreview()">
 
-        <span class="label">Merchant Display Name</span>
+        <span class="label">Payee / Merchant Name</span>
         <input type="text" id="upiNameInput" class="input" placeholder="Sadbhavna Mart" oninput="renderAdminQrPreview()">
 
-        <span class="label">WhatsApp Order Number (with country code, no +)</span>
+        <span class="label">WhatsApp Order Number (country code, no +)</span>
         <input type="text" id="waNumberInput" class="input" placeholder="917209793015">
 
         <div class="upi-preview">
           <div class="qr-wrap" id="adminQrPreview"></div>
-          <div style="font-size:13px;color:#cbd5e1;line-height:1.5;">
+          <div style="font-size:12.5px;color:#cbd5e1;line-height:1.55;">
             <strong style="color:#00ff99;">Sample ₹50 Checkout QR</strong><br>
             UPI: <span id="qrPreviewId">-</span><br>
-            Scan from GPay / PhonePe / Paytm to test.
+            Scan from GPay / PhonePe / Paytm to test before saving.
           </div>
         </div>
 
-        <button class="btn-primary" onclick="savePaymentSettings()">💾 Save Payment &amp; Contact</button>
+        <button type="button" class="btn-primary" onclick="savePaymentSettings()">💾 Save Payment &amp; Contact</button>
       </div>
 
       <!-- BROADCAST LIVE ALERT -->
       <div class="card">
-        <h2><i class="fa-solid fa-bullhorn"></i> Broadcast Live Alert</h2>
-        <span class="label">Publish announcement into Storefront Live Ticker &amp; Bell</span>
-        <input type="text" id="broadcastInput" class="input" placeholder="e.g. Maggi &amp; Cold Coffee fresh stock arrived!">
-        <button class="btn-primary" onclick="sendBroadcastAlert()">📢 Publish Live Alert</button>
+        <div class="card-head">
+          <h2><i class="fa-solid fa-bullhorn"></i> Broadcast Live Alert</h2>
+        </div>
+        <span class="label">Quick Templates (1-tap fill)</span>
+        <div class="quick-chips">
+          <button type="button" class="q-chip" onclick="fillBroadcast('Fresh Maggi & Cold Coffee stock restocked!')">🍜 Maggi Restocked</button>
+          <button type="button" class="q-chip" onclick="fillBroadcast('Exam Night Special: Pens & Practical Files available!')">📚 Stationery Ready</button>
+          <button type="button" class="q-chip" onclick="fillBroadcast('Counter closing in 30 mins — order fast!')">⏰ Closing Soon</button>
+        </div>
+        <input type="text" id="broadcastInput" class="input" placeholder="Type alert for Live Ticker & Bell...">
+        <button type="button" class="btn-primary" onclick="sendBroadcastAlert()">📢 Publish Live Alert</button>
       </div>
 
-      <!-- CHANGE PASSWORD / PIN -->
+      <!-- ADMIN PASSWORD SECURITY -->
       <div class="card">
-        <h2><i class="fa-solid fa-key"></i> Admin Password</h2>
-        <span class="label">Set New Password (4+ characters)</span>
-        <input type="password" id="newPinInput" class="input" placeholder="Enter new password" autocomplete="new-password">
-        <button class="btn-primary" onclick="updateAdminPin()">🔐 Update Password</button>
+        <div class="card-head">
+          <h2><i class="fa-solid fa-key"></i> Admin Password Security</h2>
+        </div>
+        <span class="label">Change Admin Password (min 4 characters)</span>
+        <div class="pass-wrap" style="margin-bottom:11px;">
+          <input type="password" id="newPinInput" class="input" style="text-align:left;letter-spacing:normal;font-size:14.5px;font-weight:400;" placeholder="Enter new password" autocomplete="new-password">
+          <button type="button" class="eye-btn" aria-label="Show new password" onclick="togglePassVisibility('newPinInput', this)">
+            <i class="fa-regular fa-eye"></i>
+          </button>
+        </div>
+        <p style="font-size:12px;color:#94a3b8;margin-bottom:14px;line-height:1.5;">
+          Password is saved on this browser/device. Locking or refreshing `/admin` always asks for this password.
+        </p>
+        <button type="button" class="btn-primary" onclick="updateAdminPin()">🔐 Update Admin Password</button>
       </div>
 
       <!-- QUICK STOCK EDITOR -->
       <div class="card full-span">
         <div class="stock-toolbar">
-          <h2 style="margin-bottom:0;"><i class="fa-solid fa-boxes-stacked"></i> Quick Inventory Stock</h2>
+          <h2 style="margin-bottom:0;"><i class="fa-solid fa-boxes-stacked"></i> Live Inventory Manager</h2>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <button class="btn-secondary" onclick="exportStockJson()">⬇️ Export stock.json</button>
-            <button class="btn-primary" style="width:auto;padding:10px 16px;" onclick="saveAllStock()">💾 Save Stock Changes</button>
+            <button type="button" class="btn-amber" onclick="copyStockSummary()">📋 Copy Report</button>
+            <button type="button" class="btn-secondary" onclick="exportStockJson()">⬇️ Export stock.json</button>
+            <button type="button" class="btn-primary" style="width:auto;padding:9px 16px;" onclick="saveAllStock()">💾 Save Stock</button>
           </div>
         </div>
+
+        <div class="stock-filters">
+          <button type="button" class="stk-tab active" onclick="setStockFilter('all', this)">All</button>
+          <button type="button" class="stk-tab" onclick="setStockFilter('low', this)">⚠️ Low (&le;5)</button>
+          <button type="button" class="stk-tab" onclick="setStockFilter('out', this)">❌ Out of Stock</button>
+          <input type="text" id="stockSearch" class="input stk-search" placeholder="Search item in stock..." oninput="renderStockEditor()">
+        </div>
+
         <div class="stock-grid" id="stockGrid"></div>
       </div>
     </div>
-  </div>
+  </main>
 </div>
 
 <script>
@@ -421,6 +793,7 @@ const DEFAULT_ADMIN_CONFIG = {
 
 let adminConfig = Object.assign({}, DEFAULT_ADMIN_CONFIG);
 let stockData = {};
+let activeStockFilter = "all";
 let toastTimer = null;
 
 function showToast(msg) {
@@ -429,6 +802,14 @@ function showToast(msg) {
   el.classList.add("show");
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
+}
+
+function togglePassVisibility(inputId, btn) {
+  const inp = document.getElementById(inputId);
+  if (!inp) return;
+  const isPass = inp.type === "password";
+  inp.type = isPass ? "text" : "password";
+  btn.innerHTML = isPass ? '<i class="fa-regular fa-eye-slash"></i>' : '<i class="fa-regular fa-eye"></i>';
 }
 
 function loadConfig() {
@@ -446,18 +827,25 @@ function saveConfig() {
 
 function unlockAdmin() {
   loadConfig();
-  const entered = document.getElementById("pinInput").value.trim();
+  const inp = document.getElementById("pinInput");
   const errEl = document.getElementById("pinErr");
+  const gate = document.getElementById("pinGateCard");
+  const entered = inp.value.trim();
+
   if (!entered || entered !== String(adminConfig.pin)) {
-    errEl.innerText = "Wrong password! Try again.";
-    document.getElementById("pinInput").focus();
+    errEl.innerText = "Wrong password! Please try again.";
+    gate.classList.remove("shake");
+    void gate.offsetWidth;
+    gate.classList.add("shake");
+    inp.focus();
     return;
   }
+
   errEl.innerText = "";
-  document.getElementById("pinInput").value = "";
+  inp.value = "";
   document.getElementById("lockScreen").style.display = "none";
   document.getElementById("adminShell").style.display = "block";
-  document.title = "Admin Panel — Sadbhavna Mart";
+  document.title = "Admin Console — Sadbhavna Mart";
   populateDashboard();
 }
 
@@ -470,10 +858,36 @@ function lockAdmin() {
   document.getElementById("pinInput").focus();
 }
 
+function syncHeaderChip() {
+  const chip = document.getElementById("headerStatusChip");
+  if (!chip) return;
+  chip.classList.remove("closed");
+  if (adminConfig.storeMode === "open") {
+    chip.innerText = "🟢 FORCE OPEN";
+  } else if (adminConfig.storeMode === "closed") {
+    chip.innerText = "🔒 CLOSED";
+    chip.classList.add("closed");
+  } else {
+    chip.innerText = "🕒 AUTO 10AM–3AM";
+  }
+}
+
 function setStoreMode(mode, btn) {
   adminConfig.storeMode = mode;
   document.querySelectorAll(".mode-pill").forEach(b => b.classList.remove("active"));
   if (btn) btn.classList.add("active");
+  syncHeaderChip();
+}
+
+function updateOfferPreview() {
+  const val = document.getElementById("offerBannerInput").value.trim();
+  const box = document.getElementById("offerPreviewBox");
+  if (val) {
+    box.innerText = val;
+    box.style.display = "block";
+  } else {
+    box.style.display = "none";
+  }
 }
 
 function populateDashboard() {
@@ -481,8 +895,10 @@ function populateDashboard() {
   document.querySelectorAll(".mode-pill").forEach(b => {
     b.classList.toggle("active", b.dataset.mode === adminConfig.storeMode);
   });
+  syncHeaderChip();
   document.getElementById("closedMessageInput").value = adminConfig.closedMessage || "";
   document.getElementById("offerBannerInput").value = adminConfig.offerBanner || "";
+  updateOfferPreview();
   document.getElementById("upiIdInput").value = adminConfig.upiId || "";
   document.getElementById("upiNameInput").value = adminConfig.upiName || "Sadbhavna Mart";
   document.getElementById("waNumberInput").value = adminConfig.whatsappNumber || "917209793015";
@@ -504,6 +920,7 @@ function saveStoreSettings() {
   adminConfig.closedMessage = document.getElementById("closedMessageInput").value.trim() || DEFAULT_ADMIN_CONFIG.closedMessage;
   adminConfig.offerBanner = document.getElementById("offerBannerInput").value.trim();
   saveConfig();
+  syncHeaderChip();
   showToast("✅ Store settings saved!");
 }
 
@@ -516,10 +933,14 @@ function savePaymentSettings() {
   showToast("✅ UPI QR & WhatsApp updated!");
 }
 
+function fillBroadcast(text) {
+  document.getElementById("broadcastInput").value = text;
+}
+
 function sendBroadcastAlert() {
   const msg = document.getElementById("broadcastInput").value.trim();
   if (!msg) {
-    showToast("Enter an announcement message first");
+    showToast("Type an alert message first");
     return;
   }
   try {
@@ -559,21 +980,59 @@ async function loadStockForAdmin() {
     const local = JSON.parse(localStorage.getItem("sadbhavna_local_stock") || "{}");
     stockData = Object.assign({}, stockData, local);
   } catch (e) {}
+  updateKpis();
+  renderStockEditor();
+}
+
+function updateKpis() {
+  const vals = Object.values(stockData).map(v => Number(v) || 0);
+  const totalItems = vals.length;
+  const totalUnits = vals.reduce((a, b) => a + b, 0);
+  const lowCount = vals.filter(q => q > 0 && q <= 5).length;
+  const outCount = vals.filter(q => q <= 0).length;
+
+  document.getElementById("kpiTotal").innerText = totalItems;
+  document.getElementById("kpiUnits").innerText = totalUnits;
+  document.getElementById("kpiLow").innerText = lowCount;
+  document.getElementById("kpiOut").innerText = outCount;
+}
+
+function setStockFilter(filter, btn) {
+  activeStockFilter = filter;
+  document.querySelectorAll(".stk-tab").forEach(b => b.classList.remove("active"));
+  if (btn) btn.classList.add("active");
   renderStockEditor();
 }
 
 function renderStockEditor() {
   const grid = document.getElementById("stockGrid");
+  const query = (document.getElementById("stockSearch")?.value || "").trim().toLowerCase();
   const keys = Object.keys(stockData);
-  if (!keys.length) {
-    grid.innerHTML = '<div style="color:#94a3b8;">No inventory loaded yet.</div>';
+  const filtered = keys.filter(name => {
+    const qty = Number(stockData[name]) || 0;
+    const matchSearch = !query || name.toLowerCase().includes(query);
+    if (!matchSearch) return false;
+    if (activeStockFilter === "low") return qty > 0 && qty <= 5;
+    if (activeStockFilter === "out") return qty <= 0;
+    return true;
+  });
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div style="color:#94a3b8;padding:14px 4px;">No matching items in this filter.</div>';
     return;
   }
-  grid.innerHTML = keys.map((name, idx) => {
+
+  grid.innerHTML = filtered.map(name => {
+    const idx = keys.indexOf(name);
     const qty = Number(stockData[name]) || 0;
+    const stateCls = qty <= 0 ? "out" : (qty <= 5 ? "low" : "");
+    const statusText = qty <= 0 ? "Out of Stock" : (qty <= 5 ? "Low Stock" : "In Stock");
     return `
-      <div class="stock-row">
-        <span class="stock-name">${name}</span>
+      <div class="stock-row ${stateCls}">
+        <div class="stock-info">
+          <span class="stock-name">${name}</span>
+          <span class="stock-badge">${statusText}</span>
+        </div>
         <div class="stock-ctrl">
           <button type="button" onclick="stepAdminStock(${idx}, -1)">-</button>
           <input type="number" min="0" id="stk_${idx}" value="${qty}" onchange="setAdminStock(${idx}, this.value)">
@@ -590,8 +1049,8 @@ function stepAdminStock(idx, delta) {
   if (!key) return;
   const next = Math.max(0, (Number(stockData[key]) || 0) + delta);
   stockData[key] = next;
-  const inp = document.getElementById("stk_" + idx);
-  if (inp) inp.value = next;
+  updateKpis();
+  renderStockEditor();
 }
 
 function setAdminStock(idx, val) {
@@ -599,12 +1058,23 @@ function setAdminStock(idx, val) {
   const key = keys[idx];
   if (!key) return;
   stockData[key] = Math.max(0, parseInt(val, 10) || 0);
+  updateKpis();
+  renderStockEditor();
 }
 
 function saveAllStock() {
   localStorage.setItem("sadbhavna_local_stock", JSON.stringify(stockData));
   localStorage.setItem("sadbhavna_stock_snapshot", JSON.stringify(stockData));
-  showToast("✅ Stock updated!");
+  updateKpis();
+  showToast("✅ Inventory saved!");
+}
+
+function copyStockSummary() {
+  const lines = Object.keys(stockData).map(k => `• ${k}: ${stockData[k]}`);
+  const txt = "📦 *Sadbhavna Mart Stock Report*\n" + lines.join("\n");
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(() => showToast("📋 Stock report copied!")).catch(() => showToast("Copy not permitted"));
+  }
 }
 
 function exportStockJson() {
