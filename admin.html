@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Admin Login — Sadbhavna Mart</title>
 <meta name="theme-color" content="#020617">
 <link rel="icon" type="image/png" sizes="192x192" href="images/icon-192.png">
@@ -28,14 +28,17 @@
   font-family:'Segoe UI',Arial,sans-serif;
   -webkit-tap-highlight-color:transparent;
 }
+html,body{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+}
 body{
   background:
     radial-gradient(circle at 12% 10%, rgba(0,255,153,0.14), transparent 38%),
     radial-gradient(circle at 88% 18%, rgba(56,189,248,0.12), transparent 40%),
     linear-gradient(155deg,#000000 0%,var(--bg-0) 45%,var(--bg-1) 100%);
   color:#f8fafc;
-  width:100%;
-  max-width:100%;
   min-height:100vh;
 }
 
@@ -245,7 +248,8 @@ body{
   transition:border-color 0.2s, box-shadow 0.2s;
 }
 .input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,255,153,0.14);}
-.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.form-row-2{display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:10px;width:100%;}
+.form-row-2 > div{min-width:0;}
 .btn-primary{
   width:100%;
   padding:13px 16px;
@@ -292,7 +296,8 @@ body{
 }
 
 /* MAIN GRID */
-.grid{display:grid;grid-template-columns:1fr;gap:16px;width:100%;}
+.grid{display:grid;grid-template-columns:minmax(0, 1fr);gap:16px;width:100%;}
+.grid > *, .kpi-grid > *{min-width:0;max-width:100%;}
 @media screen and (min-width:900px){
   .grid{grid-template-columns:repeat(2, minmax(0, 1fr));}
   .full-span{grid-column:1 / -1;}
@@ -303,6 +308,10 @@ body{
   border:1px solid var(--border);
   border-radius:20px;
   padding:20px;
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  overflow:hidden;
   box-shadow:0 12px 30px rgba(0,0,0,0.28);
 }
 .card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px;flex-wrap:wrap;}
@@ -525,6 +534,56 @@ body{
   font-size:13.5px;font-weight:800;cursor:pointer;box-shadow:0 6px 18px rgba(0,255,153,0.25);
 }
 .master-btn-push:disabled{opacity:0.6;cursor:wait;}
+
+/* MOBILE ZERO-ZOOM & ZERO-OVERFLOW RULES */
+@media screen and (max-width:767px){
+  .input, select.input, .stk-search, .price-mini-inp, .qty-inp{
+    font-size:16px !important;
+  }
+  .main{padding:12px;}
+  .header{padding:11px 12px;gap:8px;flex-wrap:wrap;}
+  .brand-logo{width:34px;height:34px;font-size:15px;}
+  .header h1{font-size:15.5px;}
+  .header-sub{font-size:10.5px;}
+  .header-actions{gap:6px;margin-left:auto;}
+  .status-chip{font-size:10.5px;padding:5px 8px;}
+  .lock-btn{padding:7px 10px;font-size:12px;}
+  .kpi-grid{gap:8px;margin-bottom:14px;}
+  .kpi-card{padding:11px 12px;border-radius:14px;}
+  .kpi-val{font-size:19px;}
+  .kpi-icon{width:34px;height:34px;font-size:14px;}
+  .card{padding:14px;border-radius:16px;}
+  .card h2{font-size:15px;}
+  .form-row-2{grid-template-columns:minmax(0, 1fr);gap:0;}
+  .mode-pills{gap:6px;}
+  .mode-pill{font-size:11.5px;padding:9px 4px;}
+  .upi-preview{flex-direction:column;text-align:center;}
+  .photo-upload-box{flex-wrap:wrap;}
+  .stock-filters{gap:6px;}
+  .stk-search{min-width:0;width:100%;flex:1 0 100%;}
+  .stock-row{
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+    padding:12px;
+  }
+  .stock-ctrl{
+    width:100%;
+    justify-content:space-between;
+    gap:6px;
+  }
+  .price-mini-inp,.stock-ctrl input.qty-inp{width:58px;padding:6px 4px;}
+  .stock-ctrl button{width:34px;height:34px;}
+  .master-save-bar{
+    padding:10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+    gap:8px;
+  }
+  .sync-state-label{min-width:0;width:100%;flex:1 0 100%;font-size:12px;}
+  .master-save-actions{width:100%;}
+  .master-btn-save,.master-btn-push{flex:1;text-align:center;padding:11px 10px;}
+  .admin-shell{padding-bottom:135px;}
+}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 @keyframes shakeBox{0%,100%{transform:translateX(0);}25%{transform:translateX(-8px);}50%{transform:translateX(8px);}75%{transform:translateX(-5px);}}
 </style>
